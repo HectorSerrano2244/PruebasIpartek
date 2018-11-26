@@ -3,13 +3,28 @@ public class Cuenta {
 	private String titular;
 	private Integer cuenta;
 	private Double saldo;
-	
+	private static final Double SALDO_POR_DEFECTO = 0.0;
+
 	public static void recogerDatosCuenta() {
-		Controlscanner preguntar = new Controlscanner();
+		Controlscanner preguntar= new Controlscanner();
 		Cuenta nuevacuenta= new Cuenta();
 		System.out.println("Introduzca el nombre del titular de la cuenta");
 		nuevacuenta.setTitular(preguntar.getCaptura().nextLine());
-		System.out.println(nuevacuenta);
+		if (completarYGuardarCuenta(nuevacuenta)) {
+			System.out.println("Cuenta creada");
+		}else {
+			throw new RuntimeException("Error al crear la cuenta");
+		}
+	}
+	public static Boolean completarYGuardarCuenta(Cuenta nuevacuenta) {
+		Boolean exito=true;
+		nuevacuenta.setSaldo(SALDO_POR_DEFECTO);
+		nuevacuenta.setCuenta(calculaNumeroCuenta());
+		return exito;
+	}
+	public static Integer calculaNumeroCuenta() {
+		
+		return 0;
 	}
 	public String getTitular() {
 		return titular;

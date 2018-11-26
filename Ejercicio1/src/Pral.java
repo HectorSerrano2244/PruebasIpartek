@@ -13,7 +13,7 @@ public class Pral {
 			opcion = recepcion.getCaptura().nextLine();
 			switch(opcion) {
 			case "1": Cuenta.recogerDatosCuenta();	break;
-			case "0": System.out.println("Programa terminado");recepcion.cerrarEscaner();System.exit(0);
+			case "0": System.out.println("Programa terminado");recepcion.cerrarEscaner(); System.exit(0);
 			}
 		}while(opcion != "0");
 
