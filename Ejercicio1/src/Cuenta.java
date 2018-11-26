@@ -3,6 +3,14 @@ public class Cuenta {
 	private String titular;
 	private Integer cuenta;
 	private Double saldo;
+	
+	public static void recogerDatosCuenta() {
+		Controlscanner preguntar = new Controlscanner();
+		Cuenta nuevacuenta= new Cuenta();
+		System.out.println("Introduzca el nombre del titular de la cuenta");
+		nuevacuenta.setTitular(preguntar.getCaptura().nextLine());
+		System.out.println(nuevacuenta);
+	}
 	public String getTitular() {
 		return titular;
 	}
