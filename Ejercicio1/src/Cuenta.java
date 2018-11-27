@@ -45,6 +45,7 @@ public class Cuenta {
 		File fichero = new File(RUTA_FICHERO_CUENTAS);
 		Integer cuantas=0;
 		if (fichero.exists()) {
+			@SuppressWarnings("unused")
 			String lineafichero;
 			BufferedReader lectura = new BufferedReader(new FileReader(fichero));
 			while ((lineafichero = lectura.readLine()) != null) {
