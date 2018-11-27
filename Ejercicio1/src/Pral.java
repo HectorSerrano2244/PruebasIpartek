@@ -1,7 +1,8 @@
+import java.io.IOException;
 
 public class Pral {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String opcion="";
 		Controlscanner recepcion= new Controlscanner();
 		do {
