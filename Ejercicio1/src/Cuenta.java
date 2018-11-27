@@ -19,8 +19,8 @@ public class Cuenta {
 	public static void recogerDatosCuenta() throws IOException {
 //		Controlscanner preguntar = new Controlscanner();
 		Cuenta nuevacuenta = new Cuenta();
-		System.out.println("Introduzca el nombre del titular de la cuenta");
-		nuevacuenta.setTitular(Controlscanner.leerLinea());
+//		System.out.println("Introduzca el nombre del titular de la cuenta");
+		nuevacuenta.setTitular(Controlscanner.leerLinea("titular de la cuenta"));
 		if (completarYGuardarCuenta(nuevacuenta)) {
 			System.out.println("Cuenta creada");
 			System.out.println(nuevacuenta);
