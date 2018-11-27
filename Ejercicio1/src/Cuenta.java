@@ -10,8 +10,8 @@ public class Cuenta {
 	private Integer cuenta;
 	private Double saldo;
 	private static final Double SALDO_POR_DEFECTO = 0.0;
-	private static final String RUTA_FICHEROS = "C:\\Temp";
-	private static final String RUTA_FICHERO_CUENTAS = RUTA_FICHEROS + "\\cuentas.tmp";
+//	private static final String RUTA_FICHEROS = "C:\\Temp";
+	private static final String RUTA_FICHERO_CUENTAS = "cuentas.tmp";
 	
 
 	public static void recogerDatosCuenta() throws IOException {
@@ -40,8 +40,8 @@ public class Cuenta {
 	}
 
 	public static Integer calculaNumeroCuenta() throws IOException {
-		File ruta = new  File(RUTA_FICHEROS);
-		ruta.mkdirs();
+//		File ruta = new  File(RUTA_FICHEROS);
+//		ruta.mkdirs();
 		File fichero = new File(RUTA_FICHERO_CUENTAS);
 		Integer cuantas=0;
 		if (fichero.exists()) {
