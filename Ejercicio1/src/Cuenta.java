@@ -34,6 +34,7 @@ public class Cuenta {
 		File fichero = new File(RUTA_FICHERO_CUENTAS);
 		BufferedWriter escritura = new BufferedWriter(new FileWriter(fichero,true));
 		escritura.write(nuevacuenta.toString());
+		escritura.newLine();
 		escritura.close();
 		return exito;
 	}
@@ -54,7 +55,6 @@ public class Cuenta {
 		} else {
 			BufferedWriter escritura = new BufferedWriter(new FileWriter(fichero));
 			escritura.write("");
-			escritura.newLine();
 			escritura.close();
 			return 1;
 		}	
