@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import bibliotecas.Controlscanner;
+
 public class Pral {
 
 	public static void main(String[] args) throws IOException {

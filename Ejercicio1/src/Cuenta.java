@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import bibliotecas.Controlscanner;
+
 public class Cuenta {
 	private String titular;
 	private Integer cuenta;
