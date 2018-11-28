@@ -13,7 +13,7 @@ public class Cuenta {
 	private Double saldo;
 	private static final Double SALDO_POR_DEFECTO = 0.0;
 //	private static final String RUTA_FICHEROS = "C:\\Temp";
-	private static final String RUTA_FICHERO_CUENTAS = "cuentas.tmp";
+	static final String RUTA_FICHERO_CUENTAS = "cuentas.tmp";
 	
 
 	public static void recogerDatosCuenta() throws IOException {

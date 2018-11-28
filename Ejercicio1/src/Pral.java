@@ -11,15 +11,20 @@ public class Pral {
 			System.out.println("-------------------");
 			System.out.println("");
 			System.out.println("1- Crear nueva cuenta");
+			System.out.println("2- probar getall");
 			System.out.println("0- Salir");
 			opcion = Controlscanner.leerLinea("Teclee una opciòn [0-1]");
 			switch (opcion) {
-			case "1":
-				Cuenta.recogerDatosCuenta();
-				break;
 			case "0":
 				System.out.println("Programa terminado");
 				System.exit(0);
+			case "1":
+				Cuenta.recogerDatosCuenta();
+				break;
+			case "2":
+				CrudAble<Cuenta> cuentas = new CuentaFicheroLocal();
+				cuentas.getAll();
+				break;
 			}
 		} while (opcion != "0");
 
