@@ -23,8 +23,20 @@ public class Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		Usuario usuario;
+		try {
+			usuario = new Usuario(null,email,password);
+		} catch (Exception e) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		
+		if("javoer@late".equals(usuario.getEmail())&&"Password".equals(usuario.getPassword())) {
+			request.getSession().setAttribute("usuario", usuario);
+			request.getRequestDispatcher("principal.jsp").forward(request, response);
+		}
 	}
 
 	/**
