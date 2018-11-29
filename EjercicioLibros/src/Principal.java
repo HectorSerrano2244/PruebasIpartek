@@ -25,13 +25,12 @@ public class Principal {
 				for (Libro libro1 : libros.getAll()) {
 					System.out.println(libro1);
 				}
-				;
 				break;
 			case "2":
 				pedirDatosLibro();
 			}
 
-		} while (opcion != "0");
+		} while (!"0".equals(opcion));
 	}
 
 	public static void pedirDatosLibro() {
