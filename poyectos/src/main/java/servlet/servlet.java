@@ -40,10 +40,10 @@ public class servlet extends HttpServlet {
 		}
 		ArrayList<Proyecto> proyectos = new ArrayList<Proyecto>();
 		
-		proyectos.add(new Proyecto("Proyecto 1"," efoj feoj 3fo weo fweo fewof wofej weoj few ", "C://", "C://"));
-		proyectos.add(new Proyecto("Proyecto 2"," efoj feoj 3fo dsgdsfdsgfdsfew ", "C://", "C://"));
-		proyectos.add(new Proyecto("Proyecto 3"," efoj fdsfgdsfg egjh sohe rojh greoih greewof wofej weoj few ", "C://", "C://"));
-		proyectos.add(new Proyecto("Proyecto 4"," dgfdfgdfgdfgddf e reg rtfewof wofej weoj few ", "C://", "C://"));
+		proyectos.add(new Proyecto(1,"Proyecto 1"," efoj feoj 3fo weo fweo fewof wofej weoj few ", "C://", "C://"));
+		proyectos.add(new Proyecto(2,"Proyecto 2"," efoj feoj 3fo dsgdsfdsgfdsfew ", "C://", "C://"));
+		proyectos.add(new Proyecto(3,"Proyecto 3"," efoj fdsfgdsfg egjh sohe rojh greoih greewof wofej weoj few ", "C://", "C://"));
+		proyectos.add(new Proyecto(4,"Proyecto 4"," dgfdfgdfgdfgddf e reg rtfewof wofej weoj few ", "C://", "C://"));
 		
 		request.setAttribute("proyectos", proyectos);
 		

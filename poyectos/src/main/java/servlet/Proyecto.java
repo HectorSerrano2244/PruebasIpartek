@@ -2,17 +2,22 @@ package servlet;
 
 public class Proyecto {
 	Integer id;
+	String nombre ;
+	String descripcion;
+	String rutaimagen;
+	String rutaenlace;
+	
 	public Proyecto(Integer id, String nombre, String descripcion, String rutaimagen, String rutaenlace) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 		this.rutaimagen = rutaimagen;
 		this.rutaenlace = rutaenlace;
 	}
 	@Override
 	public String toString() {
-		return "Proyecto [id=" + id + ", nombre=" + nombre + ", Descripcion=" + Descripcion + ", rutaimagen="
+		return "Proyecto [id=" + id + ", nombre=" + nombre + ", Descripcion=" + descripcion + ", rutaimagen="
 				+ rutaimagen + ", rutaenlace=" + rutaenlace + "]";
 	}
 	public Integer getId() {
@@ -21,10 +26,7 @@ public class Proyecto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	String nombre ;
-	String Descripcion;
-	String rutaimagen;
-	String rutaenlace;
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -32,10 +34,10 @@ public class Proyecto {
 		this.nombre = nombre;
 	}
 	public String getDescripcion() {
-		return Descripcion;
+		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 	}
 	public String getRutaimagen() {
 		return rutaimagen;
@@ -52,7 +54,7 @@ public class Proyecto {
 	public Proyecto(String nombre, String descripcion, String rutaimagen, String rutaenlace) {
 		super();
 		this.nombre = nombre;
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 		this.rutaimagen = rutaimagen;
 		this.rutaenlace = rutaenlace;
 	}
@@ -60,7 +62,7 @@ public class Proyecto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Descripcion == null) ? 0 : Descripcion.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((rutaenlace == null) ? 0 : rutaenlace.hashCode());
@@ -76,10 +78,10 @@ public class Proyecto {
 		if (getClass() != obj.getClass())
 			return false;
 		Proyecto other = (Proyecto) obj;
-		if (Descripcion == null) {
-			if (other.Descripcion != null)
+		if (descripcion == null) {
+			if (other.descripcion != null)
 				return false;
-		} else if (!Descripcion.equals(other.Descripcion))
+		} else if (!descripcion.equals(other.descripcion))
 			return false;
 		if (id == null) {
 			if (other.id != null)

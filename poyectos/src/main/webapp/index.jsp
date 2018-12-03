@@ -21,7 +21,7 @@
 	{%>    
 	    <article>
 	       
-	        <p><img src="media/proyecto <%= p.getId() %> .jpg" alt=""></p>
+	        <p><img src="media/<%= p.getId() %>.jpg" alt=""></p>
 	        
 	        <header>
 	            <h3><%= p.getNombre() %></h3>
