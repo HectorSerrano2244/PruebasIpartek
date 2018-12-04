@@ -1,8 +1,19 @@
+package pojos;
 
 public class Libro {
 	private Long id;
-	private String titulo,editorial,isbn;
+	private String titulo,editorial,isbn,autor;
 	private Double precio;
+	
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	
 	
 	
 	
@@ -11,14 +22,15 @@ public class Libro {
 	
 	@Override
 	public String toString() {
-		return "[id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", isbn=" + isbn + ", precio="
-				+ precio + "]";
+		return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", isbn=" + isbn + ", autor="
+				+ autor + ", precio=" + precio + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((editorial == null) ? 0 : editorial.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
@@ -36,6 +48,11 @@ public class Libro {
 		if (getClass() != obj.getClass())
 			return false;
 		Libro other = (Libro) obj;
+		if (autor == null) {
+			if (other.autor != null)
+				return false;
+		} else if (!autor.equals(other.autor))
+			return false;
 		if (editorial == null) {
 			if (other.editorial != null)
 				return false;
@@ -66,6 +83,16 @@ public class Libro {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Libro(Long id, String titulo, String editorial, String isbn, String autor, Double precio) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.editorial = editorial;
+		this.isbn = isbn;
+		this.autor = autor;
+		this.precio = precio;
 	}
 
 	public void setId(Long id) {

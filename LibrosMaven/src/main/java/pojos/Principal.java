@@ -1,3 +1,4 @@
+package pojos;
 public class Principal {
 	private static String opcion;
 	private static CrudAble<Libro> libros = new LibroDaoArrayList();
