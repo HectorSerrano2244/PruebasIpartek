@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import modelos.Libro;
 
 @WebServlet("/inicio")
-public class Inicio extends HttpServlet {
+public class InicioSrvLet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public Inicio() {
+	public InicioSrvLet() {
 
 	}
 

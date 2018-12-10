@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import modelos.Libro;
 
 @WebServlet("/altalibro")
-public class AltaLibro extends HttpServlet {
+public class AltaLibroSrvLet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AltaLibro() {
+    public AltaLibroSrvLet() {
       
     }
 
