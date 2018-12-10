@@ -27,7 +27,7 @@ public class AltaLibro extends HttpServlet {
 		String autor = request.getParameter("autor");
 		String editorial = request.getParameter("editorial");
 		String precio = request.getParameter("precio");
-		
+		@SuppressWarnings("unused")
 		Libro libro;
 		try {
 			libro = new Libro(Long.parseLong(id),isbn,titulo,autor,editorial,Double.parseDouble(precio));
@@ -35,16 +35,17 @@ public class AltaLibro extends HttpServlet {
 		} catch(RuntimeException e) {
 			//response.sendRedirect("login.jsp");
 			request.setAttribute("error", "Error en la lectura de proyectos");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("Principal.jsp").forward(request, response);
 			return;
 		}
-		ArrayList<Libro> proyectos = new ArrayList<Libro>();
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		
+		libros.add(libro);
+		
+		request.setAttribute("libros", libros);
 		
 		
-		request.setAttribute("proyectos", proyectos);
-		
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("Principal.jsp").forward(request, response);
 	}
 
 

@@ -37,7 +37,7 @@
 <section>
 	<nav>
 		<ul>
-			<li><a href="formulario.jsp">Nuevo libro</a></li>
+			<li><a href="AltaLibro">Nuevo libro</a></li>
 		</ul>
 	</nav>
 </section>
