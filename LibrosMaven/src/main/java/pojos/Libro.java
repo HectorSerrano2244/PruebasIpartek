@@ -13,14 +13,7 @@ public class Libro {
 		this.autor = autor;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	@Override
+		@Override
 	public String toString() {
 		return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", isbn=" + isbn + ", autor="
 				+ autor + ", precio=" + precio + "]";

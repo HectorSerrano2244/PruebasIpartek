@@ -1,5 +1,8 @@
 package controladores;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,8 +30,10 @@ public class AltaLibro extends HttpServlet {
 		String autor = request.getParameter("autor");
 		String editorial = request.getParameter("editorial");
 		String precio = request.getParameter("precio");
+		File fichero = new File("libros.dat");
 		@SuppressWarnings("unused")
 		Libro libro;
+		
 		try {
 			libro = new Libro(Long.parseLong(id),isbn,titulo,autor,editorial,Double.parseDouble(precio));
 			
@@ -38,11 +43,16 @@ public class AltaLibro extends HttpServlet {
 			request.getRequestDispatcher("Principal.jsp").forward(request, response);
 			return;
 		}
-		ArrayList<Libro> libros = new ArrayList<Libro>();
+		//ArrayList<Libro> libros = (ArrayList<Libro>)request.getServletContext().getAttribute("libros");
+		//String formato =(String)request.getAttribute("formato");
 		
-		libros.add(libro);
+		BufferedWriter escritura = new BufferedWriter(new FileWriter(fichero));
+		escritura.write(libro.toString());
+		escritura.close();
 		
-		request.setAttribute("libros", libros);
+		//libros.add(libro);
+		
+		//request.setAttribute("formato", libro);
 		
 		
 		request.getRequestDispatcher("Principal.jsp").forward(request, response);

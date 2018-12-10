@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-15"
-    pageEncoding="ISO-8859-15"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-15">
+<meta charset="UTF-8">
 <title>Formulario</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
 					<input name="precio" id="precio" type="text"/>
 				</p>
 				<p>
-					<button>Añadir</button>
+					<button>AÃ±adir</button>
 				</p>
 			</fieldset>
 		</form>
