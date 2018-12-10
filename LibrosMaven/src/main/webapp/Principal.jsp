@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="pojos.Libro, java.util.ArrayList"%>
+	import="modelos.Libro, java.util.ArrayList"%>
 <%
 	ArrayList<Libro> libros = (ArrayList<Libro>)request.getServletContext().getAttribute("libros");
+
 %>
 <!DOCTYPE html>
 <html>

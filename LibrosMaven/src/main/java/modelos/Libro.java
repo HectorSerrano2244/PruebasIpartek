@@ -1,4 +1,4 @@
-package pojos;
+package modelos;
 
 public class Libro {
 	private Long id;

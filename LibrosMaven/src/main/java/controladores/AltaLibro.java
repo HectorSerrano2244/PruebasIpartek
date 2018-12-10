@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pojos.Libro;
+import modelos.Libro;
 
 @WebServlet("/altalibro")
 public class AltaLibro extends HttpServlet {
