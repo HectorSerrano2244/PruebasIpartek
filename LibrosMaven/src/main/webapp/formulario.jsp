@@ -8,7 +8,7 @@
 </head>
 <body>
 	<section>
-		<form action="AltaLibro">
+		<form action="altalibro">
 			<fieldset>
 				<legend>Datos de libro</legend>
 				<p>

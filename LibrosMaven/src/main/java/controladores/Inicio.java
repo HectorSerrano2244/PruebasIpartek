@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pojos.Libro;
 
-@WebServlet("/Inicio")
+@WebServlet("/inicio")
 public class Inicio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,8 +26,6 @@ public class Inicio extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//@SuppressWarnings("unchecked")
-		//ArrayList<Libro> libros = (ArrayList<Libro>) request.getServletContext().getAttribute("libros");
 		File fichero = new File("libros.dat");
 		Libro libro = new Libro();
 		ArrayList<Libro> libros = new ArrayList<Libro>();

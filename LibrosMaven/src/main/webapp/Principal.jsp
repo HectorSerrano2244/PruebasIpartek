@@ -23,14 +23,12 @@
 		</tr>
 		 <% for(Libro l: libros){ %>
 		<tr>
-		
 			<td><%= l.getId() %></td>
 			<td><%= l.getIsbn() %></td>
 			<td><%= l.getTitulo() %></td>
 			<td><%= l.getAutor() %></td>
 			<td><%= l.getEditorial() %></td>
 			<td><%= l.getPrecio() %></td>
-		
 		</tr>
 		<%}%>	 
 	</table>
