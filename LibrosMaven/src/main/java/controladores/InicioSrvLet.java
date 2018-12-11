@@ -27,35 +27,29 @@ public class InicioSrvLet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		File fichero = new File(Libro.RUTA_LIBROS);
-		Libro libro = new Libro();
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		String lineafichero;
 		if (fichero.exists()) {
 			try {
 				BufferedReader lectura = new BufferedReader(new FileReader(fichero));
-								
 				while ((lineafichero = lectura.readLine()) != null) {
 					String id,isbn,titulo,autor,editorial,precio;
 					Integer pos;
 					String[] partes = lineafichero.split(",");
 					pos= partes[0].indexOf("=");
 					id=partes[0].substring(pos+1);
-					libro.setId(Long.parseLong(id));
 					pos= partes[1].indexOf("=");
 					titulo=partes[1].substring(pos+1);
-					libro.setTitulo(titulo);
 					pos= partes[2].indexOf("=");
 					editorial=partes[2].substring(pos+1);
-					libro.setEditorial(editorial);
 					pos= partes[3].indexOf("=");
 					isbn=partes[3].substring(pos+1);
-					libro.setIsbn(isbn);
 					pos= partes[4].indexOf("=");
 					autor=partes[4].substring(pos+1);
-					libro.setAutor(autor);
 					pos= partes[5].indexOf("=");
 					precio=partes[5].substring(pos+1);
-					libro.setPrecio(Double.parseDouble(precio));
+					
+					Libro libro = new Libro(Long.parseLong(id),isbn,titulo,autor,editorial,Double.parseDouble(precio));
 					libros.add(libro);
 				}
 				lectura.close();

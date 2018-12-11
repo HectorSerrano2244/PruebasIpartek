@@ -21,14 +21,14 @@
 			<th>Editorial</th>
 			<th>Precio</th>
 		</tr>
-		 <% for(Libro l: libros){ %>
+		 <% for(Libro libro: libros){ %>
 		<tr>
-			<td><%= l.getId() %></td>
-			<td><%= l.getIsbn() %></td>
-			<td><%= l.getTitulo() %></td>
-			<td><%= l.getAutor() %></td>
-			<td><%= l.getEditorial() %></td>
-			<td><%= l.getPrecio() %></td>
+			<td><%= libro.getId() %></td>
+			<td><%= libro.getIsbn() %></td>
+			<td><%= libro.getTitulo() %></td>
+			<td><%= libro.getAutor() %></td>
+			<td><%= libro.getEditorial() %></td>
+			<td><%= libro.getPrecio() %></td>
 		</tr>
 		<%}%>	 
 	</table>

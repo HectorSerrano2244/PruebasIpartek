@@ -14,7 +14,9 @@ public class Libro {
 		this.autor = autor;
 	}
 
-		@Override
+
+
+	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", isbn=" + isbn + ", autor="
 				+ autor + ", precio=" + precio + "]";
@@ -79,16 +81,6 @@ public class Libro {
 		return id;
 	}
 
-	public Libro(Long id, String titulo, String editorial, String isbn, String autor, Double precio) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.editorial = editorial;
-		this.isbn = isbn;
-		this.autor = autor;
-		this.precio = precio;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -125,14 +117,16 @@ public class Libro {
 		this.precio = precio;
 	}
 
-	public Libro(Long id, String titulo, String editorial, String isbn, Double precio) {
+	public Libro(Long id, String isbn, String titulo, String autor,String editorial,  Double precio) {
 		setId(id);
 		setTitulo(titulo);
 		setEditorial(editorial);
 		setIsbn(isbn);
+		setAutor(autor);
 		setPrecio(precio);
 	}
 	
+
 	public Libro() {
 		
 	}
