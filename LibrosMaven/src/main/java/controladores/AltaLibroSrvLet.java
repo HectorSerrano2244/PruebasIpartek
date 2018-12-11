@@ -36,16 +36,17 @@ public class AltaLibroSrvLet extends HttpServlet {
 
 		} catch (RuntimeException e) {
 			request.setAttribute("error", "Error en la lectura de proyectos");
-			request.getRequestDispatcher("Principal.jsp").forward(request, response);
+			request.getRequestDispatcher("principal.jsp").forward(request, response);
 			return;
 		}
 		
-		PrintWriter escritura =new PrintWriter(new FileWriter("libros.txt",true),true);
+		PrintWriter escritura =new PrintWriter(new FileWriter(Libro.RUTA_LIBROS,true),true);
 
 		escritura.println(libro.toString());
 		escritura.close();
 
-		request.getRequestDispatcher("/").forward(request, response);
+		//request.getRequestDispatcher("principal.jsp").forward(request, response);
+		response.sendRedirect("inicio");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

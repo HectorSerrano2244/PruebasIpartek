@@ -5,6 +5,8 @@ public class Libro {
 	private String titulo,editorial,isbn,autor;
 	private Double precio;
 	
+	public static final String RUTA_LIBROS="C:\\Users\\Public\\Documents\\libros.txt";
+	
 	public String getAutor() {
 		return autor;
 	}
@@ -17,8 +19,8 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [id=" + id + ", titulo=" + titulo + ", editorial=" + editorial + ", isbn=" + isbn + ", autor="
-				+ autor + ", precio=" + precio + "]";
+		return "id=" + id + "- titulo=" + titulo + "- editorial=" + editorial + "- isbn=" + isbn + "- autor="
+				+ autor + "- precio=" + precio ;
 	}
 
 	@Override
