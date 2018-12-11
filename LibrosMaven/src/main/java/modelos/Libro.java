@@ -4,6 +4,7 @@ public class Libro {
 	private Long id;
 	private String titulo,editorial,isbn,autor;
 	private Double precio;
+	public static final String RUTA_LIBROS="C:\\libros.dat";
 	
 	public String getAutor() {
 		return autor;

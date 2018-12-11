@@ -26,7 +26,7 @@ public class InicioSrvLet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		File fichero = new File("libros.dat");
+		File fichero = new File(Libro.RUTA_LIBROS);
 		Libro libro = new Libro();
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		String lineafichero;

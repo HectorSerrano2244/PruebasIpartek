@@ -3,7 +3,6 @@
 	import="modelos.Libro, java.util.ArrayList"%>
 <%
 	ArrayList<Libro> libros = (ArrayList<Libro>)request.getServletContext().getAttribute("libros");
-
 %>
 <!DOCTYPE html>
 <html>
