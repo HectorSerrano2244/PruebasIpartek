@@ -33,11 +33,12 @@ public class InicioSrvLet extends HttpServlet {
 			PrintWriter escritura = new PrintWriter(new FileWriter(Libro.RUTA_LIBROS));
 		}else {
 			BufferedReader lectura = new BufferedReader(new FileReader(Libro.RUTA_LIBROS));
-			String lineafichero,id="0", isbn="", titulo="", autor="", editorial="", precio="0.0";
+			String lineafichero,id, isbn, titulo, autor, editorial, precio;
 			Integer pos;
 			String[] partes;
-			Libro libro = new Libro(Long.parseLong(id), isbn, titulo, autor, editorial, Double.parseDouble(precio));
+			Libro libro;
 			while ((lineafichero = lectura.readLine()) != null) {
+				libro = new Libro();
 				partes = lineafichero.split("-");
 				pos = partes[0].indexOf("=");
 				id = partes[0].substring(pos + 1);

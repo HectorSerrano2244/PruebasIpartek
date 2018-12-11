@@ -24,11 +24,13 @@
 		 <c:forEach items="${libros}" var="libro">
 		<tr>
 			<td>${libro.id}</td>
-			<td>${libro.isbn}<%-- libro.getIsbn() --%></td>
-			<td>${libro.titulo}<%-- libro.getTitulo() --%></td>
-			<td>${libro.autor}<%-- libro.getAutor() --%></td>
-			<td>${libro.editorial}<%-- libro.getEditorial() --%></td>
-			<td>${libro.precio}<%-- libro.getPrecio() --%></td>
+			<td>${libro.isbn}</td>
+			<td>${libro.titulo}</td>
+			<td>${libro.autor}</td>
+			<td>${libro.editorial}</td>
+			<td>${libro.precio}</td>
+			<td><a href="formulario.jsp?id=${libro.id}&est='ed'">Editar</a></td>
+			<td><a>Borrar</a></td>
 		</tr>
 		</c:forEach> 
 	</table>
@@ -36,7 +38,7 @@
 <section>
 	<nav>
 		<ul>
-			<li><a href="formulario.jsp">Nuevo libro</a></li>
+			<li><a href="formulario.jsp?id=0&est='n'">Nuevo libro</a></li>
 		</ul>
 	</nav>
 </section>
