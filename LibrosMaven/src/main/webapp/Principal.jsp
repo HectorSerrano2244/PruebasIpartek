@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="modelos.Libro, java.util.ArrayList"%>
+	import="modelos.Libro, java.util.ArrayList,"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	ArrayList<Libro> libros = (ArrayList<Libro>)request.getServletContext().getAttribute("libros");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>principal</title>
@@ -21,16 +22,16 @@
 			<th>Editorial</th>
 			<th>Precio</th>
 		</tr>
-		 <% for(Libro libro: libros){ %>
+		 <c:forEach items="${libros}" var="libro">
 		<tr>
-			<td><%= libro.getId() %></td>
-			<td><%= libro.getIsbn() %></td>
-			<td><%= libro.getTitulo() %></td>
-			<td><%= libro.getAutor() %></td>
-			<td><%= libro.getEditorial() %></td>
-			<td><%= libro.getPrecio() %></td>
+			<td>${libro.id}</td>
+			<td>${libro.isbn}<%-- libro.getIsbn() --%></td>
+			<td>${libro.titulo}<%-- libro.getTitulo() --%></td>
+			<td>${libro.autor}<%-- libro.getAutor() --%></td>
+			<td>${libro.editorial}<%-- libro.getEditorial() --%></td>
+			<td>${libro.precio}<%-- libro.getPrecio() --%></td>
 		</tr>
-		<%}%>	 
+		</c:forEach> 
 	</table>
 </section>
 <section>
