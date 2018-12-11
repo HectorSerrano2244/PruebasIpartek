@@ -1,10 +1,7 @@
 package controladores;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,45 +23,33 @@ public class InicioSrvLet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		File fichero = new File(Libro.RUTA_LIBROS);
-		ArrayList<Libro> libros = new ArrayList<Libro>();
-		String lineafichero;
-		if (fichero.exists()) {
-			try {
-				BufferedReader lectura = new BufferedReader(new FileReader(fichero));
-				while ((lineafichero = lectura.readLine()) != null) {
-					String id,isbn,titulo,autor,editorial,precio;
-					Integer pos;
-					String[] partes = lineafichero.split(",");
-					pos= partes[0].indexOf("=");
-					id=partes[0].substring(pos+1);
-					pos= partes[1].indexOf("=");
-					titulo=partes[1].substring(pos+1);
-					pos= partes[2].indexOf("=");
-					editorial=partes[2].substring(pos+1);
-					pos= partes[3].indexOf("=");
-					isbn=partes[3].substring(pos+1);
-					pos= partes[4].indexOf("=");
-					autor=partes[4].substring(pos+1);
-					pos= partes[5].indexOf("=");
-					precio=partes[5].substring(pos+1);
-					
-					Libro libro = new Libro(Long.parseLong(id),isbn,titulo,autor,editorial,Double.parseDouble(precio));
-					libros.add(libro);
-				}
-				lectura.close();
-			} catch (IOException e) {
-				System.out.println("Algo pasa con el fichero");
-			}
-		} else {
-			BufferedWriter escritura = new BufferedWriter(new FileWriter(fichero));
-			escritura.write("");
-			escritura.close();
-		}
 
-		request.getServletContext().setAttribute("libros", libros);
-		
-		request.getRequestDispatcher("Principal.jsp").forward(request, response);
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		BufferedReader lectura = new BufferedReader(new FileReader("libros.txt"));
+		String lineafichero,id, isbn, titulo, autor, editorial, precio;
+		Integer pos;
+		while ((lineafichero = lectura.readLine()) != null) {
+			String[] partes = lineafichero.split(",");
+			pos = partes[0].indexOf("=");
+			id = partes[0].substring(pos + 1);
+			pos = partes[1].indexOf("=");
+			titulo = partes[1].substring(pos + 1);
+			pos = partes[2].indexOf("=");
+			editorial = partes[2].substring(pos + 1);
+			pos = partes[3].indexOf("=");
+			isbn = partes[3].substring(pos + 1);
+			pos = partes[4].indexOf("=");
+			autor = partes[4].substring(pos + 1);
+			pos = partes[5].indexOf("=");
+			precio = partes[5].substring(pos + 1);
+			Libro libro = new Libro(Long.parseLong(id), isbn, titulo, autor, editorial, Double.parseDouble(precio));
+			libros.add(libro);
+		}
+		lectura.close();
+
+	request.getServletContext().setAttribute("libros",libros);
+
+	request.getRequestDispatcher("Principal.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
