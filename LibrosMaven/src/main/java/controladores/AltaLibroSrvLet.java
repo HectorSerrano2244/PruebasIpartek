@@ -45,7 +45,7 @@ public class AltaLibroSrvLet extends HttpServlet {
 		escritura.println(libro.toString());
 		escritura.close();
 
-		request.getRequestDispatcher("Principal.jsp").forward(request, response);
+		request.getRequestDispatcher("/").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
