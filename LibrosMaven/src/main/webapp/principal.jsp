@@ -38,7 +38,7 @@
 <section>
 	<nav>
 		<ul>
-			<li><a href="formulario.jsp">Nuevo libro</a></li>
+			<li><a href="formulario.jsp?accion=nuevo">Nuevo libro</a></li>
 		</ul>
 	</nav>
 </section>

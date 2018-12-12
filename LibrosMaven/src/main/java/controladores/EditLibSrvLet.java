@@ -56,12 +56,11 @@ public class EditLibSrvLet extends HttpServlet {
 				
 				String accion="editar";
 				request.setAttribute("libro", libro);
-				request.setAttribute("accion", accion);
 					
 				break;
 			}
 		}
-		request.getRequestDispatcher("formulario.jsp").forward(request, response);
+		request.getRequestDispatcher("formulario.jsp?accion=editar").forward(request, response);
 	}
 
 

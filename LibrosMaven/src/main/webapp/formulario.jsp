@@ -5,27 +5,22 @@
     	String accget=request.getParameter("accion");
     	String ira="",txtbot="",txterror="";
     	
-    	if (accget!=null || "".equals(accget)){
-    		if(libro==null && accion==null){
+    	if ("nuevo".equals(accget)){
         		ira="altalibro";
         		txtbot="Agregar";
-        		txterror="El libro no ha sido encontrado";
-        		}
-        	else if(libro==null && accion!=null){
+    	}
+    	else if ("editar".equals(accget)){
+        		
+    		 if(libro==null){
         		ira="altalibro";
         		txtbot="Agregar";
+        		txterror="No se ha encontrado el libro";
         		}
-        	else if (libro!=null){
+        	 else if (libro!=null){
         		ira="editarlibro";
         		txtbot="Modificar";
         		}
-    	}else{
-    		ira="altalibro";
-    		txtbot="Agregar";
     	}
-
-    	
-
     %>
 <!DOCTYPE html>
 <html>
