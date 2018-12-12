@@ -63,7 +63,8 @@ public class InicioSrvLet extends HttpServlet {
 			}
 			lectura.close();
 
-		request.getServletContext().setAttribute("libros",libros);
+		request.setAttribute("libros",libros);
+		request.setAttribute("accion", "nuevo");
 
 		request.getRequestDispatcher("principal.jsp").forward(request,response);
 		}
