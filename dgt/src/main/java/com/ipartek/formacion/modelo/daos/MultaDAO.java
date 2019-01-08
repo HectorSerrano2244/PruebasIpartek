@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
@@ -169,25 +168,25 @@ public class MultaDAO {
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
-		m.setId(rs.getLong("id"));
-		m.setImporte(rs.getFloat("importe"));
-		m.setConcepto(rs.getString("concepto"));
+		//m.setId(rs.getLong("id"));
+//		m.setImporte(rs.getFloat("importe"));
+//		m.setConcepto(rs.getString("concepto"));
 		m.setFecha(rs.getDate("fecha"));
 
 		
 
 		Coche c = new Coche();
-		c.setId(rs.getLong("id"));
+//		c.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
-		c.setModelo(rs.getString("modelo"));
-		c.setKm(rs.getFloat("km"));
+//		c.setModelo(rs.getString("modelo"));
+//		c.setKm(rs.getFloat("km"));
 		
-		Agente a = new Agente();
-		a.setId(rs.getLong("id"));
-		a.setNombre(rs.getString("nombre"));
-		a.setPlaca(rs.getString("placa"));
+//		Agente a = new Agente();
+//		a.setId(rs.getLong("id"));
+//		a.setNombre(rs.getString("nombre"));
+//		a.setPlaca(rs.getString("placa"));
 
-		m.setAgente(a);
+		m.setAgente(null);
 		m.setCoche(c);
 
 		return m;
