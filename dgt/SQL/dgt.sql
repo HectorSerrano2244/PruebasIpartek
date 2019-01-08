@@ -1,165 +1,235 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.2.7.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1    Database: dgt
--- ------------------------------------------------------
--- Server version	8.0.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 08-01-2019 a las 23:47:05
+-- Versión del servidor: 5.6.20
+-- Versión de PHP: 5.5.15
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Table structure for table `agente`
+-- Base de datos: `dgt`
+--
+CREATE DATABASE IF NOT EXISTS `dgt` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `dgt`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `agente`
 --
 
 DROP TABLE IF EXISTS `agente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `agente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `agente` (
+`id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `placa` int(11) NOT NULL,
-  `id_departamento` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `placa_UNIQUE` (`placa`),
-  KEY `fk_agente_departamento_idx` (`id_departamento`),
-  CONSTRAINT `fk_agente_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_departamento` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `agente`
+-- Volcado de datos para la tabla `agente`
 --
 
-LOCK TABLES `agente` WRITE;
-/*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei',123456,39),(2,'Johnny Walker',987654,36),(3,'Monk',324586,38),(4,'Takelberry',87456,37),(5,'Tontimmy',998776,37);
-/*!40000 ALTER TABLE `agente` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `agente` (`id`, `nombre`, `placa`, `id_departamento`) VALUES
+(1, 'Majonei', 123456, 39),
+(2, 'Johnny Walker', 987654, 36),
+(3, 'Monk', 324586, 38),
+(4, 'Takelberry', 87456, 37),
+(5, 'Tontimmy', 998776, 37);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `coche`
+-- Estructura de tabla para la tabla `coche`
 --
 
 DROP TABLE IF EXISTS `coche`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `coche` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `coche` (
+`id` int(11) NOT NULL,
   `matricula` varchar(10) NOT NULL,
   `modelo` varchar(45) NOT NULL DEFAULT 'cuatro latas',
-  `km` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `matricula_UNIQUE` (`matricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `km` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `coche`
+-- Volcado de datos para la tabla `coche`
 --
 
-LOCK TABLES `coche` WRITE;
-/*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','flagoneta',47500);
-/*!40000 ALTER TABLE `coche` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `coche` (`id`, `matricula`, `modelo`, `km`) VALUES
+(1, '3548MKZ', 'Toyota Yaris', 500),
+(2, '9605EFH', 'Fiat multipla', 800),
+(3, '5674MBD', 'GRT', 1800),
+(4, 'BI0020AZ', 'flagoneta', 47500);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `departamento`
+-- Estructura de tabla para la tabla `departamento`
 --
 
 DROP TABLE IF EXISTS `departamento`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE IF NOT EXISTS `departamento` (
+`id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
--- Dumping data for table `departamento`
+-- Volcado de datos para la tabla `departamento`
 --
 
-LOCK TABLES `departamento` WRITE;
-/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT INTO `departamento` VALUES (31,'ventas'),(33,'ingenieria'),(34,'produccion'),(35,'mercadeo'),(36,'Alcholemia'),(37,'oficinistas'),(38,'fealdad'),(39,'velocidad');
-/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `departamento` (`id`, `nombre`) VALUES
+(31, 'ventas'),
+(33, 'ingenieria'),
+(34, 'produccion'),
+(35, 'mercadeo'),
+(36, 'Alcholemia'),
+(37, 'oficinistas'),
+(38, 'fealdad'),
+(39, 'velocidad');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `empleado`
+-- Estructura de tabla para la tabla `empleado`
 --
 
 DROP TABLE IF EXISTS `empleado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `empleado` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `empleado` (
+`id` int(11) NOT NULL,
   `apellido` varchar(50) NOT NULL,
-  `id_departamento` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_empleado_departamento_idx` (`id_departamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_departamento` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `empleado`
+-- Volcado de datos para la tabla `empleado`
 --
 
-LOCK TABLES `empleado` WRITE;
-/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Andrade',31),(2,'Jordan',33),(3,'Steinberg',33),(4,'Róbinson',34),(5,'Zolano',34),(6,'Gaspar',36);
-/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `empleado` (`id`, `apellido`, `id_departamento`) VALUES
+(1, 'Andrade', 31),
+(2, 'Jordan', 33),
+(3, 'Steinberg', 33),
+(4, 'Róbinson', 34),
+(5, 'Zolano', 34),
+(6, 'Gaspar', 36);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `multa`
+-- Estructura de tabla para la tabla `multa`
 --
 
 DROP TABLE IF EXISTS `multa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `multa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `multa` (
+`id` int(11) NOT NULL,
   `importe` float DEFAULT '50',
   `concepto` varchar(255) DEFAULT NULL,
   `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   `id_coche` int(11) NOT NULL,
-  `id_agente` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_multa_coches_idx` (`id_coche`) /*!80000 INVISIBLE */,
-  KEY `fk__idx` (`id_agente`),
-  CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
-  CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_agente` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `multa`
+-- Volcado de datos para la tabla `multa`
 --
 
-LOCK TABLES `multa` WRITE;
-/*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,3),(2,500,'exceso velocidad a 240km/h','2019-01-07 10:38:43',4,1),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2),(5,800,'por velcoidad','2019-01-07 13:16:21',4,1),(6,300,'otra multa','2019-01-07 13:48:49',4,1);
-/*!40000 ALTER TABLE `multa` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `multa` (`id`, `importe`, `concepto`, `fecha`, `id_coche`, `id_agente`) VALUES
+(1, 200, 'por feo', '2019-01-07 10:37:13', 2, 3),
+(2, 500, 'exceso velocidad a 240km/h', '2019-01-07 10:38:43', 3, 4),
+(3, 700, 'por empinar codo 8.0', '2019-01-07 10:41:09', 1, 2),
+(4, 700, 'por empinar codo 8.0', '2018-12-31 22:40:52', 1, 2),
+(5, 800, 'por velcoidad', '2019-01-07 13:16:21', 4, 4),
+(6, 300, 'otra multa', '2019-01-07 13:48:49', 2, 4);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `agente`
+--
+ALTER TABLE `agente`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `placa_UNIQUE` (`placa`), ADD KEY `fk_agente_departamento_idx` (`id_departamento`);
+
+--
+-- Indices de la tabla `coche`
+--
+ALTER TABLE `coche`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `matricula_UNIQUE` (`matricula`);
+
+--
+-- Indices de la tabla `departamento`
+--
+ALTER TABLE `departamento`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_empleado_departamento_idx` (`id_departamento`);
+
+--
+-- Indices de la tabla `multa`
+--
+ALTER TABLE `multa`
+ ADD PRIMARY KEY (`id`), ADD KEY `fk_multa_coches_idx` (`id_coche`), ADD KEY `fk__idx` (`id_agente`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `agente`
+--
+ALTER TABLE `agente`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `coche`
+--
+ALTER TABLE `coche`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `departamento`
+--
+ALTER TABLE `departamento`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `multa`
+--
+ALTER TABLE `multa`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `agente`
+--
+ALTER TABLE `agente`
+ADD CONSTRAINT `fk_agente_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`);
+
+--
+-- Filtros para la tabla `multa`
+--
+ALTER TABLE `multa`
+ADD CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
+ADD CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-01-08 11:18:18
