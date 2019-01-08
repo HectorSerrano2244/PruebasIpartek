@@ -38,7 +38,7 @@ public class SeguridadFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 
 		HttpSession session = request.getSession();
-		Agente aLogueado = (Agente) session.getAttribute("usuarioLogueado");
+		Agente aLogueado = (Agente) session.getAttribute("agenteLogueado");
 		if (aLogueado != null) {
 			chain.doFilter(req, res);
 		}
