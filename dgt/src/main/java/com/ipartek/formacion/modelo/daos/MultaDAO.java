@@ -19,9 +19,9 @@ public class MultaDAO {
 	private static MultaDAO INSTANCE = null;
 	HttpSession session;
 
-	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
+	private static final String SQL_GETBYID = "SELECT fecha,concepto,importe,nombre,placa FROM 	multa as m, agente as a WHERE m.id_agente = a.id AND m.id = 1;";
 //	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
-	private static final String SQL_GETALL_USU = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id_usuario = ? ORDER BY v.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_USU = "SELECT m.fecha, c.matricula FROM multa as m, coche as c WHERE m.id_coche= c.id  AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO multa  (importe, concepto, fecha, id_coche, id_agente) VALUES( ? , ? , ? , ? , ?);";
 //	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
 //	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";

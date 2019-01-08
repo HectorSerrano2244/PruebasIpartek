@@ -1,6 +1,6 @@
 package com.ipartek.formacion.modelo.pojo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Multa {
 	private Long id;
@@ -60,7 +60,7 @@ public class Multa {
 		this.id=-1l;
 		this.importe=0.0f;
 		this.concepto="";
-		this.fecha=new Date();
+		this.fecha=null; 
 		this.agente=new Agente();
 		this.coche=new Coche();
 	}
