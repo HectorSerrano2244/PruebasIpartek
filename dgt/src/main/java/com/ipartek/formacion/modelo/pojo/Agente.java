@@ -8,7 +8,7 @@ public class Agente {
 	
 	public Agente(Long id, String nombre, String placa) {
 		this();
-		setId( id);
+		setId(id);
 		setNombre(nombre);
 		setPlaca(placa);
 	}
