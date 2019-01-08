@@ -8,8 +8,10 @@
 <meta name="author" content="">
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Página</title>
+<base href="${pageContext.request.contextPath}/">
 <!-- Bootstrap core CSS -->
 <link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	 <link href="https://getbootstrap.com/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
 </head>
 <body>
