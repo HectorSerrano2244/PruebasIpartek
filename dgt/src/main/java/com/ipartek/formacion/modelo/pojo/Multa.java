@@ -46,6 +46,29 @@ public class Multa {
 	public void setCoche(Coche coche) {
 		this.coche = coche;
 	}
+	public Multa(Long id, Float importe, String concepto, Date fecha, Agente agente, Coche coche) {
+		this();
+		setId(id);
+		setImporte(importe);
+		setConcepto(concepto);
+		setFecha(fecha);
+		setAgente(agente);
+		setCoche(coche);
+	}
+	public Multa() {
+		super();
+		this.id=-1l;
+		this.importe=0.0f;
+		this.concepto="";
+		this.fecha=new Date();
+		this.agente=new Agente();
+		this.coche=new Coche();
+	}
+	@Override
+	public String toString() {
+		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha + ", agente="
+				+ agente + ", coche=" + coche + "]";
+	}
 	
 	
 	
