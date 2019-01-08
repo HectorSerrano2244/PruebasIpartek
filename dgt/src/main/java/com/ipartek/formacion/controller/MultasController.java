@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,13 @@ public class MultasController extends HttpServlet {
 	private String op = null;
 	Agente a = null;
 	String vista = "";
+	
+	@Override
+		public void init(ServletConfig config) throws ServletException {
+			// TODO Auto-generated method stub
+			super.init(config);
+			daoMulta = MultaDAO.getInstance();
+		}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
