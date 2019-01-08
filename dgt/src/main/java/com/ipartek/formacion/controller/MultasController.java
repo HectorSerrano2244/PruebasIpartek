@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
@@ -19,29 +20,47 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 @WebServlet("/privado/multas")
 public class MultasController extends HttpServlet {
 	private static final String VISTA_INDEX = "multas/index.jsp";
+	private static final String VISTA_FORM = "multas/form.jsp";
+
 	private static final long serialVersionUID = 1L;
+	
 	private MultaDAO daoMulta;
+	private CocheDAO daoCoche;
+	
 	private String op = null;
 	Agente a = null;
 	String vista = "";
-	
+	String multaStr = "";
+
 	@Override
-		public void init(ServletConfig config) throws ServletException {
-			// TODO Auto-generated method stub
-			super.init(config);
-			daoMulta = MultaDAO.getInstance();
-		}
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+		daoMulta = MultaDAO.getInstance();
+		daoCoche = CocheDAO.getInstance();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		getParameters(request);
-		
+
 		switch (op) {
-			default:
+		case "ver":
+			if (multaStr == null) {
 				request.setAttribute("multas", daoMulta.getAllUsu(a.getId()));
 				vista = VISTA_INDEX;
-				break;
+			} else {
+				long multa = Long.parseLong(multaStr);
+				request.setAttribute("multa", daoMulta.getById(multa));
+				vista = VISTA_FORM;
+			}
+			break;
+		case "multar":
+				request.setAttribute("coches", daoCoche.getMatriculas());
+				vista = VISTA_FORM;
+			break;
 		}
+		request.setAttribute("op", op);
 		request.getRequestDispatcher(vista).forward(request, response);
 	}
 
@@ -49,6 +68,10 @@ public class MultasController extends HttpServlet {
 		HttpSession session = request.getSession();
 		a = (Agente) session.getAttribute("agenteLogueado");
 		op = request.getParameter("op");
+		multaStr = request.getParameter("multa");
+		if (op == null) {
+			op = "ver";
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

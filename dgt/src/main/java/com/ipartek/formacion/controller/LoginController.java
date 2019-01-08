@@ -33,12 +33,12 @@ public class LoginController extends HttpServlet {
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 		daoAgente = AgenteDAO.getInstance();
-		a = daoAgente.getById(4);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		a = daoAgente.getById(4);
 		session.setAttribute("agenteLogueado", a);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);

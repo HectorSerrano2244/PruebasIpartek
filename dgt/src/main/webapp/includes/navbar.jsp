@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <span class="navbar-brand" >DGT</span>
-  <a class="navbar-brand" href="index.jsp">Atrás</a>
-  <span class="navbar-brand" >${agenteLogueado.nombre }</span>
+  <a class="navbar-brand" href="login">Atrás</a>
+  <span class="navbar-brand" >${agenteLogueado.nombre}</span>
 
   <!-- <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
