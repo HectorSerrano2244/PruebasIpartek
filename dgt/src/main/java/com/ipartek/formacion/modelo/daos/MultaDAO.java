@@ -169,7 +169,7 @@ public class MultaDAO {
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
-		m.setId(rs.getLong("id_video"));
+		m.setId(rs.getLong("id"));
 		m.setImporte(rs.getFloat("importe"));
 		m.setConcepto(rs.getString("concepto"));
 		m.setFecha(rs.getDate("fecha"));
