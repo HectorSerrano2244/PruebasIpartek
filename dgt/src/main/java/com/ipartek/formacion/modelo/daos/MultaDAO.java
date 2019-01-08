@@ -1,0 +1,196 @@
+package com.ipartek.formacion.modelo.daos;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
+import com.ipartek.formacion.modelo.cm.ConnectionManager;
+import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Multa;
+
+public class MultaDAO {
+
+	private static MultaDAO INSTANCE = null;
+	HttpSession session;
+
+	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
+//	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_USU = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id_usuario = ? ORDER BY v.id DESC LIMIT 1000;";
+	private static final String SQL_INSERT = "INSERT INTO multa  (importe, concepto, fecha, id_coche, id_agente) VALUES( ? , ? , ? , ? , ?);";
+//	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
+//	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
+
+	// constructor privado, solo acceso por getInstance()
+	private MultaDAO() {
+		super();
+	}
+
+	public synchronized static MultaDAO getInstance() {
+
+		if (INSTANCE == null) {
+			INSTANCE = new MultaDAO();
+		}
+		return INSTANCE;
+	}
+
+	public Multa getById(long id) {
+
+		Multa v = null;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
+			pst.setLong(1, id);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					v = rowMapper(rs);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return v;
+	}
+
+//	public ArrayList<Multa> getAll() {
+//
+//		ArrayList<Multa> videos = new ArrayList<Multa>();
+//
+//		try (Connection conn = ConnectionManager.getConnection();
+//				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
+//				ResultSet rs = pst.executeQuery()) {
+//
+//			while (rs.next()) {
+//				try {
+//					videos.add(rowMapper(rs));
+//				} catch (Exception e) {
+//					System.out.println("usuario no valido");
+//					e.printStackTrace();
+//				}
+//			} // while
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return videos;
+//	}
+
+	public ArrayList<Multa> getAllUsu(long id) {
+
+		ArrayList<Multa> videos = new ArrayList<Multa>();
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_USU);) {
+
+			pst.setLong(1, id);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					try {
+						videos.add(rowMapper(rs));
+					} catch (Exception e) {
+						System.out.println("usuario no valido");
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return videos;
+	}
+
+	public boolean insert(Multa m) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
+
+			pst.setFloat(1, m.getImporte());
+			pst.setString(2, m.getConcepto());
+			pst.setDate(3, (Date) m.getFecha());
+			pst.setLong(4, m.getCoche().getId());
+			pst.setLong(5, m.getAgente().getId());
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+
+//	public boolean update(Multa m) throws SQLException {
+//
+//		boolean resul = false;
+//		try (Connection conn = ConnectionManager.getConnection();
+//				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+//
+//			pst.setString(1, v.getNombre());
+//			pst.setString(2, v.getCodigo());
+//			pst.setLong(3, v.getUsuario().getId());
+//			pst.setLong(4, v.getId());
+//
+//			int affectedRows = pst.executeUpdate();
+//			if (affectedRows == 1) {
+//				resul = true;
+//			}
+//		}
+//		return resul;
+//
+//	}
+//
+//	public boolean delete(long id) throws SQLException {
+//
+//		boolean resul = false;
+//		try (Connection conn = ConnectionManager.getConnection();
+//				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
+//
+//			pst.setLong(1, id);
+//
+//			int affectedRows = pst.executeUpdate();
+//			if (affectedRows == 1) {
+//				resul = true;
+//			}
+//
+//		}
+//		return resul;
+//
+//	}
+
+	private Multa rowMapper(ResultSet rs) throws SQLException {
+		Multa m = new Multa();
+		m.setId(rs.getLong("id_video"));
+		m.setImporte(rs.getFloat("importe"));
+		m.setConcepto(rs.getString("concepto"));
+		m.setFecha(rs.getDate("fecha"));
+
+		
+
+		Coche c = new Coche();
+		c.setId(rs.getLong("id"));
+		c.setMatricula(rs.getString("matricula"));
+		c.setModelo(rs.getString("modelo"));
+		c.setKm(rs.getFloat("km"));
+		
+		Agente a = new Agente();
+		a.setId(rs.getLong("id"));
+		a.setNombre(rs.getString("nombre"));
+		a.setPlaca(rs.getString("placa"));
+
+		m.setAgente(a);
+		m.setCoche(c);
+
+		return m;
+	}
+
+}
