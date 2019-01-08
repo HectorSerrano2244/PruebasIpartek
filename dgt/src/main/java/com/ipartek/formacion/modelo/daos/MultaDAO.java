@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
+import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
@@ -17,7 +18,7 @@ public class MultaDAO {
 
 	private static MultaDAO INSTANCE = null;
 	HttpSession session;
-
+	private String dondeEstoy="";
 	private static final String SQL_GETBYID = "SELECT fecha,concepto,importe,nombre,placa FROM 	multa as m, agente as a WHERE m.id_agente = a.id AND m.id = 1;";
 //	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
 	private static final String SQL_GETALL_USU = "SELECT m.fecha, c.matricula FROM multa as m, coche as c WHERE m.id_coche= c.id  AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
@@ -83,7 +84,7 @@ public class MultaDAO {
 	public ArrayList<Multa> getAllUsu(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
-
+		dondeEstoy="GetAllUsu";
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_USU);) {
 
@@ -109,7 +110,7 @@ public class MultaDAO {
 	public boolean insert(Multa m) throws SQLException {
 
 		boolean resul = false;
-
+		dondeEstoy="Insert";
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
 
@@ -168,19 +169,17 @@ public class MultaDAO {
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
-		//m.setId(rs.getLong("id"));
-//		m.setImporte(rs.getFloat("importe"));
-//		m.setConcepto(rs.getString("concepto"));
-		m.setFecha(rs.getDate("fecha"));
-
-		
-
 		Coche c = new Coche();
-//		c.setId(rs.getLong("id"));
+		m.setFecha(rs.getDate("fecha"));
 		c.setMatricula(rs.getString("matricula"));
-//		c.setModelo(rs.getString("modelo"));
-//		c.setKm(rs.getFloat("km"));
-		
+		if(!"GetAllUsu".equals(dondeEstoy)) {	
+			m.setImporte(rs.getFloat("importe"));
+			m.setId(rs.getLong("id"));
+			m.setConcepto(rs.getString("concepto"));
+			c.setId(rs.getLong("id"));
+			c.setModelo(rs.getString("modelo"));
+			c.setKm(rs.getFloat("km"));
+		}
 //		Agente a = new Agente();
 //		a.setId(rs.getLong("id"));
 //		a.setNombre(rs.getString("nombre"));
@@ -188,7 +187,6 @@ public class MultaDAO {
 
 		m.setAgente(null);
 		m.setCoche(c);
-
 		return m;
 	}
 
