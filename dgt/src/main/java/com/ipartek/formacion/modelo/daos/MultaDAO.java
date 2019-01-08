@@ -41,7 +41,7 @@ public class MultaDAO {
 
 	public Multa getById(long id) {
 
-		Multa v = null;
+		Multa m = null;
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
@@ -49,13 +49,13 @@ public class MultaDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					v = rowMapper(rs);
+					m = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return v;
+		return m;
 	}
 
 //	public ArrayList<Multa> getAll() {
@@ -83,7 +83,7 @@ public class MultaDAO {
 
 	public ArrayList<Multa> getAllUsu(long id) {
 
-		ArrayList<Multa> videos = new ArrayList<Multa>();
+		ArrayList<Multa> multas = new ArrayList<Multa>();
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_USU);) {
@@ -93,7 +93,7 @@ public class MultaDAO {
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					try {
-						videos.add(rowMapper(rs));
+						multas.add(rowMapper(rs));
 					} catch (Exception e) {
 						System.out.println("usuario no valido");
 						e.printStackTrace();
@@ -104,7 +104,7 @@ public class MultaDAO {
 			e.printStackTrace();
 		}
 
-		return videos;
+		return multas;
 	}
 
 	public boolean insert(Multa m) throws SQLException {
