@@ -8,7 +8,7 @@
 	</button>
 	<div class="collapse navbar-collapse text-white" id="navbarCollapse">
 		<ul class="navbar-nav">
-			<li class="list-unlisted text-white">${usuarioLogueado.email}</li>
+			<li class="list-unlisted text-white">${agenteLogueado.nombre}</li>
 		</ul>
 	</div>
 </nav>
