@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 
 /**
  * Servlet implementation class MultasController
@@ -21,16 +22,19 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class MultasController extends HttpServlet {
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
+	private static final String VISTA_BUSCAR = "multas/buscar.jsp";
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private MultaDAO daoMulta;
 	private CocheDAO daoCoche;
-	
+
 	private String op = null;
 	Agente a = null;
 	String vista = "";
 	String multaStr = "";
+	String mat = "";
+	Coche c = null;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -55,9 +59,21 @@ public class MultasController extends HttpServlet {
 				vista = VISTA_FORM;
 			}
 			break;
-		case "multar":
-				request.setAttribute("coches", daoCoche.getMatriculas());
+		case "ir_a":
+			vista = VISTA_BUSCAR;
+			break;
+		case "buscar":
+			c = daoCoche.getByMatri(mat);
+			if (c != null) {
+				request.setAttribute("coche", c);
 				vista = VISTA_FORM;
+			} else {
+				request.setAttribute("mensaje", "caca");
+				vista = VISTA_BUSCAR;
+			}
+			break;
+		case "multar":
+			request.setAttribute("coches", daoCoche.getMatriculas());
 			break;
 		}
 		request.setAttribute("op", op);
@@ -69,6 +85,7 @@ public class MultasController extends HttpServlet {
 		a = (Agente) session.getAttribute("agenteLogueado");
 		op = request.getParameter("op");
 		multaStr = request.getParameter("multa");
+		mat = request.getParameter("matricula");
 		if (op == null) {
 			op = "ver";
 		}
@@ -76,6 +93,7 @@ public class MultasController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
