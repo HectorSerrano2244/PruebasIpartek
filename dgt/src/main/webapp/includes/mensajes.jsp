@@ -1,5 +1,5 @@
-<c:if test="${mensaje != null}">
-	<div class="alert alert-${mensaje.tipo} alert-dismissible fade show"
-		role="alert"> ${mensaje.texto}
+<c:if test="${mensaje != null || mensaje != borra}">
+	<div class="alert alert-danger alert-dismissible fade show"
+		role="alert"> ${mensaje}
 	</div>
 </c:if>
