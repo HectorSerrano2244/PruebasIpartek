@@ -7,6 +7,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <title>Página</title>
 <base href="${pageContext.request.contextPath}/">
 <!-- Bootstrap core CSS -->

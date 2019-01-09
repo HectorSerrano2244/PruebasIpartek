@@ -2,8 +2,9 @@
 <%@ include file="../../includes/navbar.jsp"%>
 <main role="main" class="container"> ${multa}
 <form action="multas" method="post">
-	<input type="hidden" name="id" value="${(op == 'ver') ? '${multa.id}' : 0}">
-	<div class="form-group">
+	<input type="hidden" name="id"
+		value="${(op == 'ver') ? '${multa.id}' : 0}">
+	<%-- 	<div class="form-group">
 		<label for="matricula">Matrícula</label>
 		<c:choose>
 			<c:when test="${op == 'ver'}">
@@ -19,11 +20,26 @@
 				</select>
 			</c:otherwise>
 		</c:choose>
+	</div> --%>
+	<div class="form-group">
+		<label for="fecha">Matricula</label> <input type="text" name="fecha"
+			value="${coche.matricula}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<label for="fecha">Fecha</label> <input type="text" name="fecha"
-			value="${multa.fecha}" class="form-control"
-			${(op == 'ver') ? "readonly" : ""}>
+			value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${fecha}" />"
+			class="form-control" readonly>
+	</div>
+	<div class="form-group">
+		<span>Detalles del vehiculo</span>
+	</div>
+	<div class="form-group">
+		<label for="fecha">Modelo</label> <input type="text" name="fecha"
+			value="${coche.modelo}" class="form-control" readonly>
+	</div>
+	<div class="form-group">
+		<label for="fecha">KM</label> <input type="text" name="fecha"
+			value="${coche.km}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<label for="concepto">Concepto</label> <input type="text"
@@ -35,21 +51,14 @@
 			name="importe" value="${multa.importe}" class="form-control"
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
-	<c:choose>
-	<c:when test="${op == 'ver'}">
-		<div class="form-group">
-			<label for="modelo">Modelo</label> <input type="text" name="modelo"
-				value="${multa.coche.modelo}" class="form-control" readonly>
-		</div>
-		<div class="form-group">
-			<label for="km">Kilómetros</label> <input type="number" name="km"
-				value="${multa.coche.km}" class="form-control" readonly>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<button type="submit" class="btn btn-outline-primary btn-block">GUARDAR</button>
-	</c:otherwise>
-	</c:choose>
+
+	<a href="privado/multas?op=buscar&mensaje=borra" class="btn btn-outline-primary btn-block">Cambiar de
+		Vehiculo</a>
+	<button type="submit"
+		class="btn btn-outline-success btn-block mt-3 mb-3">GUARDAR</button>
+	<a class="btn btn-outline-primary btn-block">Volver al inicio</a>
+
+
 </form>
 </main>
 <%@ include file="../../includes/footer.jsp"%>

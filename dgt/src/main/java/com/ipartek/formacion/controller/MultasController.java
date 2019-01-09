@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -66,6 +67,7 @@ public class MultasController extends HttpServlet {
 			c = daoCoche.getByMatri(mat);
 			if (c != null) {
 				request.setAttribute("coche", c);
+				request.setAttribute("fecha", new Date());
 				vista = VISTA_FORM;
 			} else {
 				request.setAttribute("mensaje", "caca");
