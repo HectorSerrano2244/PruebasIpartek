@@ -1,7 +1,7 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
 <main role="main" class="container"> ${multa}
-<form action="multas" method="post">
+<form action="privado/multas" method="post">
 	<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 	<input type="hidden" name="idcoche" value="${coche.id}">
 	<input type="hidden" name="op" value="multar">
