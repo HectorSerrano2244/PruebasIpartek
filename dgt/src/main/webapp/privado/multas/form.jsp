@@ -2,8 +2,8 @@
 <%@ include file="../../includes/navbar.jsp"%>
 <main role="main" class="container"> ${multa}
 <form action="multas" method="post">
-	<input type="hidden" name="id"
-		value="${(op == 'ver') ? '${multa.id}' : 0}">
+	<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
+	<input type="hidden" name="idcoche" value="${coche.id}">
 	<%-- 	<div class="form-group">
 		<label for="matricula">Matrícula</label>
 		<c:choose>
@@ -22,33 +22,33 @@
 		</c:choose>
 	</div> --%>
 	<div class="form-group">
-		<label for="fecha">Matricula</label> <input type="text" name="fecha"
+		<label for="matricula">Matricula</label> <input type="text" name="matricula"
 			value="${coche.matricula}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<label for="fecha">Fecha</label> <input type="text" name="fecha"
-			value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${fecha}" />"
+			value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${(op == 'ver') ? multa.fecha : fecha}" />"
 			class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<span>Detalles del vehiculo</span>
 	</div>
 	<div class="form-group">
-		<label for="fecha">Modelo</label> <input type="text" name="fecha"
-			value="${coche.modelo}" class="form-control" readonly>
+		<label for="modelo">Modelo</label> <input type="text" name="modelo"
+			value="${(op == 'ver') ? multa.coche.modelo : coche.modelo}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
-		<label for="fecha">KM</label> <input type="text" name="fecha"
-			value="${coche.km}" class="form-control" readonly>
+		<label for="km">KM</label> <input type="text" name="km"
+			value="${(op == 'ver') ? multa.coche.km : coche.km}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<label for="concepto">Concepto</label> <input type="text"
-			name="concepto" value="${(op == 'ver') ? multa.concepto:''}" class="form-control"
+			name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" class="form-control"
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
 	<div class="form-group">
 		<label for="importe">Importe</label> <input type="number"
-			name="importe" value="${multa.importe}" class="form-control"
+			name="importe" value="${(op == 'ver') ? multa.importe : ''}" class="form-control"
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
 
