@@ -179,7 +179,7 @@ public class MultaDAO {
 			m.setConcepto(rs.getString("concepto"));
 			c.setId(rs.getLong("id"));
 			c.setModelo(rs.getString("modelo"));
-			c.setKm(rs.getFloat("km"));
+			c.setKm(rs.getInt("km"));
 		}
 //		Agente a = new Agente();
 //		a.setId(rs.getLong("id"));
