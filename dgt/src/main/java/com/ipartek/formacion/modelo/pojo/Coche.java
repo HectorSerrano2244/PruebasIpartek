@@ -4,9 +4,9 @@ public class Coche {
 	private Long id;
 	private String matricula;
 	private String modelo;
-	private Float km;
+	private Integer km;
 	
-	public Coche(Long id, String matricula, String modelo, Float km) {
+	public Coche(Long id, String matricula, String modelo, Integer km) {
 		this();
 		setId(id);
 		setMatricula(matricula);
@@ -19,7 +19,7 @@ public class Coche {
 		this.id=-1l;
 		this.matricula="";
 		this.modelo="";
-		this.km=0.00f;
+		this.km=0;
 	}
 
 	public Long getId() {
@@ -46,11 +46,11 @@ public class Coche {
 		this.modelo = modelo;
 	}
 
-	public Float getKm() {
+	public Integer getKm() {
 		return km;
 	}
 
-	public void setKm(Float km) {
+	public void setKm(Integer km) {
 		this.km = km;
 	}
 

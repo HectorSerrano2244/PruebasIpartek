@@ -35,6 +35,8 @@ public class CocheDAO {
 		Coche c = new Coche();
 		c.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
+		c.setModelo(rs.getString("modelo"));
+		c.setKm(rs.getInt("km"));
 		return c;
 	}
 	
