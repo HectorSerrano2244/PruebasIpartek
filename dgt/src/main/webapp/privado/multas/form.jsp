@@ -4,6 +4,7 @@
 <form action="multas" method="post">
 	<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 	<input type="hidden" name="idcoche" value="${coche.id}">
+	<input type="hidden" name="op" value="multar">
 	<%-- 	<div class="form-group">
 		<label for="matricula">Matrícula</label>
 		<c:choose>
@@ -54,10 +55,9 @@
 		<a href="privado/multas?op=ir_a" class="btn btn-outline-primary btn-block">Cambiar de
 			Vehiculo</a>
 	<c:if test="${op == 'buscar'}">
-		<button type="submit"
-			class="btn btn-outline-success btn-block mt-3 mb-3">GUARDAR</button>
+		<input type="submit"class="btn btn-outline-success btn-block mt-3 mb-3" value="GUARDAR">
 	</c:if>
-	<a href="privado/multas?op=ver" class="btn btn-outline-primary btn-block">Volver al inicio</a>
+	<a href="../index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
 
 
 

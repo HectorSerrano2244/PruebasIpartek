@@ -23,6 +23,7 @@ import com.ipartek.formacion.modelo.pojo.Multa;
  */
 @WebServlet("/privado/multas")
 public class MultasController extends HttpServlet {
+	private static final String VISTA_PRAL = "../index.jsp";
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
 	private static final String VISTA_BUSCAR = "multas/buscar.jsp";
@@ -94,7 +95,7 @@ public class MultasController extends HttpServlet {
 			try {
 				if(daoMulta.insert(m)) {
 					mensaje="ok";
-					vista = VISTA_INDEX;
+					vista = VISTA_PRAL;
 				}else {
 					mensaje="ko";
 					vista = VISTA_FORM;
