@@ -23,7 +23,7 @@
 	</div> --%>
 	<div class="form-group">
 		<label for="matricula">Matricula</label> <input type="text" name="matricula"
-			value="${coche.matricula}" class="form-control" readonly>
+			value="${(op == 'ver') ? multa.coche.matricula : coche.matricula}" class="form-control" readonly>
 	</div>
 	<div class="form-group">
 		<label for="fecha">Fecha</label> <input type="text" name="fecha"
