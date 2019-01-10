@@ -61,6 +61,7 @@ public class MultasController extends HttpServlet {
 			}
 			break;
 		case "ir_a":
+			request.setAttribute("mensaje", null);
 			vista = VISTA_BUSCAR;
 			break;
 		case "buscar":

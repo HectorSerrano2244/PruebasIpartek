@@ -52,7 +52,7 @@
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
 
-	<a href="privado/multas?op=buscar&mensaje=borra" class="btn btn-outline-primary btn-block">Cambiar de
+	<a href="privado/multas?op=ir_a" class="btn btn-outline-primary btn-block">Cambiar de
 		Vehiculo</a>
 	<button type="submit"
 		class="btn btn-outline-success btn-block mt-3 mb-3">GUARDAR</button>
