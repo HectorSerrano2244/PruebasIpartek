@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletConfig;
@@ -15,6 +16,7 @@ import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Multa;
 
 /**
  * Servlet implementation class MultasController
@@ -39,7 +41,8 @@ public class MultasController extends HttpServlet {
 	String imp="";
 	String concep="";
 	String id_coche="";
-
+	HttpSession session;
+	String mensaje="";
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
@@ -79,16 +82,35 @@ public class MultasController extends HttpServlet {
 			}
 			break;
 		case "multar":
-			
-			
+			Multa m=new Multa();
+			Coche c= new Coche();
+			Agente a;
+			Long id_agente;
+			m.setImporte(Float.parseFloat(imp));
+			m.setConcepto(concep);
+			c.setId(Long.parseLong(id_coche));
+			m.setCoche(c);
+			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
+			try {
+				if(daoMulta.insert(m)) {
+					mensaje="ok";
+					vista = VISTA_INDEX;
+				}else {
+					mensaje="ko";
+					vista = VISTA_FORM;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
+		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
 		request.getRequestDispatcher(vista).forward(request, response);
 	}
 
 	private void getParameters(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		session=request.getSession();
 		a = (Agente) session.getAttribute("agenteLogueado");
 		op = request.getParameter("op");
 		multaStr = request.getParameter("multa");
