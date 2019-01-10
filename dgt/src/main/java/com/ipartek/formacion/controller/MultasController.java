@@ -85,8 +85,6 @@ public class MultasController extends HttpServlet {
 		case "multar":
 			Multa m=new Multa();
 			Coche c= new Coche();
-			Agente a;
-			Long id_agente;
 			m.setImporte(Float.parseFloat(imp));
 			m.setConcepto(concep);
 			c.setId(Long.parseLong(id_coche));

@@ -21,7 +21,7 @@ public class MultaDAO {
 	private static final String SQL_GETBYID = "SELECT m.id, m.fecha, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
 //	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
 	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
-	private static final String SQL_INSERT = "INSERT INTO multa  (importe, concepto, fecha, id_coche, id_agente) VALUES( ? , ? , ? , ? , ?);";
+	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES ( ? , ? , ? , ?);";
 //	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
 //	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
@@ -117,9 +117,8 @@ public class MultaDAO {
 
 			pst.setFloat(1, m.getImporte());
 			pst.setString(2, m.getConcepto());
-			pst.setDate(3, (Date) m.getFecha());
-			pst.setLong(4, m.getCoche().getId());
-			pst.setLong(5, m.getAgente().getId());
+			pst.setLong(3, m.getCoche().getId());
+			pst.setLong(4, m.getAgente().getId());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
