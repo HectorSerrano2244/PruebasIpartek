@@ -25,6 +25,7 @@
 		<label for="matricula">Matricula</label> <input type="text" name="matricula" class="form-control">
 	</div>
 	<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>
+	<a href="privado/multas?op=ver" class="btn btn-outline-primary btn-block">Volver al inicio</a>
 <%-- 	<div class="form-group">
 		<label for="concepto">Concepto</label> <input type="text"
 			name="concepto" value="${multa.concepto}" class="form-control"
