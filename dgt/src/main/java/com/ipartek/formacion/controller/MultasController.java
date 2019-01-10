@@ -36,6 +36,9 @@ public class MultasController extends HttpServlet {
 	String multaStr = "";
 	String mat = "";
 	Coche c = null;
+	String imp="";
+	String concep="";
+	String id_coche="";
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -76,7 +79,8 @@ public class MultasController extends HttpServlet {
 			}
 			break;
 		case "multar":
-			request.setAttribute("coches", daoCoche.getMatriculas());
+			
+			
 			break;
 		}
 		request.setAttribute("op", op);
@@ -89,6 +93,9 @@ public class MultasController extends HttpServlet {
 		op = request.getParameter("op");
 		multaStr = request.getParameter("multa");
 		mat = request.getParameter("matricula");
+		imp = request.getParameter("importe");
+		concep = request.getParameter("concepto");
+		id_coche=request.getParameter("idcoche");
 		if (op == null) {
 			op = "ver";
 		}
