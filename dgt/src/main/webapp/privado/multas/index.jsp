@@ -1,6 +1,7 @@
 <%@include file="../../includes/header.jsp"%>
 <%@include file="../../includes/navbar.jsp"%>
 <main role="main" class="container">
+<h3 class="text-center w100 mb-3 mt-3">${(opm=='baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
 <table class="table table-hover">
 	<thead class="thead-light">
 		<tr>

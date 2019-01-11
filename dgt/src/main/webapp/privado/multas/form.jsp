@@ -45,7 +45,30 @@
 	<c:if test="${op != 'buscar'}">
 	<a href="privado/multas?op=ver&opm=${opm }" class="btn btn-outline-primary btn-block mt-3 mb-3">Volver a la lista</a>
 	<c:if test="${opm != 'baja'}">
-	<a href="#" class="btn btn-outline-danger btn-block mt-3 mb-3">Anular multa</a>
+	<!-- Button trigger modal -->
+
+  <a href="#" class="btn btn-outline-danger btn-block mt-3 mb-3" data-toggle="modal" data-target="#exampleModal">Anular multa</a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmación de anulación de multa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       ¿está seguro de anular esta multa de la matricula ${multa.coche.matricula } con fecha ${multa.fecha }?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No anular</button>
+        <button type="button" class="btn btn-primary">Anular multa</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 	</c:if>
 	</c:if>
 	
