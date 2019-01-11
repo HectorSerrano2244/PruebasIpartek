@@ -9,7 +9,7 @@ en la carpeta SQL se encuentra la base de datos necesaria para el correcto funci
 
 ## Previsualización
 
-![ScreenShot](https://raw.github.com/AjRoBSeYeR/PruebasIpartek/tree/master/dgt/src/main/resources/dgt.png)
+<img src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/dgt.png">
 
 ## Tecnología
 
