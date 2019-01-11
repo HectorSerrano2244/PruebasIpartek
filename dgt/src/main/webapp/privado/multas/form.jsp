@@ -63,7 +63,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No anular</button>
-        <a href="privado/multas?op=anular"  class="btn btn-danger">Anular multa</a>
+        <a href="privado/multas?op=anular&multa=${multa.id }"  class="btn btn-danger">Anular multa</a>
       </div>
     </div>
   </div>

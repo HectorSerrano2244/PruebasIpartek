@@ -157,7 +157,7 @@ public class MultasController extends HttpServlet {
 			break;
 		case "anular":
 			try {
-				request.setAttribute("multa", daoMulta.update(m));
+				request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(multaStr))));
 				op = "ver";
 				opm = "baja";
 				vista = VISTA_INDEX;
