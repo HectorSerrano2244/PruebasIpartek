@@ -10,12 +10,14 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 public class MultaDAO {
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
 	private String dondeEstoy="";
+	private Mensaje mensaje = null;
 
 	private static final String SQL_GETBYID = "SELECT m.id, m.fecha_alta, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
 	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
@@ -73,13 +75,13 @@ public class MultaDAO {
 					try {
 						multas.add(rowMapper(rs));
 					} catch (Exception e) {
-						System.out.println("usuario no valido");
-						e.printStackTrace();
+						mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Error en la sentencia SQL");
+						LOG.error(mensaje.getTexto(), e);
 					}
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 
 		return multas;

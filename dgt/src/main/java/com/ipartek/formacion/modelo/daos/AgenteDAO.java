@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
 public class AgenteDAO {
+	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
 	private static final String SQL_GETBYID = "SELECT id, nombre FROM agente WHERE id = ?;";
 
@@ -89,7 +92,7 @@ public class AgenteDAO {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return a;
 	}
@@ -139,7 +142,7 @@ public class AgenteDAO {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("El agente que buscas no existe", e);
 		}
 		return a;
 	}
