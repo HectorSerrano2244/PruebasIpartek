@@ -6,7 +6,6 @@
 		<tr>
 			<th>Matricula</th>
 			<th>Fecha</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>

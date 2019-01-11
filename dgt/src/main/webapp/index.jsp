@@ -6,7 +6,7 @@
 </div>
 <a href="privado/multas?op=ir_a" class="mt-6 btn btn-outline-primary btn-block btn-lg">Poner una multa</a>
 <a href="privado/multas?op=ver" class="mt-6 btn btn-outline-secondary btn-block btn-lg">Ver todas tus multas</a>
-<a href="privado/multas?op=ver_anu" class="mt-6 btn btn-outline-secondary btn-block btn-lg">Ver tus multas anuladas</a>
+<a href="privado/multas?opm=baja" class="mt-6 btn btn-outline-secondary btn-block btn-lg">Ver tus multas anuladas</a>
 
 </main>
 <%@include file="includes/footer.jsp"%>

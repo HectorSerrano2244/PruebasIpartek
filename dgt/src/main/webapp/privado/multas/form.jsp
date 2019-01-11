@@ -5,23 +5,6 @@
 	<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 	<input type="hidden" name="idcoche" value="${coche.id}">
 	<input type="hidden" name="op" value="multar">
-	<%-- 	<div class="form-group">
-		<label for="matricula">Matrícula</label>
-		<c:choose>
-			<c:when test="${op == 'ver'}">
-				<input type="text" name="matricula" value="${multa.coche.matricula}"
-					class="form-control" readonly>
-			</c:when>
-			<c:otherwise>
-				<select class="form-control" name="matricula" id="matricula">
-					<option value="-1">-- Selecciona --</option>
-					<c:forEach items="${coches}" var="c">
-						<option value="${c.id}">${c.matricula}</option>
-					</c:forEach>
-				</select>
-			</c:otherwise>
-		</c:choose>
-	</div> --%>
 	<div class="form-group">
 		<label for="matricula">Matricula</label> <input type="text" name="matricula"
 			value="${(op == 'ver') ? multa.coche.matricula : coche.matricula}" class="form-control" readonly>
