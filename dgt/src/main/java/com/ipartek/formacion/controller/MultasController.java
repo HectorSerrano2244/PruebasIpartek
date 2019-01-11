@@ -48,14 +48,20 @@ public class MultasController extends HttpServlet {
 
 	private String op = null;
 	String opm = "";
-	Agente a = null;
-	String vista = "";
-	String multaStr = "";
-	String mat = "";
-	Coche c = null;
+	
+	// Parametros
 	String imp = "";
 	String concep = "";
 	String id_coche = "";
+	String vista = "";
+	String multaStr = "";
+	String mat = "";
+	
+	// Objectos
+	Agente a = null;
+	Coche c = null;
+	Multa m = null;
+
 	HttpSession session;
 
 	@Override
@@ -77,34 +83,41 @@ public class MultasController extends HttpServlet {
 			if (multaStr == null) {
 				request.setAttribute("multas", daoMulta.getAllUsu(a.getId(), opm));
 				vista = VISTA_INDEX;
+				LOG.info("Buscando todas las multas puestas por el usuario");
 			} else {
 				long multa = Long.parseLong(multaStr);
 				request.setAttribute("multa", daoMulta.getById(multa));
 				vista = VISTA_FORM;
+				LOG.info("Información de la multa"+multa);
 			}
 			break;
 		case "ir_a":
 			mensaje = new Mensaje(Mensaje.TIPO_INFO, "Introduzca una matrícula");
 			vista = VISTA_BUSCAR;
+			LOG.info("Accediendo a la busqueda de matriculas");
 			break;
 		case "buscar":
 			try {
 				c = daoCoche.getByMatri(mat);
+				LOG.debug("Matricula conseguida");
 			} catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No es posible multar al coche revise el importe y el concepto");
+				LOG.warn(mensaje.getTexto());
 			}
 			if (c != null) {
 				request.setAttribute("coche", c);
 				request.setAttribute("fecha", new Date());
 				vista = VISTA_FORM;
+				LOG.debug("Enviando datos de un coche");
 			} else {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
 				vista = VISTA_BUSCAR;
+				LOG.warn(mensaje.getTexto());
 			}
 			break;
 		case "multar":
-			Multa m = new Multa();
-			Coche c = new Coche();
+			m = new Multa();
+			c = new Coche();
 			m.setImporte(Float.parseFloat(imp));
 			m.setConcepto(concep);
 			c.setId(Long.parseLong(id_coche));
@@ -121,30 +134,47 @@ public class MultasController extends HttpServlet {
 				vista = VISTA_BUSCAR;
 				errores += "</ul>";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
+				LOG.debug(mensaje.getTexto());
 			}
 			else {
+				LOG.debug("No hay violaciones. Se procede a crear una multa");
 				try {
 					if (daoMulta.insert(m)) {
 						mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
 						vista = VISTA_PRAL;
+						LOG.debug(mensaje.getTexto());
 					} else {
 						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
 						vista = VISTA_FORM;
+						LOG.debug(mensaje.getTexto());
 					}
 				} catch (SQLException e) {
 					mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros incorrectos");
 					vista = VISTA_FORM;
+					LOG.debug(mensaje.getTexto());
 				}
+			}
+			break;
+		case "anular":
+			try {
+				request.setAttribute("multa", daoMulta.update(m));
+				op = "ver";
+				opm = "baja";
+				vista = VISTA_INDEX;
+			} catch (SQLException e) {
+				LOG.error(e);
 			}
 			break;
 			default: 
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
 				vista = VISTA_PRAL;
+				LOG.debug(mensaje.getTexto());
 				break;
 		}
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
 		request.setAttribute("opm", opm);
+		LOG.debug("Mostrar la vista");
 		request.getRequestDispatcher(vista).forward(request, response);
 	}
 
@@ -162,9 +192,11 @@ public class MultasController extends HttpServlet {
 			imp = request.getParameter("importe");
 			concep = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
+			LOG.debug("Parametros recuperados satisfactoriamente");
 		} catch (Exception e) {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
 			vista = VISTA_PRAL;
+			LOG.error(mensaje.getTexto());
 		}
 
 	}

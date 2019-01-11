@@ -9,11 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
-import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
