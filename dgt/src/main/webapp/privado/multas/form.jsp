@@ -44,7 +44,7 @@
 	</div>
 	<div class="form-group">
 		<label for="concepto">Concepto</label> <input type="text"
-			name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" class="form-control"
+			name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" ${(op == 'ver') ? '' :'autofocus'} class="form-control"
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
 	<div class="form-group">

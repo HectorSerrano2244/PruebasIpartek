@@ -18,9 +18,9 @@ public class MultaDAO {
 	private static MultaDAO INSTANCE = null;
 	private String dondeEstoy="";
 
-	private static final String SQL_GETBYID = "SELECT m.id, m.fecha, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
+	private static final String SQL_GETBYID = "SELECT m.id, m.fecha_alta, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
 //	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
-	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES ( ? , ? , ? , ?);";
 //	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
 //	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
@@ -170,7 +170,7 @@ public class MultaDAO {
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		Coche c = new Coche();
-		m.setFecha(rs.getDate("fecha"));
+		m.setFecha(rs.getDate("fecha_alta"));
 		m.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
 		if("getById".equals(dondeEstoy)) {	
