@@ -18,11 +18,11 @@ public class MultaDAO {
 	private String dondeEstoy="";
 
 	private static final String SQL_GETBYID = "SELECT m.id, m.fecha_alta, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
-//	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
-	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? ORDER BY m.id DESC LIMIT 1000;";
-	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES ( ? , ? , ? , ?);";
+	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_USU_BAJA = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES (?, ?, ?, ?);";
 //	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
-//	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
+
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -51,42 +51,20 @@ public class MultaDAO {
 				while (rs.next()) {
 					m = rowMapper(rs);
 				}
+				LOG.debug("Usuario encontrado");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("Usuario no encontrado");
 		}
 		return m;
 	}
 
-//	public ArrayList<Multa> getAll() {
-//
-//		ArrayList<Multa> videos = new ArrayList<Multa>();
-//
-//		try (Connection conn = ConnectionManager.getConnection();
-//				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
-//				ResultSet rs = pst.executeQuery()) {
-//
-//			while (rs.next()) {
-//				try {
-//					videos.add(rowMapper(rs));
-//				} catch (Exception e) {
-//					System.out.println("usuario no valido");
-//					e.printStackTrace();
-//				}
-//			} // while
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return videos;
-//	}
-
-	public ArrayList<Multa> getAllUsu(long id) {
+	public ArrayList<Multa> getAllUsu(long id, String opm) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		dondeEstoy = "getAllUsu";
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_USU);) {
+				PreparedStatement pst = conn.prepareStatement(("baja".equals(opm)) ? SQL_GETALL_USU_BAJA : SQL_GETALL_USU);) {
 
 			pst.setLong(1, id);
 
