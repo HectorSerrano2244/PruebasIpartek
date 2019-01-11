@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -21,8 +22,8 @@ public class MultaDAO {
 	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_GETALL_USU_BAJA = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES (?, ?, ?, ?);";
-//	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
-
+	private static final String SQL_UPDATE = "UPDATE multa SET fecha_baja = ?  WHERE id = ?;";
+//	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL  WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -106,25 +107,23 @@ public class MultaDAO {
 
 	}
 
-//	public boolean update(Multa m) throws SQLException {
-//
-//		boolean resul = false;
-//		try (Connection conn = ConnectionManager.getConnection();
-//				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
-//
-//			pst.setString(1, v.getNombre());
-//			pst.setString(2, v.getCodigo());
-//			pst.setLong(3, v.getUsuario().getId());
-//			pst.setLong(4, v.getId());
-//
-//			int affectedRows = pst.executeUpdate();
-//			if (affectedRows == 1) {
-//				resul = true;
-//			}
-//		}
-//		return resul;
-//
-//	}
+	public boolean update(Multa m) throws SQLException {
+
+	boolean resul = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+
+			pst.setDate(1, (java.sql.Date) new Date());
+			pst.setLong(2, m.getId());
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
+
+	}
 
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
