@@ -52,13 +52,20 @@
 			name="importe" value="${(op == 'ver') ? multa.importe : ''}" class="form-control"
 			${(op == 'ver') ? "readonly" : ""}>
 	</div>
+	<c:if test="${op == 'buscar'}">
 		<a href="privado/multas?op=ir_a" class="btn btn-outline-primary btn-block">Cambiar de
 			Vehiculo</a>
-	<c:if test="${op == 'buscar'}">
-		<input type="submit"class="btn btn-outline-success btn-block mt-3 mb-3" value="GUARDAR">
+	
+		<input type="submit" class="btn btn-outline-success btn-block mt-3 mb-3" value="Guardar multa">
+		
 	</c:if>
-	<a href="../index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
-	<a href="../index.jsp" class="btn btn-outline-danger btn-block">Eliminar multa</a>
+	<c:if test="${op != 'buscar'}">
+	<a href="privado/multas?op=ver" class="btn btn-outline-primary btn-block mt-3 mb-3">Volver a la lista</a>
+	<a href="#" class="btn btn-outline-danger btn-block mt-3 mb-3">Anular multa</a>
+	</c:if>
+	
+	<a href="index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
+	
 
 </form>
 </main>

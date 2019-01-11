@@ -21,5 +21,6 @@
 		</c:forEach>
 	</tbody>
 </table>
+<a href="index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
 </main>
 <%@include file="../../includes/footer.jsp"%>
