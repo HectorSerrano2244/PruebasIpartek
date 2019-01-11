@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 
 public class CocheDAO {
 	
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
-	private String dondeEstoy = "";
 
 	private static final String SQL_GETMATRICULAS = "SELECT id, matricula, modelo, km FROM coche ORDER BY id DESC LIMIT 100;";
 	private static final String SQL_GETMATRICULA = "SELECT * FROM coche WHERE matricula= ? ;";
@@ -65,7 +63,6 @@ public class CocheDAO {
 	
 	public ArrayList<Coche> getMatriculas() {
 		ArrayList<Coche> matriculas = new ArrayList<Coche>();
-		dondeEstoy = "getMatriculas";
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETMATRICULAS);) {
 

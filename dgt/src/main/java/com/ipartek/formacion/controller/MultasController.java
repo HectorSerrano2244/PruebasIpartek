@@ -111,13 +111,14 @@ public class MultasController extends HttpServlet {
 			m.setCoche(c);
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
-			if (violations.size() > 0) { // validacion NO PASA
+			if (violations.size() > 0) {
 				String errores = "<ul class='list-unlisted'>";
 				for (ConstraintViolation<Multa> violation : violations) {
 
 					errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
 
 				}
+				vista = VISTA_BUSCAR;
 				errores += "</ul>";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 			}
