@@ -63,7 +63,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No anular</button>
-        <button type="button" class="btn btn-primary">Anular multa</button>
+        <button type="button" class="btn btn-danger">Anular multa</button>
       </div>
     </div>
   </div>
