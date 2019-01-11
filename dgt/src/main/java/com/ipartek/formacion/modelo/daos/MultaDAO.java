@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -20,9 +19,9 @@ public class MultaDAO {
 
 	private static final String SQL_GETBYID = "SELECT m.id, m.fecha_alta, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
 	private static final String SQL_GETALL_USU = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
-	private static final String SQL_GETALL_USU_BAJA = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_USU_BAJA = "SELECT m.id, m.fecha_baja, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES (?, ?, ?, ?);";
-	private static final String SQL_UPDATE = "UPDATE multa SET fecha_baja = ?  WHERE id = ?;";
+	private static final String SQL_UPDATE = "UPDATE multa SET fecha_baja = CURRENT_TIMESTAMP  WHERE id = ?;";
 //	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL  WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
@@ -113,8 +112,7 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
 
-			pst.setDate(1, (java.sql.Date) new Date());
-			pst.setLong(2, m.getId());
+			pst.setLong(1, m.getId());
 			
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
