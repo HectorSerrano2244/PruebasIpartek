@@ -15,7 +15,7 @@ Gestor de multas DGT, permite a un agente aplicar multas, anularlas y listarlas
 
 <table>
 <tr>
-	<td width="33%" style="v-align:top"><img  src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/dgt.png"></td>
+	<td width="33%" style="valign:top"><img  src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/dgt.png"></td>
 	<td width="33%"><img  src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/dgt2.png"></td>
 	<td width="33%"><img src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/dgt3.png"></td>
 </tr>
