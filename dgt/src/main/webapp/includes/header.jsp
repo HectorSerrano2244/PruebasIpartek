@@ -11,6 +11,10 @@
 <title>Página</title>
 <base href="${pageContext.request.contextPath}/">
 <!-- Bootstrap core CSS -->
+<meta name="theme-color" content="#007bff">
+
+<meta name="msapplication-navbutton-color" content="#007bff">
+
 <link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 	 <link href="https://getbootstrap.com/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">

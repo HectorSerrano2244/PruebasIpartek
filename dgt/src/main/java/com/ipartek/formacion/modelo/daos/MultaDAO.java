@@ -125,24 +125,7 @@ public class MultaDAO {
 //		return resul;
 //
 //	}
-//
-//	public boolean delete(long id) throws SQLException {
-//
-//		boolean resul = false;
-//		try (Connection conn = ConnectionManager.getConnection();
-//				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
-//
-//			pst.setLong(1, id);
-//
-//			int affectedRows = pst.executeUpdate();
-//			if (affectedRows == 1) {
-//				resul = true;
-//			}
-//
-//		}
-//		return resul;
-//
-//	}
+
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
@@ -157,12 +140,6 @@ public class MultaDAO {
 			c.setModelo(rs.getString("modelo"));
 			c.setKm(rs.getInt("km"));
 		}
-//		Agente a = new Agente();
-//		a.setId(rs.getLong("id"));
-//		a.setNombre(rs.getString("nombre"));
-//		a.setPlaca(rs.getString("placa"));
-//		m.setAgente(a);
-		
 		m.setCoche(c);
 		return m;
 	}
