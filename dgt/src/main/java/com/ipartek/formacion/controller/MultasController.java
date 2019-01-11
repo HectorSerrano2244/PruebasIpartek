@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 /**
@@ -23,6 +26,8 @@ import com.ipartek.formacion.modelo.pojo.Multa;
  */
 @WebServlet("/privado/multas")
 public class MultasController extends HttpServlet {
+	private final static Logger LOG = Logger.getLogger(MultasController.class);
+	private Mensaje mensaje;
 	private static final String VISTA_PRAL = "../index.jsp";
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
@@ -39,11 +44,11 @@ public class MultasController extends HttpServlet {
 	String multaStr = "";
 	String mat = "";
 	Coche c = null;
-	String imp="";
-	String concep="";
-	String id_coche="";
+	String imp = "";
+	String concep = "";
+	String id_coche = "";
 	HttpSession session;
-	String mensaje="";
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
@@ -83,23 +88,25 @@ public class MultasController extends HttpServlet {
 			}
 			break;
 		case "multar":
-			Multa m=new Multa();
-			Coche c= new Coche();
+			Multa m = new Multa();
+			Coche c = new Coche();
 			m.setImporte(Float.parseFloat(imp));
 			m.setConcepto(concep);
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			try {
-				if(daoMulta.insert(m)) {
-					mensaje="ok";
+				if (daoMulta.insert(m)) {
+					mensaje = new Mensaje(mensaje.TIPO_SUCCESS, "Coche multado");
 					vista = VISTA_PRAL;
-				}else {
-					mensaje="ko";
+				} else {
+					mensaje = new Mensaje(mensaje.TIPO_WARNING,
+							"No es posible multar al coche revise el importe y el concepto");
 					vista = VISTA_FORM;
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				mensaje = new Mensaje(mensaje.TIPO_DANGER, "Parámetros incorrectos");
+				vista = VISTA_FORM;
 			}
 			break;
 		}
@@ -109,17 +116,22 @@ public class MultasController extends HttpServlet {
 	}
 
 	private void getParameters(HttpServletRequest request) {
-		session=request.getSession();
+		session = request.getSession();
 		a = (Agente) session.getAttribute("agenteLogueado");
-		op = request.getParameter("op");
-		multaStr = request.getParameter("multa");
-		mat = request.getParameter("matricula");
-		imp = request.getParameter("importe");
-		concep = request.getParameter("concepto");
-		id_coche=request.getParameter("idcoche");
-		if (op == null) {
-			op = "ver";
+		try {
+			op = request.getParameter("op");
+			if (op == null) {
+				op = "ver";
+			}
+			multaStr = request.getParameter("multa");
+			mat = request.getParameter("matricula");
+			imp = request.getParameter("importe");
+			concep = request.getParameter("concepto");
+			id_coche = request.getParameter("idcoche");
+		} catch (Exception e) {
+			mensaje = new Mensaje(mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

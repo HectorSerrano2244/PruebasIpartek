@@ -1,20 +1,19 @@
 package com.ipartek.formacion.modelo.daos;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 public class MultaDAO {
-
+	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
 	private String dondeEstoy="";
 

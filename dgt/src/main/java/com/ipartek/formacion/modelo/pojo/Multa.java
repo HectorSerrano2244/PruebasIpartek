@@ -2,9 +2,13 @@ package com.ipartek.formacion.modelo.pojo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class Multa {
 	private Long id;
+	@NotNull
 	private Float importe;
+	@NotNull
 	private String concepto;
 	private Date fecha;
 	private Agente agente;
