@@ -105,8 +105,7 @@ public class MultasController extends HttpServlet {
 					mensaje = new Mensaje(mensaje.TIPO_SUCCESS, "Coche multado");
 					vista = VISTA_PRAL;
 				} else {
-					mensaje = new Mensaje(mensaje.TIPO_WARNING,
-							"No es posible multar al coche revise el importe y el concepto");
+					mensaje = new Mensaje(mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
 					vista = VISTA_FORM;
 				}
 			} catch (SQLException e) {
@@ -117,6 +116,7 @@ public class MultasController extends HttpServlet {
 		}
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
+		request.setAttribute("opm", opm);
 		request.getRequestDispatcher(vista).forward(request, response);
 	}
 
