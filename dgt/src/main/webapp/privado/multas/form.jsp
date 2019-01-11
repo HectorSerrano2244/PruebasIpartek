@@ -1,6 +1,6 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
-<main role="main" class="container"> ${multa}
+<main role="main" class="container">
 <form action="privado/multas" method="post">
 	<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 	<input type="hidden" name="idcoche" value="${coche.id}">
@@ -58,8 +58,7 @@
 		<input type="submit"class="btn btn-outline-success btn-block mt-3 mb-3" value="GUARDAR">
 	</c:if>
 	<a href="../index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
-
-
+	<a href="../index.jsp" class="btn btn-outline-danger btn-block">Eliminar multa</a>
 
 </form>
 </main>
