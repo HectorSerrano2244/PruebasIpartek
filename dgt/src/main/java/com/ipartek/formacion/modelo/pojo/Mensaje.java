@@ -2,6 +2,7 @@ package com.ipartek.formacion.modelo.pojo;
 
 public class Mensaje {
 	
+	public static final String TIPO_INFO = "info";
 	public static final String TIPO_PRIMARY = "primary";
 	public static final String TIPO_SUCCESS = "success";
 	public static final String TIPO_DANGER = "danger";

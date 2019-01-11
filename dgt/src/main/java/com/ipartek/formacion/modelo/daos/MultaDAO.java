@@ -54,7 +54,7 @@ public class MultaDAO {
 				LOG.debug("Usuario encontrado");
 			}
 		} catch (Exception e) {
-			LOG.error("Usuario no encontrado");
+			LOG.error("Usuario no encontrado"+ e);
 		}
 		return m;
 	}

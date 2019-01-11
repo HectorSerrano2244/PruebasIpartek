@@ -3,6 +3,7 @@ package com.ipartek.formacion.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
@@ -32,7 +37,10 @@ public class MultasController extends HttpServlet {
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
 	private static final String VISTA_BUSCAR = "multas/buscar.jsp";
-
+	
+	private ValidatorFactory factory;
+	private Validator validator;
+	
 	private static final long serialVersionUID = 1L;
 
 	private MultaDAO daoMulta;
@@ -54,6 +62,8 @@ public class MultasController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 		daoMulta = MultaDAO.getInstance();
 		daoCoche = CocheDAO.getInstance();
 	}
@@ -69,28 +79,26 @@ public class MultasController extends HttpServlet {
 				vista = VISTA_INDEX;
 			} else {
 				long multa = Long.parseLong(multaStr);
-				request.setAttribute("opm", opm);
 				request.setAttribute("multa", daoMulta.getById(multa));
 				vista = VISTA_FORM;
 			}
 			break;
 		case "ir_a":
-			request.setAttribute("mensaje", null);
+			mensaje = new Mensaje(Mensaje.TIPO_INFO, "Introduzca una matrícula");
 			vista = VISTA_BUSCAR;
 			break;
 		case "buscar":
 			try {
 				c = daoCoche.getByMatri(mat);
 			} catch (Exception e) {
-				mensaje = new Mensaje(mensaje.TIPO_DANGER, "No es posible multar al coche revise el importe y el concepto");
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No es posible multar al coche revise el importe y el concepto");
 			}
 			if (c != null) {
 				request.setAttribute("coche", c);
 				request.setAttribute("fecha", new Date());
-				request.setAttribute("opm", opm);
 				vista = VISTA_FORM;
 			} else {
-				request.setAttribute("mensaje", "caca");
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
 				vista = VISTA_BUSCAR;
 			}
 			break;
@@ -102,21 +110,36 @@ public class MultasController extends HttpServlet {
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
-			try {
-				if (daoMulta.insert(m)) {
-					mensaje = new Mensaje(mensaje.TIPO_SUCCESS, "Coche multado");
-					vista = VISTA_PRAL;
-				} else {
-					request.setAttribute("opm", opm);
-					mensaje = new Mensaje(mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
+			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
+			if (violations.size() > 0) { // validacion NO PASA
+				String errores = "<ul class='list-unlisted'>";
+				for (ConstraintViolation<Multa> violation : violations) {
+
+					errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
+
+				}
+				errores += "</ul>";
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
+			}
+			else {
+				try {
+					if (daoMulta.insert(m)) {
+						mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
+						vista = VISTA_PRAL;
+					} else {
+						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
+						vista = VISTA_FORM;
+					}
+				} catch (SQLException e) {
+					mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros incorrectos");
 					vista = VISTA_FORM;
 				}
-			} catch (SQLException e) {
-				request.setAttribute("opm", opm);
-				mensaje = new Mensaje(mensaje.TIPO_DANGER, "Parámetros incorrectos");
-				vista = VISTA_FORM;
 			}
 			break;
+			default: 
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
+				vista = VISTA_PRAL;
+				break;
 		}
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
@@ -139,7 +162,7 @@ public class MultasController extends HttpServlet {
 			concep = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
 		} catch (Exception e) {
-			mensaje = new Mensaje(mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
+			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
 			vista = VISTA_PRAL;
 		}
 
