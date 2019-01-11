@@ -44,7 +44,9 @@
 	</c:if>
 	<c:if test="${op != 'buscar'}">
 	<a href="privado/multas?op=ver" class="btn btn-outline-primary btn-block mt-3 mb-3">Volver a la lista</a>
+	<c:if test="${opm != 'baja'}">
 	<a href="#" class="btn btn-outline-danger btn-block mt-3 mb-3">Anular multa</a>
+	</c:if>
 	</c:if>
 	
 	<a href="index.jsp" class="btn btn-outline-primary btn-block">Volver al inicio</a>
