@@ -69,6 +69,7 @@ public class MultasController extends HttpServlet {
 				vista = VISTA_INDEX;
 			} else {
 				long multa = Long.parseLong(multaStr);
+				request.setAttribute("opm", opm);
 				request.setAttribute("multa", daoMulta.getById(multa));
 				vista = VISTA_FORM;
 			}
@@ -86,6 +87,7 @@ public class MultasController extends HttpServlet {
 			if (c != null) {
 				request.setAttribute("coche", c);
 				request.setAttribute("fecha", new Date());
+				request.setAttribute("opm", opm);
 				vista = VISTA_FORM;
 			} else {
 				request.setAttribute("mensaje", "caca");
@@ -105,10 +107,12 @@ public class MultasController extends HttpServlet {
 					mensaje = new Mensaje(mensaje.TIPO_SUCCESS, "Coche multado");
 					vista = VISTA_PRAL;
 				} else {
+					request.setAttribute("opm", opm);
 					mensaje = new Mensaje(mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
 					vista = VISTA_FORM;
 				}
 			} catch (SQLException e) {
+				request.setAttribute("opm", opm);
 				mensaje = new Mensaje(mensaje.TIPO_DANGER, "Parámetros incorrectos");
 				vista = VISTA_FORM;
 			}

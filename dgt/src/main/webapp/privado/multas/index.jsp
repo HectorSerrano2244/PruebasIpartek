@@ -12,7 +12,7 @@
 		<c:forEach items="${multas}" var="m">
 
 			
-			<tr onclick="location='privado/multas?op=ver&multa=${m.id}'">
+			<tr onclick="location='privado/multas?op=ver&multa=${m.id}&opm=${opm }'">
 				<td>${m.coche.matricula}</td>
 				<td>${m.fecha}</td>
 			</tr>
