@@ -10,11 +10,13 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 
 public class CocheDAO {
 	
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
+	private Mensaje mensaje = null;
 
 	private static final String SQL_GETMATRICULAS = "SELECT id, matricula, modelo, km FROM coche ORDER BY id DESC LIMIT 100;";
 	private static final String SQL_GETMATRICULA = "SELECT * FROM coche WHERE matricula= ? ;";
@@ -41,10 +43,9 @@ public class CocheDAO {
 		return c;
 	}
 	
-	public Coche getByMatri(String mat) {
+	public Coche getByMatricula(String mat) {
 		Coche c = null;
-		String sql = SQL_GETMATRICULA;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_GETMATRICULA);) {
 
 			pst.setString(1, mat);
 
@@ -71,8 +72,8 @@ public class CocheDAO {
 					try {
 						matriculas.add(rowMapper(rs));
 					} catch (Exception e) {
-						System.out.println("usuario no valido");
-						e.printStackTrace();
+						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No se encontró ninguna matricula");
+						LOG.warn(mensaje.getTexto(), e);
 					}
 				}
 			}

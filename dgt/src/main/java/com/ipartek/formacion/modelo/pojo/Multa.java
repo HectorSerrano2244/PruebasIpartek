@@ -10,7 +10,9 @@ public class Multa {
 	private Float importe;
 	@NotNull
 	private String concepto;
-	private Date fecha;
+	private Date fechaAlta;
+	private Date fechaModificacion;
+	private Date fechaBaja;
 	private Agente agente;
 	private Coche coche;
 	
@@ -32,11 +34,23 @@ public class Multa {
 	public void setConcepto(String concepto) {
 		this.concepto = concepto;
 	}
-	public Date getFecha() {
-		return fecha;
+	public Date getFechaAlta() {
+		return fechaAlta;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 	public Agente getAgente() {
 		return agente;
@@ -50,12 +64,14 @@ public class Multa {
 	public void setCoche(Coche coche) {
 		this.coche = coche;
 	}
-	public Multa(Long id, Float importe, String concepto, Date fecha, Agente agente, Coche coche) {
+	public Multa(Long id, Float importe, String concepto, Date fechaAlta, Date fechaModificacion, Date fechaBaja, Agente agente, Coche coche) {
 		this();
 		setId(id);
 		setImporte(importe);
 		setConcepto(concepto);
-		setFecha(fecha);
+		setFechaAlta(fechaAlta);
+		setFechaModificacion(fechaModificacion);
+		setFechaBaja(fechaBaja);
 		setAgente(agente);
 		setCoche(coche);
 	}
@@ -64,13 +80,15 @@ public class Multa {
 		this.id=-1l;
 		this.importe=0.0f;
 		this.concepto="";
-		this.fecha=null; 
+		this.fechaAlta=null;
+		this.fechaModificacion=null; 
+		this.fechaBaja=null; 
 		this.agente=new Agente();
 		this.coche=new Coche();
 	}
 	@Override
 	public String toString() {
-		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha + ", agente="
+		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fechaAlta=" + fechaAlta + ", agente="
 				+ agente + ", coche=" + coche + "]";
 	}
 	

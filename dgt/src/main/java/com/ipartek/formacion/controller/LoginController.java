@@ -30,9 +30,10 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		a = daoAgente.getById(4);
-		session.setAttribute("agenteLogueado", a);
+		a = daoAgente.getById(4); // Busca el agente mediante su id
+		session.setAttribute("agenteLogueado", a); // Pasa el objeto agente como atributo de sesión
 		
+		request.setAttribute("titulo", "Menú | App Multas");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

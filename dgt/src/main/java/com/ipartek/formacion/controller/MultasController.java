@@ -32,7 +32,12 @@ import com.ipartek.formacion.modelo.pojo.Multa;
 @WebServlet("/privado/multas")
 public class MultasController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(MultasController.class);
+	
+	// Clase que lleva mensajes de información, peligro u error
 	private Mensaje mensaje;
+	
+	// Constantes que contienen los archivos .jsp. 
+	// Aquí se encuentra tanto el contenido visual (html) y la información pertinente sacada de los controladores
 	private static final String VISTA_PRAL = "../index.jsp";
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
@@ -50,12 +55,12 @@ public class MultasController extends HttpServlet {
 	String opm = "";
 	
 	// Parametros
-	String imp = "";
-	String concep = "";
+	String importe = "";
+	String concepto = "";
 	String id_coche = "";
 	String vista = "";
-	String multaStr = "";
-	String mat = "";
+	String idMultaStr = "";
+	String matricula = "";
 	
 	// Objectos
 	Agente a = null;
@@ -100,14 +105,14 @@ public class MultasController extends HttpServlet {
 		case "ver":
 			opVer(request);
 			break;
-		case "ir_a":
-			opIrA();
+		case "irA":
+			opIrA(request);
 			break;
 		case "buscar":
 			opBuscar(request);
 			break;
 		case "multar":
-			opMultar();
+			opMultar(request);
 			break;
 		case "anular":
 			opAnular(request);
@@ -115,13 +120,14 @@ public class MultasController extends HttpServlet {
 			default: 
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
 				vista = VISTA_PRAL;
+				request.setAttribute("titulo", "Menú | App Multas");
 				LOG.debug(mensaje.getTexto());
 				break;
 		}
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
 		request.setAttribute("opm", opm);
-		LOG.debug("Mostrar la vista");
+		LOG.debug("Mostrando la vista");
 		request.getRequestDispatcher(vista).forward(request, response);
 	}
 	/**
@@ -131,15 +137,33 @@ public class MultasController extends HttpServlet {
 	 * 3. Rellenar la lista de multas anuladas de un policía
 	 * 4. Mostrar el formulario con los datos de una multa sacada de cualquiera
 	 * de las 2 listas
+	 * 5. Multar a un coche
+	 * 6. Anular la multa de un coche
 	 * 
 	 * Parametros:
 	 * 
 	 * - a 
-	 * a es el objeto agente en session 'agenteLogueado'.
+	 * Es el objeto agente en session
+	 * 
+	 * - matricula
+	 * Cadena de caracteres que contiene la matricula de un coche seleccionado
+	 * 
 	 * - op
 	 * La variable de operación que se usará para llamar al resto de métodos
-	 * - opm
 	 * 
+	 * - opm
+	 * Es una variable que se establece a 'baja' cuando se acude al método 'opAnular', el cual
+	 * permite hacer esencialmente lo mismo que el método 'opVer' pero permite
+	 * ver las multas que se han dado de baja
+	 * 
+	 * - importe
+	 * Importe de la multa
+	 * 
+	 * - concepto
+	 * Razón o concepto de la multa
+	 * 
+	 * - id_coche
+	 * Identificador unívoco del coche que consultamos o al que queremos poner o anular una multa
 	 */
 	private void getParameters(HttpServletRequest request) {
 		session = request.getSession();
@@ -150,10 +174,10 @@ public class MultasController extends HttpServlet {
 				op = "ver";
 			}
 			opm = request.getParameter("opm");
-			multaStr = request.getParameter("multa");
-			mat = request.getParameter("matricula");
-			imp = request.getParameter("importe");
-			concep = request.getParameter("concepto");
+			idMultaStr = request.getParameter("idmulta");
+			matricula = request.getParameter("matricula");
+			importe = request.getParameter("importe");
+			concepto = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
 			LOG.debug("Parametros recuperados satisfactoriamente");
 		} catch (Exception e) {
@@ -163,28 +187,53 @@ public class MultasController extends HttpServlet {
 		}
 	}
 	/**
-	 * En caso de tener o no una multa almacenada en 'multaStr':
+	 * En caso de tener o no una multa almacenada en 'idMultaStr':
 	 * - Nos retorna el DAO de las multas que ha puesto un agente identificado por su id
+	 * - Si contiene 'baja' en la variable opm, retorna el DAO de las multas anuladas de un agente identificado por su id
 	 * - Nos retorna el objeto multa que contiene una multa en concreto
 	 * En caso de excepción:
-	 * 
+	 * El importe o el concepto de la multa son de tipos incorrectos. Siempre se devuelve a al jsp index de multas con el mensaje de error
 	 */
 	private void opVer(HttpServletRequest request) {
-		if (multaStr == null) {
+		if (idMultaStr == null) {
 			try {
-				request.setAttribute("multas", daoMulta.getAllUsu(a.getId(), opm));
-				LOG.info("Buscando todas las multas puestas por el agente");
+				request.setAttribute("multas", daoMulta.getAllByUser(a.getId(), opm));			
 			}
 			catch (Exception e) {
-				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No es posible multar al coche. Revise el importe y el concepto");
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
 				LOG.error(mensaje.getTexto());
+			}
+			if(opm == null) {
+				request.setAttribute("titulo", "Tus multas | App Multas");
+				LOG.info("Buscando todas las multas puestas por el agente");
+			}
+			else {
+				request.setAttribute("titulo", "Tus multas anuladas | App Multas");
+				LOG.info("Buscando todas las multas anuladas por el agente");
 			}
 			vista = VISTA_INDEX;
 		} else {
-			long multa = Long.parseLong(multaStr);
-			request.setAttribute("multa", daoMulta.getById(multa));
-			vista = VISTA_FORM;
-			LOG.info("Información de la multa "+multa);
+			long idMulta = Long.parseLong(idMultaStr);
+			try {
+				m = daoMulta.getById(idMulta, opm);
+				request.setAttribute("multa", m);
+				LOG.info("Información de la multa "+idMulta);
+				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
+				vista = VISTA_FORM;
+			}
+			catch (Exception e) {
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La multa que buscas no existe");
+				if(opm == null) {
+					request.setAttribute("titulo", "Tus multas | App Multas");
+					LOG.info("Buscando todas las multas puestas por el agente");
+				}
+				else {
+					request.setAttribute("titulo", "Tus multas anuladas | App Multas");
+					LOG.info("Buscando todas las multas anuladas por el agente");
+				}
+				LOG.error(mensaje.getTexto(), e);
+				vista = VISTA_INDEX;
+			}
 		}
 	}
 	
@@ -193,9 +242,10 @@ public class MultasController extends HttpServlet {
 	 * Se compone de un pequeño formulario con un input donde introducir la matrícula
 	 * Se trata del método anterior a 'opBuscar'
 	 */
-	private void opIrA() {
+	private void opIrA(HttpServletRequest request) {
 		mensaje = new Mensaje(Mensaje.TIPO_INFO, "Introduzca una matrícula");
 		vista = VISTA_BUSCAR;
+		request.setAttribute("titulo", "Introduzca una matrícula | App Multas");
 		LOG.info("Accediendo a la busqueda de matriculas");
 	}
 	
@@ -207,7 +257,7 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opBuscar(HttpServletRequest request) {
 		try {
-			c = daoCoche.getByMatri(mat);
+			c = daoCoche.getByMatricula(matricula);
 			LOG.debug("Matricula conseguida");
 		} catch (Exception e) {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No es posible multar al coche revise el importe y el concepto");
@@ -216,20 +266,28 @@ public class MultasController extends HttpServlet {
 		if (c != null) {
 			request.setAttribute("coche", c);
 			request.setAttribute("fecha", new Date());
+			request.setAttribute("titulo", "Registra los datos de la multa de "+c.getMatricula()+" | App Multas");
 			vista = VISTA_FORM;
-			LOG.debug("Enviando datos de un coche");
+			mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Enviando datos de un coche");
+			LOG.debug(mensaje.getTexto());
 		} else {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
 			vista = VISTA_BUSCAR;
 			LOG.warn(mensaje.getTexto());
 		}
 	}
-	
-	private void opMultar() {
+	/**
+	 * Se rellenan los datos de la multa al coche seleccionado usando los objetos 'Multa' y 'Coche'
+	 * Usamos un validator de la instancia del objeto multa.
+	 * Si hay errores se devuelve a la vista de búsqueda y se indican los errores
+	 * En caso de no haberlos se inserta la multa en la base de datos usando el metodo insert de daoMulta.
+	 * Si hay una excepción en la inserción de la multa, se devuelve la vista del formulario
+	 */
+	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Coche();
-		m.setImporte(Float.parseFloat(imp));
-		m.setConcepto(concep);
+		m.setImporte(Float.parseFloat(importe));
+		m.setConcepto(concepto);
 		c.setId(Long.parseLong(id_coche));
 		m.setCoche(c);
 		m.setAgente((Agente) session.getAttribute("agenteLogueado"));
@@ -239,7 +297,7 @@ public class MultasController extends HttpServlet {
 			for (ConstraintViolation<Multa> violation : violations) {
 				errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
 			}
-			vista = VISTA_BUSCAR;
+			vista = VISTA_FORM;
 			errores += "</ul>";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 			LOG.debug(mensaje.getTexto());
@@ -249,8 +307,9 @@ public class MultasController extends HttpServlet {
 			try {
 				if (daoMulta.insert(m)) {
 					mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
-					vista = VISTA_PRAL;
 					LOG.debug(mensaje.getTexto());
+					idMultaStr = null;
+					opVer(request);
 				} else {
 					mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
 					vista = VISTA_FORM;
@@ -263,15 +322,20 @@ public class MultasController extends HttpServlet {
 			}
 		}
 	}
-
+	/**
+	 * Similar al método 'opVer', solo que lleva la variable 'opm'
+	 * para ver las multas anuladas. Para más información, mirar el método 'opVer'
+	 */
 	private void opAnular(HttpServletRequest request) {
 		try {
-			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(multaStr))));
+			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm)));
 			op = "ver";
 			opm = "baja";
-			vista = VISTA_INDEX;
+			idMultaStr = null;
+			opVer(request);
 		} catch (SQLException e) {
-			LOG.error("No se puede anular la multa", e);
+			mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No se puede anular la multa");
+			LOG.error(mensaje.getTexto(), e);
 		}
 	}
 }

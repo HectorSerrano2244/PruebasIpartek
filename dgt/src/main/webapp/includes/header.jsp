@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<title>Página</title>
+<title>${(titulo != null) ? titulo : 'Página'}</title>
 <base href="${pageContext.request.contextPath}/">
 <!-- Bootstrap core CSS -->
 <meta name="theme-color" content="#007bff">
