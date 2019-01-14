@@ -30,6 +30,16 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
+		<div class="form-group">
+				<label for="concepto">Concepto</label> <input type="text"
+					name="concepto" value="${(op == 'ver') ? multa.concepto : concepto}" ${(op == 'ver') ? '' :'autofocus'} required class="form-control"
+					${(op == 'ver') ? "readonly" : ""}>
+		</div>
+		<div class="form-group">
+			<label for="importe">Importe</label> <input type="number" step="0.01" required
+				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control"
+				${(op == 'ver') ? "readonly" : ""}>
+		</div>
 		<fieldset class="border p-2">
 			<legend class="w-auto">Detalles del vehiculo</legend>
 			<div class="form-group">
@@ -39,16 +49,6 @@
 			<div class="form-group">
 				<label for="km">KM</label> <input type="text" name="km"
 					value="${(op == 'ver') ? multa.coche.km : coche.km}" class="form-control" readonly>
-			</div>
-			<div class="form-group">
-				<label for="concepto">Concepto</label> <input type="text"
-					name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" ${(op == 'ver') ? '' :'autofocus'} class="form-control"
-					${(op == 'ver') ? "readonly" : ""}>
-			</div>
-			<div class="form-group">
-				<label for="importe">Importe</label> <input type="number"
-					name="importe" value="${(op == 'ver') ? multa.importe : ''}" class="form-control"
-					${(op == 'ver') ? "readonly" : ""}>
 			</div>
 		</fieldset>
 		<c:if test="${op == 'buscar'}">
@@ -91,6 +91,7 @@
 				</div>	
 			</c:if>
 		</c:if>
+		<%@ include file="../../includes/mensajes.jsp"%>
 		<a href="login" class="btn btn-outline-primary btn-block">Volver al inicio</a>
 	</form>
 </main>

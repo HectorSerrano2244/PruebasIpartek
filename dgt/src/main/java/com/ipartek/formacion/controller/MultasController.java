@@ -55,7 +55,7 @@ public class MultasController extends HttpServlet {
 	String opm = "";
 	
 	// Parametros
-	String importe = "";
+	String importeStr = "";
 	String concepto = "";
 	String id_coche = "";
 	String vista = "";
@@ -156,7 +156,7 @@ public class MultasController extends HttpServlet {
 	 * permite hacer esencialmente lo mismo que el método 'opVer' pero permite
 	 * ver las multas que se han dado de baja
 	 * 
-	 * - importe
+	 * - importeStr
 	 * Importe de la multa
 	 * 
 	 * - concepto
@@ -176,7 +176,7 @@ public class MultasController extends HttpServlet {
 			opm = request.getParameter("opm");
 			idMultaStr = request.getParameter("idmulta");
 			matricula = request.getParameter("matricula");
-			importe = request.getParameter("importe");
+			importeStr = request.getParameter("importeStr");
 			concepto = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
 			LOG.debug("Parametros recuperados satisfactoriamente");
@@ -192,7 +192,7 @@ public class MultasController extends HttpServlet {
 	 * - Si contiene 'baja' en la variable opm, retorna el DAO de las multas anuladas de un agente identificado por su id
 	 * - Nos retorna el objeto multa que contiene una multa en concreto
 	 * En caso de excepción:
-	 * El importe o el concepto de la multa son de tipos incorrectos. Siempre se devuelve a al jsp index de multas con el mensaje de error
+	 * El importeStr o el concepto de la multa son de tipos incorrectos. Siempre se devuelve a al jsp index de multas con el mensaje de error
 	 */
 	private void opVer(HttpServletRequest request) {
 		if (idMultaStr == null) {
@@ -256,13 +256,8 @@ public class MultasController extends HttpServlet {
 	 *  Se trata del método posterior a 'opIrA'
 	 */
 	private void opBuscar(HttpServletRequest request) {
-		try {
-			c = daoCoche.getByMatricula(matricula);
-			LOG.debug("Matricula conseguida");
-		} catch (Exception e) {
-			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No es posible multar al coche revise el importe y el concepto");
-			LOG.warn(mensaje.getTexto(), e);
-		}
+		c = daoCoche.getByMatricula(matricula);
+		LOG.debug("Matricula conseguida");
 		if (c != null) {
 			request.setAttribute("coche", c);
 			request.setAttribute("fecha", new Date());
@@ -272,6 +267,7 @@ public class MultasController extends HttpServlet {
 			LOG.debug(mensaje.getTexto());
 		} else {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
+			request.setAttribute("matricula", matricula);
 			vista = VISTA_BUSCAR;
 			LOG.warn(mensaje.getTexto());
 		}
@@ -286,40 +282,55 @@ public class MultasController extends HttpServlet {
 	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Coche();
-		m.setImporte(Float.parseFloat(importe));
-		m.setConcepto(concepto);
-		c.setId(Long.parseLong(id_coche));
-		m.setCoche(c);
-		m.setAgente((Agente) session.getAttribute("agenteLogueado"));
-		Set<ConstraintViolation<Multa>> violations = validator.validate(m);
-		if (violations.size() > 0) {
-			String errores = "<ul class='list-unlisted'>";
-			for (ConstraintViolation<Multa> violation : violations) {
-				errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
-			}
-			vista = VISTA_FORM;
-			errores += "</ul>";
-			mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
-			LOG.debug(mensaje.getTexto());
-		}
-		else {
-			LOG.debug("No hay violaciones. Se procede a crear una multa");
-			try {
-				if (daoMulta.insert(m)) {
-					mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
-					LOG.debug(mensaje.getTexto());
-					idMultaStr = null;
-					opVer(request);
-				} else {
-					mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
-					vista = VISTA_FORM;
-					LOG.debug(mensaje.getTexto());
+		float importe = 0.0F;
+		try {
+			m.setConcepto(concepto);
+			c.setId(Long.parseLong(id_coche));
+			m.setCoche(c);
+			String importeFormato = String.format("%.2f", Float.parseFloat(importeStr));
+			importe = Float.parseFloat(importeFormato);
+			m.setImporte(importe);
+			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
+			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
+			if (violations.size() > 0) {
+				String errores = "<ul class='list-unlisted'>";
+				for (ConstraintViolation<Multa> violation : violations) {
+					errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
 				}
-			} catch (SQLException e) {
-				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros incorrectos");
 				vista = VISTA_FORM;
-				LOG.debug(mensaje.getTexto(), e);
+				errores += "</ul>";
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
+				LOG.debug(mensaje.getTexto());
 			}
+			else {
+				LOG.debug("No hay violaciones. Se procede a crear una multa");
+				try {
+					if (daoMulta.insert(m)) {
+						// TODO informacion del coche multado
+						mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
+						LOG.debug(mensaje.getTexto());
+						idMultaStr = null;
+						opVer(request);
+					} else {
+						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importeStr y el concepto");
+						vista = VISTA_FORM;
+						LOG.debug(mensaje.getTexto());
+					}
+				} catch (SQLException e) {
+					mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros incorrectos");
+					vista = VISTA_FORM;
+					LOG.debug(mensaje.getTexto(), e);
+				}
+			}
+		}
+		catch (Exception e) {
+			request.setAttribute("concepto", concepto);
+			request.setAttribute("importe", importeStr);
+			request.setAttribute("fecha", new Date());
+			c = daoCoche.getByMatricula(matricula);
+			request.setAttribute("coche", c);
+			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
+			vista = VISTA_FORM;
 		}
 	}
 	/**

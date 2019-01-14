@@ -2,11 +2,13 @@ package com.ipartek.formacion.modelo.pojo;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 public class Multa {
 	private Long id;
 	@NotNull
+	@Digits(fraction = 2, integer = 5)
 	private Float importe;
 	@NotNull
 	private String concepto;
