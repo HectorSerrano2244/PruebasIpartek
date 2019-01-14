@@ -52,10 +52,10 @@
 			</div>
 		</fieldset>
 		<c:if test="${op == 'buscar'}">
-			<a href="privado/multas?op=irA" class="btn btn-outline-primary btn-block">
-				Cambiar de Vehiculo
+			<a href="privado/multas?op=irA" class="mt-4 btn btn-outline-primary btn-block">
+				Cambiar de Vehículo
 			</a>
-			<input type="submit" class="btn btn-outline-success btn-block mt-3 mb-3" value="Guardar multa">
+			<input type="submit" class="btn btn-outline-success btn-block mt-3 mb-3" value="Multar">
 		</c:if>
 		
 		<c:if test="${op != 'buscar'}">
