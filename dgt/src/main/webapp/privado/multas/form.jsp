@@ -1,6 +1,6 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
-<main role="main" class="container">
+<main role="main" class="container p-4">
 	<form action="privado/multas" method="post">
 		<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 		<input type="hidden" name="idcoche" value="${coche.id}">
@@ -30,27 +30,27 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-		<div class="form-group">
-			<span>Detalles del vehiculo</span>
-		</div>
-		<div class="form-group">
-			<label for="modelo">Modelo</label> <input type="text" name="modelo"
-				value="${(op == 'ver') ? multa.coche.modelo : coche.modelo}" class="form-control" readonly>
-		</div>
-		<div class="form-group">
-			<label for="km">KM</label> <input type="text" name="km"
-				value="${(op == 'ver') ? multa.coche.km : coche.km}" class="form-control" readonly>
-		</div>
-		<div class="form-group">
-			<label for="concepto">Concepto</label> <input type="text"
-				name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" ${(op == 'ver') ? '' :'autofocus'} class="form-control"
-				${(op == 'ver') ? "readonly" : ""}>
-		</div>
-		<div class="form-group">
-			<label for="importe">Importe</label> <input type="number"
-				name="importe" value="${(op == 'ver') ? multa.importe : ''}" class="form-control"
-				${(op == 'ver') ? "readonly" : ""}>
-		</div>
+		<fieldset class="border p-2">
+			<legend class="w-auto">Detalles del vehiculo</legend>
+			<div class="form-group">
+				<label for="modelo">Modelo</label> <input type="text" name="modelo"
+					value="${(op == 'ver') ? multa.coche.modelo : coche.modelo}" class="form-control" readonly>
+			</div>
+			<div class="form-group">
+				<label for="km">KM</label> <input type="text" name="km"
+					value="${(op == 'ver') ? multa.coche.km : coche.km}" class="form-control" readonly>
+			</div>
+			<div class="form-group">
+				<label for="concepto">Concepto</label> <input type="text"
+					name="concepto" value="${(op == 'ver') ? multa.concepto : ''}" ${(op == 'ver') ? '' :'autofocus'} class="form-control"
+					${(op == 'ver') ? "readonly" : ""}>
+			</div>
+			<div class="form-group">
+				<label for="importe">Importe</label> <input type="number"
+					name="importe" value="${(op == 'ver') ? multa.importe : ''}" class="form-control"
+					${(op == 'ver') ? "readonly" : ""}>
+			</div>
+		</fieldset>
 		<c:if test="${op == 'buscar'}">
 			<a href="privado/multas?op=irA" class="btn btn-outline-primary btn-block">
 				Cambiar de Vehiculo

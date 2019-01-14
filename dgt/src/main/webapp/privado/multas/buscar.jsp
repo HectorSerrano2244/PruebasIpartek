@@ -1,7 +1,7 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
 
-<main role="main" class="container"> 
+<main role="main" class="container p-4"> 
 	<form action="privado/multas" method="post">
 		<%@ include file="../../includes/mensajes.jsp"%>
 		<input type="hidden" name="op" value="buscar">
