@@ -282,14 +282,12 @@ public class MultasController extends HttpServlet {
 	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Coche();
-		double importe = 0;
+		Double importe = 0.0;
 		try {
 			m.setConcepto(concepto);
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
 			importe = Double.parseDouble(importeStr);
-			String importeFormato = String.format("%.2f", importe);
-			importe = Double.parseDouble(importeFormato);
 			m.setImporte(importe);
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
@@ -300,6 +298,12 @@ public class MultasController extends HttpServlet {
 				}
 				vista = VISTA_FORM;
 				errores += "</ul>";
+				request.setAttribute("concepto", concepto);
+				request.setAttribute("importe", importeStr);
+				request.setAttribute("fecha", new Date());
+				c = daoCoche.getByMatricula(matricula);
+				request.setAttribute("coche", c);
+				op = "buscar";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 				LOG.debug(mensaje.getTexto());
 			}
@@ -332,6 +336,7 @@ public class MultasController extends HttpServlet {
 			request.setAttribute("coche", c);
 			op = "buscar";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
+			LOG.debug(mensaje.getTexto(), e);
 			vista = VISTA_FORM;
 		}
 	}

@@ -9,7 +9,7 @@ public class Multa {
 	private Long id;
 	@NotNull
 	@Digits(fraction = 2, integer = 5)
-	private double importe;
+	private Double importe;
 	@NotNull
 	private String concepto;
 	private Date fechaAlta;
@@ -27,7 +27,7 @@ public class Multa {
 	public double getImporte() {
 		return importe;
 	}
-	public void setImporte(double importe) {
+	public void setImporte(Double importe) {
 		this.importe = importe;
 	}
 	public String getConcepto() {
@@ -66,7 +66,7 @@ public class Multa {
 	public void setCoche(Coche coche) {
 		this.coche = coche;
 	}
-	public Multa(Long id, double importe, String concepto, Date fechaAlta, Date fechaModificacion, Date fechaBaja, Agente agente, Coche coche) {
+	public Multa(Long id, Double importe, String concepto, Date fechaAlta, Date fechaModificacion, Date fechaBaja, Agente agente, Coche coche) {
 		this();
 		setId(id);
 		setImporte(importe);
@@ -80,7 +80,7 @@ public class Multa {
 	public Multa() {
 		super();
 		this.id=-1l;
-		this.importe=0.0f;
+		this.importe=0.0;
 		this.concepto="";
 		this.fechaAlta=null;
 		this.fechaModificacion=null; 
