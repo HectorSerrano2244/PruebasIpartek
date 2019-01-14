@@ -244,7 +244,6 @@ public class MultasController extends HttpServlet {
 	 * Se trata del método anterior a 'opBuscar'
 	 */
 	private void opIrA(HttpServletRequest request) {
-		mensaje = new Mensaje(Mensaje.TIPO_INFO, "Introduzca una matrícula");
 		vista = VISTA_BUSCAR;
 		request.setAttribute("titulo", "Introduzca una matrícula | App Multas");
 		LOG.info("Accediendo a la busqueda de matriculas");
@@ -258,13 +257,12 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opBuscar(HttpServletRequest request) {
 		c = daoCoche.getByMatricula(matricula);
-		LOG.debug("Matricula conseguida");
 		if (c != null) {
 			request.setAttribute("coche", c);
 			request.setAttribute("fecha", new Date());
 			request.setAttribute("titulo", "Registra los datos de la multa de "+c.getMatricula()+" | App Multas");
 			vista = VISTA_FORM;
-			LOG.debug(mensaje.getTexto());
+			LOG.debug("Matricula conseguida");
 		} else {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
 			request.setAttribute("matricula", matricula);

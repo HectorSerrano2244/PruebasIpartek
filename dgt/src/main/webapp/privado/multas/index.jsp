@@ -2,10 +2,10 @@
 <%@include file="../../includes/navbar.jsp"%>
 <main role="main" class="container p-4">
 <div class="row align-items-center">
-	<a href="login" class="btn btn-outline-primary mt-3 mb-3 col-1">
+	<a href="login" class="btn btn-outline-primary mt-3 mb-3 col-3">
 		Volver
 	</a>
-	<h3 class="text-center  mb-3 col-10 ">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
+	<h3 class="text-center  mb-3 col-9 ">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
 </div>
 	<table class="table table-hover tablaOrdenable">
 		<thead class="thead-light">
