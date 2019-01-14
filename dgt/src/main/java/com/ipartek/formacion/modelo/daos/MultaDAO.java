@@ -110,7 +110,7 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
 
-			pst.setFloat(1, m.getImporte());
+			pst.setDouble(1, m.getImporte());
 			pst.setString(2, m.getConcepto());
 			pst.setLong(3, m.getCoche().getId());
 			pst.setLong(4, m.getAgente().getId());
@@ -154,7 +154,7 @@ public class MultaDAO {
 		m.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
 		if(isGetById) {	
-			m.setImporte(rs.getFloat("importe"));
+			m.setImporte(rs.getDouble("importe"));
 			m.setConcepto(rs.getString("concepto"));
 			c.setId(rs.getLong("id"));
 			c.setModelo(rs.getString("modelo"));

@@ -176,7 +176,7 @@ public class MultasController extends HttpServlet {
 			opm = request.getParameter("opm");
 			idMultaStr = request.getParameter("idmulta");
 			matricula = request.getParameter("matricula");
-			importeStr = request.getParameter("importeStr");
+			importeStr = request.getParameter("importe");
 			concepto = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
 			LOG.debug("Parametros recuperados satisfactoriamente");
@@ -282,13 +282,14 @@ public class MultasController extends HttpServlet {
 	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Coche();
-		float importe = 0.0F;
+		double importe = 0;
 		try {
 			m.setConcepto(concepto);
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
-			String importeFormato = String.format("%.2f", Float.parseFloat(importeStr));
-			importe = Float.parseFloat(importeFormato);
+			importe = Double.parseDouble(importeStr);
+			String importeFormato = String.format("%.2f", importe);
+			importe = Double.parseDouble(importeFormato);
 			m.setImporte(importe);
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
@@ -307,7 +308,7 @@ public class MultasController extends HttpServlet {
 				try {
 					if (daoMulta.insert(m)) {
 						// TODO informacion del coche multado
-						mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Coche multado");
+						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+m.getFechaAlta()+", Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
 						LOG.debug(mensaje.getTexto());
 						idMultaStr = null;
 						opVer(request);
@@ -329,6 +330,7 @@ public class MultasController extends HttpServlet {
 			request.setAttribute("fecha", new Date());
 			c = daoCoche.getByMatricula(matricula);
 			request.setAttribute("coche", c);
+			op = "buscar";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
 			vista = VISTA_FORM;
 		}
