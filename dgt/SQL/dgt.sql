@@ -118,7 +118,7 @@ CREATE TABLE `multa` (
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,3,NULL,NULL),(2,500,'exceso velocidad a 240km/h','2019-01-07 10:38:43',4,4,NULL,NULL),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2,NULL,NULL),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2,NULL,NULL),(5,800,'por velcoidad','2019-01-07 13:16:21',4,4,NULL,NULL),(6,300,'otra multa','2019-01-07 13:48:49',4,1,NULL,NULL),(7,45,'tuputamadre',NULL,2,4,NULL,NULL),(8,43333,'dfgrsthrtsh',NULL,2,4,NULL,NULL),(9,11,'vvvvv',NULL,2,4,NULL,NULL),(10,23,'sssss',NULL,2,4,NULL,NULL),(11,55555,'dcxxxx','2019-01-10 14:23:44',2,4,NULL,NULL);
+INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,4,NULL,'2019-01-07 10:37:13'),(2,500,'exceso velocidad a 240km/h','2019-01-07 10:38:43',4,4,NULL,'2019-01-11 14:18:28'),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2,NULL,NULL),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,4,NULL,NULL),(5,800,'por velcoidad','2019-01-07 13:16:21',4,4,NULL,'2019-01-14 08:47:57'),(6,300,'otra multa','2016-01-07 13:48:49',4,4,NULL,'2019-01-07 13:48:49'),(7,45,'tuputamadre','2019-01-07 13:48:49',2,4,NULL,NULL),(8,43333,'dfgrsthrtsh','2019-01-07 13:48:49',2,4,NULL,NULL),(9,11,'vvvvv','2019-01-07 13:48:49',2,4,NULL,NULL),(10,23,'sssss','2019-01-07 13:48:49',2,4,NULL,NULL),(11,55555,'dcxxxx','2019-01-10 14:23:44',2,4,NULL,'2019-01-11 14:27:06'),(12,69,'ander','2019-01-14 10:17:56',2,4,'2019-01-14 10:17:56','2019-01-14 10:18:21'),(13,58,'ggggggggggggg','2019-01-14 10:21:32',2,4,'2019-01-14 10:21:32',NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-11  9:41:03
+-- Dump completed on 2019-01-14 12:40:33
