@@ -1,12 +1,12 @@
 <%@include file="../../includes/header.jsp"%>
 <%@include file="../../includes/navbar.jsp"%>
 <main role="main" class="container p-4">
-<div class="row align-items-center">
-	<a href="login" class="btn btn-outline-primary mt-3 mb-3 col-3">
-		Volver
-	</a>
-	<h3 class="text-center  mb-3 col-9 ">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
-</div>
+	<div>
+		<a href="login" class="text-center btn btn-outline-primary mt-3 mb-3 col-3">
+			Volver
+		</a>
+	</div>
+	<h3 class="text-center mb-3 mt-3">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
 	<table class="table table-hover tablaOrdenable">
 		<thead class="thead-light">
 			<tr>
@@ -32,7 +32,7 @@
 					</c:if>
 				</tr>
 			</c:forEach>
-		</tbody>
+		</tbody>								
 	</table>
 </main>
 <%@include file="../../includes/footer.jsp"%>
