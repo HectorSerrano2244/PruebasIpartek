@@ -263,7 +263,6 @@ public class MultasController extends HttpServlet {
 			request.setAttribute("fecha", new Date());
 			request.setAttribute("titulo", "Registra los datos de la multa de "+c.getMatricula()+" | App Multas");
 			vista = VISTA_FORM;
-			mensaje = new Mensaje(Mensaje.TIPO_SUCCESS, "Enviando datos de un coche");
 			LOG.debug(mensaje.getTexto());
 		} else {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
@@ -300,12 +299,12 @@ public class MultasController extends HttpServlet {
 				errores += "</ul>";
 				request.setAttribute("concepto", concepto);
 				request.setAttribute("importe", importeStr);
-				request.setAttribute("fecha", new Date());
 				c = daoCoche.getByMatricula(matricula);
-				request.setAttribute("coche", c);
+				matricula = c.getMatricula();
 				op = "buscar";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 				LOG.debug(mensaje.getTexto());
+				opBuscar(request);
 			}
 			else {
 				LOG.debug("No hay violaciones. Se procede a crear una multa");
@@ -331,13 +330,12 @@ public class MultasController extends HttpServlet {
 		catch (Exception e) {
 			request.setAttribute("concepto", concepto);
 			request.setAttribute("importe", importeStr);
-			request.setAttribute("fecha", new Date());
 			c = daoCoche.getByMatricula(matricula);
-			request.setAttribute("coche", c);
+			matricula = c.getMatricula();
 			op = "buscar";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
 			LOG.debug(mensaje.getTexto(), e);
-			vista = VISTA_FORM;
+			opBuscar(request);
 		}
 	}
 	/**
