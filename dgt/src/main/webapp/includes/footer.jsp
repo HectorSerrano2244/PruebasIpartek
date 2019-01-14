@@ -16,7 +16,7 @@
 	    				"sEmptyTable":     "Ningún dato disponible en esta tabla",
 	    				"sInfo":           "Mostrando multas del número _START_ al _END_ de un total de _TOTAL_ multas",
 	    				"sInfoEmpty":      "",
-	    				"sInfoFiltered":   "(filtrado de un total de _MAX_ multas)",
+	    				"sInfoFiltered":   "(Filtrado de un total de _MAX_ multas)",
 	    				"sInfoPostFix":    "",
 	    				"sSearch":         "Buscar:",
 	    				"sUrl":            "",
