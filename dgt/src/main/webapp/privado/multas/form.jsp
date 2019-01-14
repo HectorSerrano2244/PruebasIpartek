@@ -20,12 +20,12 @@
 			<c:otherwise>
 				<div class="form-group">
 					<label for="fecha">Fecha Alta</label> <input type="text" name="fechaAlta"
-						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${multa.fechaAlta}" />"
+						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:mm" value = "${multa.fechaAlta}" />"
 						class="form-control" readonly>
 				</div>
 				<div class="form-group">
 					<label for="fecha">Fecha Baja</label> <input type="text" name="fechaBaja"
-						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${multa.fechaBaja}" />"
+						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:mm" value = "${multa.fechaBaja}" />"
 						class="form-control" readonly>
 				</div>
 			</c:otherwise>
