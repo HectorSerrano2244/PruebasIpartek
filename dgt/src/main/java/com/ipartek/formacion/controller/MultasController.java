@@ -55,7 +55,7 @@ public class MultasController extends HttpServlet {
 	String opm = "";
 	
 	// Parametros
-	String importeStr = "";
+	String importe = "";
 	String concepto = "";
 	String id_coche = "";
 	String vista = "";
@@ -176,7 +176,7 @@ public class MultasController extends HttpServlet {
 			opm = request.getParameter("opm");
 			idMultaStr = request.getParameter("idmulta");
 			matricula = request.getParameter("matricula");
-			importeStr = request.getParameter("importe");
+			importe = request.getParameter("importe");
 			concepto = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
 			LOG.debug("Parametros recuperados satisfactoriamente");
@@ -282,13 +282,11 @@ public class MultasController extends HttpServlet {
 	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Coche();
-		Double importe = 0.0;
 		try {
 			m.setConcepto(concepto);
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
-			importe = Double.parseDouble(importeStr);
-			m.setImporte(importe);
+			m.setImporte(Double.parseDouble(importe));
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
 			if (violations.size() > 0) {
@@ -299,7 +297,7 @@ public class MultasController extends HttpServlet {
 				vista = VISTA_FORM;
 				errores += "</ul>";
 				request.setAttribute("concepto", concepto);
-				request.setAttribute("importe", importeStr);
+				request.setAttribute("importe", importe);
 				op = "buscar";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 				LOG.debug(mensaje.getTexto());
@@ -328,7 +326,7 @@ public class MultasController extends HttpServlet {
 		}
 		catch (Exception e) {
 			request.setAttribute("concepto", concepto);
-			request.setAttribute("importe", importeStr);
+			request.setAttribute("importe", importe);
 			op = "buscar";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
 			LOG.debug(mensaje.getTexto(), e);
