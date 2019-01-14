@@ -21,9 +21,9 @@
 			<c:forEach items="${multas}" var="m">
 				<tr onclick="location='privado/multas?op=ver&idmulta=${m.id}&opm=${opm}'">
 					<td>${m.coche.matricula}</td>
-					<td>${m.fechaAlta}</td>
+					<td><fmt:formatDate pattern = "dd/MM/yyyy HH:mm" value = "${m.fechaAlta}"/></td>
 					<c:if test="${opm == 'baja'}">
-						<td>${m.fechaBaja}</td>
+						<td><fmt:formatDate pattern = "dd/MM/yyyy HH:mm" value = "${m.fechaBaja}"/></td>
 					</c:if>
 				</tr>
 			</c:forEach>

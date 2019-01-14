@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -144,9 +145,11 @@ public class MultaDAO {
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		Coche c = new Coche();
-		m.setFechaAlta(rs.getDate("fecha_alta"));
+		Timestamp timestampalta=rs.getTimestamp("fecha_alta");
+		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
 		if (isBaja) {
-			m.setFechaBaja(rs.getDate("fecha_baja"));
+			Timestamp timestampbaja=rs.getTimestamp("fecha_baja");
+			m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
 		}
 		m.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));

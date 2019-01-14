@@ -13,7 +13,7 @@
 			<c:when test="${opm != 'baja'}">
 				<div class="form-group">
 					<label for="fecha">Fecha</label> <input type="text" name="fecha"
-						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:MM" value = "${(op == 'ver') ? multa.fechaAlta : fecha}" />"
+						value="<fmt:formatDate pattern = "dd/MM/yyyy HH:mm" value = "${(op == 'ver') ? multa.fechaAlta : fecha}" />"
 						class="form-control" readonly>
 				</div>
 			</c:when>
