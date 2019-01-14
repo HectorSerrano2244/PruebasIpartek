@@ -1,6 +1,11 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
 <main role="main" class="container p-4">
+	<c:if test="${op != 'buscar'}">
+		<a href="privado/multas?op=ver&opm=${opm}" class="btn btn-outline-primary mt-3 mb-3">
+			Volver
+		</a>
+	</c:if>
 	<form action="privado/multas" method="post">
 		<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 		<input type="hidden" name="idcoche" value="${coche.id}">
@@ -53,15 +58,12 @@
 		</fieldset>
 		<c:if test="${op == 'buscar'}">
 			<a href="privado/multas?op=irA" class="mt-4 btn btn-outline-primary btn-block">
-				Cambiar de Vehículo
+				Buscar otro Vehículo
 			</a>
 			<input type="submit" class="btn btn-outline-success btn-block mt-3 mb-3" value="Multar">
 		</c:if>
 		
 		<c:if test="${op != 'buscar'}">
-			<a href="privado/multas?op=ver&opm=${opm}" class="btn btn-outline-primary btn-block mt-3 mb-3">
-				Volver a la lista
-			</a>
 			<c:if test="${opm != 'baja'}">
 			<!-- Button trigger modal -->
 		
