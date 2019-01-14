@@ -7,7 +7,34 @@
   	<script type="text/javascript" charset="utf8" src="js/datatables.js"></script>
   	<script>
 	  	$(document).ready(function() {
-	    	$('.tablaOrdenable').DataTable();
+	    	$('.tablaOrdenable').DataTable( {
+	    		responsive: true,
+	    		language: {
+	    				"sProcessing":     "Procesando...",
+	    				"sLengthMenu":     "Mostrar _MENU_ multas",
+	    				"sZeroRecords":    "No se encontraron resultados",
+	    				"sEmptyTable":     "Ningún dato disponible en esta tabla",
+	    				"sInfo":           "Mostrando multas del _START_ al _END_ de un total de _TOTAL_ multas",
+	    				"sInfoEmpty":      "Mostrando multas del 0 al 0 de un total de 0 multas",
+	    				"sInfoFiltered":   "(filtrado de un total de _MAX_ multas)",
+	    				"sInfoPostFix":    "",
+	    				"sSearch":         "Buscar:",
+	    				"sUrl":            "",
+	    				"sInfoThousands":  ",",
+	    				"sLoadingRecords": "Cargando...",
+	    				"oPaginate": {
+	    					"sFirst":    "Primero",
+	    					"sLast":     "Último",
+	    					"sNext":     "Siguiente",
+	    					"sPrevious": "Anterior"
+	    				},
+	    				"oAria": {
+	    					"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+	    					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    				}
+	    			}
+	    		}
+	    	);
 		});
 	</script>
   </body>
