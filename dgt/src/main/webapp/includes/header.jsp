@@ -15,7 +15,7 @@
 
 <meta name="msapplication-navbutton-color" content="#007bff">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="css/datatables.css">
 	
 <link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
