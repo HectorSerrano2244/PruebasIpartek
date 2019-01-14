@@ -92,7 +92,6 @@
 			</c:if>
 		</c:if>
 		<%@ include file="../../includes/mensajes.jsp"%>
-		<a href="login" class="btn btn-outline-primary btn-block">Volver al inicio</a>
 	</form>
 </main>
 <%@ include file="../../includes/footer.jsp"%>

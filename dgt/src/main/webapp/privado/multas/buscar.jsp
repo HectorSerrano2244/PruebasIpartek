@@ -9,9 +9,6 @@
 				<label for="matricula">Matricula</label> <input type="text" name="matricula" class="form-control" placeholder="4 numeros, 3 letras" value="${matricula}" required>
 			</div>
 			<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>
-			<a href="login" class="btn btn-outline-primary btn-block">
-				Volver al inicio
-			</a>
 	</form>
 </main>
 <%@ include file="../../includes/footer.jsp"%>
