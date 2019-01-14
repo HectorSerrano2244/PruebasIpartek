@@ -117,12 +117,12 @@ public class MultasController extends HttpServlet {
 		case "anular":
 			opAnular(request);
 			break;
-			default: 
-				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
-				vista = VISTA_PRAL;
-				request.setAttribute("titulo", "Menú | App Multas");
-				LOG.debug(mensaje.getTexto());
-				break;
+		default: 
+			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
+			vista = VISTA_PRAL;
+			request.setAttribute("titulo", "Menú | App Multas");
+			LOG.debug(mensaje.getTexto());
+			break;
 		}
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("op", op);
@@ -219,6 +219,7 @@ public class MultasController extends HttpServlet {
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
+				mensaje = null;
 				vista = VISTA_FORM;
 			}
 			catch (Exception e) {
@@ -299,8 +300,6 @@ public class MultasController extends HttpServlet {
 				errores += "</ul>";
 				request.setAttribute("concepto", concepto);
 				request.setAttribute("importe", importeStr);
-				c = daoCoche.getByMatricula(matricula);
-				matricula = c.getMatricula();
 				op = "buscar";
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, errores);
 				LOG.debug(mensaje.getTexto());
@@ -311,8 +310,8 @@ public class MultasController extends HttpServlet {
 				try {
 					if (daoMulta.insert(m)) {
 						// TODO informacion del coche multado
-						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+m.getFechaAlta()+", Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
-						LOG.debug(mensaje.getTexto());
+						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+new Date()+", Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
+						LOG.info(mensaje.getTexto());
 						idMultaStr = null;
 						opVer(request);
 					} else {
@@ -330,8 +329,6 @@ public class MultasController extends HttpServlet {
 		catch (Exception e) {
 			request.setAttribute("concepto", concepto);
 			request.setAttribute("importe", importeStr);
-			c = daoCoche.getByMatricula(matricula);
-			matricula = c.getMatricula();
 			op = "buscar";
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "El importe es incorrecto");
 			LOG.debug(mensaje.getTexto(), e);

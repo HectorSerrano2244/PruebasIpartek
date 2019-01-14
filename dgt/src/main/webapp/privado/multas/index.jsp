@@ -7,7 +7,7 @@
 	</a>
 	<h3 class="text-center  mb-3 col-10 ">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
 </div>
-	<table class="table table-hover">
+	<table class="table table-hover tablaOrdenable">
 		<thead class="thead-light">
 			<tr>
 				<th>Matricula</th>

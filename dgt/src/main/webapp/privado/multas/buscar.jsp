@@ -3,6 +3,9 @@
 
 <main role="main" class="container p-4"> 
 	<form action="privado/multas" method="post">
+		<a href="login" class="btn btn-outline-primary mt-3 mb-3 col-1">
+			Volver
+		</a>
 		<%@ include file="../../includes/mensajes.jsp"%>
 		<input type="hidden" name="op" value="buscar">
 			<div class="form-group">
