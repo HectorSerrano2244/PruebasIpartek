@@ -24,9 +24,9 @@ public class MultaDAO {
 	private Mensaje mensaje = null;
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETBYID_BAJA = "{call pa_multa_getAllByIdBaja(?)}";
+	private static final String SQL_GETBYID_BAJA = "{call pa_multa_getByIdBaja(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getAll_User(?)}";
-	private static final String SQL_GETALL_BYUSER_BAJA = "{call pa_multa_getAllByIdBaja(?)}";
+	private static final String SQL_GETALL_BYUSER_BAJA = "{call pa_multa_getAllByUserBaja(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?)}";
 //	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL WHERE id = ?;";
