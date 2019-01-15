@@ -130,8 +130,7 @@ public class AgenteDAO {
 	public Agente getById(long id) {
 
 		Agente a = null;
-		String sql = SQL_GETBYID;
-		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
 
 			cs.setLong(1, id);
 
