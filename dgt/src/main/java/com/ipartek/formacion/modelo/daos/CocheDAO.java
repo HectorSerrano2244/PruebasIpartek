@@ -1,5 +1,6 @@
 package com.ipartek.formacion.modelo.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class CocheDAO {
 	private Mensaje mensaje = null;
 
 	private static final String SQL_GETMATRICULAS = "SELECT id, matricula, modelo, km FROM coche ORDER BY id DESC LIMIT 100;";
-	private static final String SQL_GETMATRICULA = "SELECT * FROM coche WHERE matricula= ? ;";
+	private static final String SQL_GETMATRICULA = "{call pa_getMatricula(?)} ;";
 
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
@@ -45,11 +46,11 @@ public class CocheDAO {
 	
 	public Coche getByMatricula(String mat) {
 		Coche c = null;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_GETMATRICULA);) {
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_GETMATRICULA);) {
 
-			pst.setString(1, mat);
+			cs.setString(1, mat);
 
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 
 				while (rs.next()) {
 					c = rowMapper(rs);

@@ -1,5 +1,6 @@
 package com.ipartek.formacion.modelo.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,9 +22,9 @@ public class MultaDAO {
 	private boolean isBaja = false;
 	private Mensaje mensaje = null;
 
-	private static final String SQL_GETBYID = "SELECT m.id, m.fecha_alta, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
+	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GETBYID_BAJA = "SELECT m.id, m.fecha_alta, m.fecha_baja, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
-	private static final String SQL_GETALL_BYUSER = "SELECT m.id, m.fecha_alta, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getAll_User(?)}";
 	private static final String SQL_GETALL_BYUSER_BAJA = "SELECT m.id, m.fecha_alta, m.fecha_baja, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO multa (importe, concepto, id_coche, id_agente) VALUES (?, ?, ?, ?);";
 	private static final String SQL_UPDATE = "UPDATE multa SET fecha_baja = CURRENT_TIMESTAMP  WHERE id = ?;";
@@ -49,8 +50,8 @@ public class MultaDAO {
 		isGetById = true;
 
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(("baja".equals(opm)) ? SQL_GETBYID_BAJA : SQL_GETBYID);) {
-			pst.setLong(1, id);
+				CallableStatement cs = conn.prepareCall(("baja".equals(opm)) ? SQL_GETBYID_BAJA : SQL_GETBYID);) {
+			cs.setLong(1, id);
 			
 			if ("baja".equals(opm)) {
 				isBaja = true;
@@ -59,7 +60,7 @@ public class MultaDAO {
 				isBaja = false;
 			}
 			
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					m = rowMapper(rs);
 				}
@@ -77,16 +78,16 @@ public class MultaDAO {
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(("baja".equals(opm)) ? SQL_GETALL_BYUSER_BAJA : SQL_GETALL_BYUSER);) {
+				CallableStatement cs = conn.prepareCall(("baja".equals(opm)) ? SQL_GETALL_BYUSER_BAJA : SQL_GETALL_BYUSER);) {
 			if ("baja".equals(opm)) {
 				isBaja = true;
 			}
 			else {
 				isBaja = false;
 			}
-			pst.setLong(1, id);
+			cs.setLong(1, id);
 
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
