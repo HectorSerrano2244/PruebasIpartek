@@ -7,8 +7,8 @@
 		</a>
 	</div>
 	<h3 class="text-center mb-3 mt-3">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</h3>
-	<table class="table table-hover tablaOrdenable">
-		<thead class="thead-light">
+	<table class="table table-hover responsive nowrap tablaOrdenable">
+		<thead class="thead-dark">
 			<tr>
 				<th>Matricula</th>
 				<c:choose>

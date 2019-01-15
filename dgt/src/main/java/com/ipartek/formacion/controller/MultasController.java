@@ -311,14 +311,22 @@ public class MultasController extends HttpServlet {
 						idMultaStr = null;
 						opVer(request);
 					} else {
-						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importeStr y el concepto");
+						request.setAttribute("concepto", concepto);
+						request.setAttribute("importe", importe);
+						op = "buscar";
+						mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No es posible multar al coche revise el importe y el concepto");
 						vista = VISTA_FORM;
 						LOG.debug(mensaje.getTexto());
+						opBuscar(request);
 					}
 				} catch (SQLException e) {
+					request.setAttribute("concepto", concepto);
+					request.setAttribute("importe", importe);
+					op = "buscar";
 					mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros incorrectos");
 					vista = VISTA_FORM;
 					LOG.debug(mensaje.getTexto(), e);
+					opBuscar(request);
 				}
 			}
 		}
