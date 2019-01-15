@@ -2,7 +2,7 @@
 	"sProcessing":     "Procesando...",
 	"sLengthMenu":     "Mostrar _MENU_ multas",
 	"sZeroRecords":    "No se encontraron resultados",
-	"sEmptyTable":     "Ning�n dato disponible en esta tabla",
+	"sEmptyTable":     "Ningun dato disponible en esta tabla",
 	"sInfo":           "Mostrando multas del numero _START_ al _END_ de un total de _TOTAL_ multas",
 	"sInfoEmpty":      "",
 	"sInfoFiltered":   "(Filtrado de un total de _MAX_ multas)",
@@ -13,7 +13,7 @@
 	"sLoadingRecords": "Cargando...",
 	"oPaginate": {
 		"sFirst":    "Primero",
-		"sLast":     "�ltimo",
+		"sLast":     "Ultimo",
 		"sNext":     "Siguiente",
 		"sPrevious": "Anterior"
 	},
