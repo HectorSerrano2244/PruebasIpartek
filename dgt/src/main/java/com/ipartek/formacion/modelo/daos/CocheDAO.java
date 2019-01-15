@@ -20,7 +20,7 @@ public class CocheDAO {
 	private Mensaje mensaje = null;
 
 	private static final String SQL_GETMATRICULAS = "{call pa_coche_getMatriculas()}";
-	private static final String SQL_GETMATRICULA = "{call pa_getMatricula(?)}";
+	private static final String SQL_GETMATRICULA = "{call pa_coche_getMatricula(?)}";
 
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
