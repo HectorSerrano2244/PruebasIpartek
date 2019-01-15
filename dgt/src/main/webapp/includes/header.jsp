@@ -15,7 +15,8 @@
 	
 	<meta name="msapplication-navbutton-color" content="#007bff">
 	
-	<link rel="stylesheet" type="text/css" href="css/datatables.css">
+	<link rel="stylesheet" href="css/datatables.css">
+	<link rel="stylesheet" href="css/datatables-responsive.css">
 	
 	<link rel="shortcut icon" type="image/x-icon" href="https://pngimage.net/wp-content/uploads/2018/05/escudo-policia-nacional-espa%C3%B1a-png-1.png"/>
 		
