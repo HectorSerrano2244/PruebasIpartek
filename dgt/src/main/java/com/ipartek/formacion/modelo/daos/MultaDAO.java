@@ -24,11 +24,11 @@ public class MultaDAO {
 	private Mensaje mensaje = null;
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETBYID_BAJA = "SELECT m.id, m.fecha_alta, m.fecha_baja, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = ?;";
+	private static final String SQL_GETBYID_BAJA = "{call pa_multa_getAllByIdBaja(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getAll_User(?)}";
-	private static final String SQL_GETALL_BYUSER_BAJA = "SELECT m.id, m.fecha_alta, m.fecha_baja, c.matricula, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND fecha_baja IS NOT NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_BYUSER_BAJA = "{call pa_multa_getAllByIdBaja(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
-	private static final String SQL_UPDATE = "UPDATE multa SET fecha_baja = CURRENT_TIMESTAMP  WHERE id = ?;";
+	private static final String SQL_UPDATE = "{call pa_multa_update(?)}";
 //	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
@@ -131,11 +131,11 @@ public class MultaDAO {
 
 		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+				CallableStatement cs = conn.prepareCall(SQL_UPDATE);) {
 
-			pst.setLong(1, m.getId());
+			cs.setLong(1, m.getId());
 
-			int affectedRows = pst.executeUpdate();
+			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
 			}

@@ -19,8 +19,8 @@ public class CocheDAO {
 	private static CocheDAO INSTANCE = null;
 	private Mensaje mensaje = null;
 
-	private static final String SQL_GETMATRICULAS = "SELECT id, matricula, modelo, km FROM coche ORDER BY id DESC LIMIT 100;";
-	private static final String SQL_GETMATRICULA = "{call pa_getMatricula(?)} ;";
+	private static final String SQL_GETMATRICULAS = "{call pa_coche_getMatriculas()}";
+	private static final String SQL_GETMATRICULA = "{call pa_getMatricula(?)}";
 
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
@@ -66,9 +66,9 @@ public class CocheDAO {
 	public ArrayList<Coche> getMatriculas() {
 		ArrayList<Coche> matriculas = new ArrayList<Coche>();
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GETMATRICULAS);) {
+				CallableStatement cs = conn.prepareCall(SQL_GETMATRICULAS);) {
 
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					try {
 						matriculas.add(rowMapper(rs));

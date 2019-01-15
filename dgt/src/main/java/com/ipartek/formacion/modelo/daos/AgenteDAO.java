@@ -1,5 +1,6 @@
 package com.ipartek.formacion.modelo.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class AgenteDAO {
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
-	private static final String SQL_GETBYID = "SELECT id, nombre FROM agente WHERE id = ?;";
+	private static final String SQL_GETBYID = "{call pa_agente_getById(?)}";
 
 	// Constructor privado, solo acceso por getInstance()
 	private AgenteDAO() {
@@ -83,10 +84,10 @@ public class AgenteDAO {
 
 	public Agente getByUser(Agente a) {
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
-			pst.setLong(1, a.getId());
+				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
+			cs.setLong(1, a.getId());
 
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					a = rowMapper(rs);
 				}
@@ -130,11 +131,11 @@ public class AgenteDAO {
 
 		Agente a = null;
 		String sql = SQL_GETBYID;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 
-			pst.setLong(1, id);
+			cs.setLong(1, id);
 
-			try (ResultSet rs = pst.executeQuery()) {
+			try (ResultSet rs = cs.executeQuery()) {
 
 				while (rs.next()) {
 					a = rowMapper(rs);
