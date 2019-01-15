@@ -156,7 +156,7 @@ public class MultasController extends HttpServlet {
 	 * permite hacer esencialmente lo mismo que el método 'opVer' pero permite
 	 * ver las multas que se han dado de baja
 	 * 
-	 * - importeStr
+	 * - importe
 	 * Importe de la multa
 	 * 
 	 * - concepto
