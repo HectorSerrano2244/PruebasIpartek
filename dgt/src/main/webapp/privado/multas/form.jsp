@@ -42,14 +42,16 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
+		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
-				<label for="concepto">Concepto</label> <input type="text"
-					name="concepto" value="${(op == 'ver') ? multa.concepto : concepto}" ${(op == 'ver') ? '' :'autofocus'} required class="form-control"
-					${(op == 'ver') ? "readonly" : ""}>
+				<label for="concepto">Concepto <span id="contadorLabel"></span></label> <textarea
+					name="concepto" id="concepto" value="${(op == 'ver') ? multa.concepto : concepto}" ${(op == 'ver') ? '' :'autofocus'} cols="20" rows="10" required class="form-control"
+					${(op == 'ver') ? "readonly" : ""}></textarea>
 		</div>
+		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
 			<label for="importe">Importe</label> <input type="number" step="0.01" required
-				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control"
+				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control number"
 				${(op == 'ver') ? "readonly" : ""}>
 		</div>
 		<fieldset class="border p-2">
