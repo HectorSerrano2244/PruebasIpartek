@@ -22,6 +22,9 @@ public class MultaDAO {
 	private boolean isGetById = false;
 	private boolean isBaja = false;
 	private Mensaje mensaje = null;
+	
+	private static final String MULTAS_ANULADAS = "baja";
+	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
@@ -78,7 +81,7 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn
 						.prepareCall(SQL_GETALL_BYUSER);) {
-			if ("baja".equals(opm)) {
+			if (MULTAS_ANULADAS.equals(opm)) {
 				isBaja = true;
 			} else {
 				isBaja = false;
