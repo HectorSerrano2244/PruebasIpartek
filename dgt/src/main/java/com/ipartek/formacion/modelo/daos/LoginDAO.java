@@ -11,19 +11,19 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
-public class AgenteDAO {
-	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
-	private static AgenteDAO INSTANCE = null;
+public class LoginDAO {
+	private final static Logger LOG = Logger.getLogger(LoginDAO.class);
+	private static LoginDAO INSTANCE = null;
 	private static final String SQL_GETBYID = "{call pa_agente_getById(?)}";
 
 	// Constructor privado, solo acceso por getInstance()
-	private AgenteDAO() {
+	private LoginDAO() {
 		super();
 	}
 
-	public synchronized static AgenteDAO getInstance() {
+	public synchronized static LoginDAO getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new AgenteDAO();
+			INSTANCE = new LoginDAO();
 		}
 		return INSTANCE;
 	}
@@ -35,25 +35,24 @@ public class AgenteDAO {
 	 * @param pass  String pass
 	 * @return usuario con datos si existe, null si no existe
 	 */
-//	public Agente login(String email, String password) {
-//
-//		Agente agente = null;
-//		String sql = SQL_GETBYUSER;
-//
-//		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-//			pst.setString(1, email);
-//			pst.setString(2, password);
-//			try (ResultSet rs = pst.executeQuery()) {
-//				while (rs.next()) { // hemos encontrado usuario
-//					agente = new Agente();
-//					agente.setId(rs.getLong("id"));
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return agente;
-//	}
+	public Agente login(String placa, String password) {
+
+		Agente agente = null;
+
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
+			pst.setString(1, placa);
+			pst.setString(2, password);
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) { // hemos encontrado usuario
+					agente = new Agente();
+					agente.setId(rs.getLong("id"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return agente;
+	}
 
 //	public ArrayList<Agente> getAll() {
 //
