@@ -44,19 +44,14 @@
 		</c:choose>
 		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
-				<label for="concepto">Concepto <span id="contadorLabel"></span></label> <textarea
-					name="concepto" id="concepto" value="${(op == 'ver') ? multa.concepto : concepto}" ${(op == 'ver') ? '' :'autofocus'} cols="20" rows="10" required class="form-control"
-					${(op == 'ver') ? "readonly" : ""}></textarea>
+				<label for="concepto">Concepto <c:if test="${op != 'ver'}"><span id="contadorLabel"></span></c:if></label> <textarea
+					name="concepto" id="concepto" ${(op == 'ver') ? '' :'autofocus'} rows="8" style="resize: none" required class="form-control"
+					${(op == 'ver') ? "readonly" : ""}>${(op == 'ver') ? multa.concepto : concepto}</textarea>
 		</div>
 		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
-<<<<<<< HEAD
-			<label for="importe">Importe</label> <input type="number" step="0.01" required
-				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control number"
-=======
 			<label for="importe">Importe</label> <input type="number" step="any" required
-				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control"
->>>>>>> branch 'master' of https://github.com/AjRoBSeYeR/PruebasIpartek
+				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control number"
 				${(op == 'ver') ? "readonly" : ""}>
 		</div>
 		<fieldset class="border p-2">

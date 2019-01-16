@@ -2,7 +2,7 @@ console.log('funcionando');
 let label;
 let concepto; // textarea
 
-const MAX_CARACTERES = 50; // TODO cambiar por 250 despues de las pruebas
+const MAX_CARACTERES = 255; // TODO cambiar por 250 despues de las pruebas
 const MIN_CARACTERES = 10;
 
 window.addEventListener('load', function() {
@@ -18,15 +18,17 @@ window.addEventListener('load', function() {
 	
 	if (caracteres <= MIN_CARACTERES) {
 		label.style.color = 'red';
+		label.textContent = `(${caracteres}/${MAX_CARACTERES}) Minimo ${MIN_CARACTERES} caracteres`;
 	} else if (caracteres >= MIN_CARACTERES) {
 		label.style.color = 'green';
+		label.textContent = `(${caracteres}/${MAX_CARACTERES}) Correcto`;
 	}
 
-	if (caracteres >= (MAX_CARACTERES / 2)) {
-
+	if (caracteres >= (MAX_CARACTERES / 1.25)) {
+		label.textContent = `(${caracteres}/${MAX_CARACTERES}) Estas cerca del limite`;
 	}
 	if (caracteres >= MAX_CARACTERES) {
-
+		label.textContent = `(${caracteres}/${MAX_CARACTERES}) Llegaste al limite`;
 	}
 
 	concepto.addEventListener("keyup", function() {
@@ -36,15 +38,17 @@ window.addEventListener('load', function() {
 
 		if (caracteres <= MIN_CARACTERES) {
 			label.style.color = 'red';
+			label.textContent = `(${caracteres}/${MAX_CARACTERES}) Minimo ${MIN_CARACTERES} caracteres`;
 		} else if (caracteres >= MIN_CARACTERES) {
 			label.style.color = 'green';
+			label.textContent = `(${caracteres}/${MAX_CARACTERES}) Correcto`;
 		}
 
-		if (caracteres >= (MAX_CARACTERES / 2)) {
-
+		if (caracteres >= (MAX_CARACTERES / 1.25)) {
+			label.textContent = `(${caracteres}/${MAX_CARACTERES}) Estas cerca del limite`;
 		}
 		if (caracteres >= MAX_CARACTERES) {
-
+			label.textContent = `(${caracteres}/${MAX_CARACTERES}) Llegaste al limite`;
 		}
 
 	});
