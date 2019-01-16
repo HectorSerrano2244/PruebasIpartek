@@ -48,7 +48,7 @@
 					${(op == 'ver') ? "readonly" : ""}>
 		</div>
 		<div class="form-group">
-			<label for="importe">Importe</label> <input type="number" step="0.01" required
+			<label for="importe">Importe</label> <input type="number" step="any" required
 				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control"
 				${(op == 'ver') ? "readonly" : ""}>
 		</div>

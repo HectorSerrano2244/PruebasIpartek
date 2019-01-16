@@ -179,6 +179,7 @@ public class MultasController extends HttpServlet {
 			importe = request.getParameter("importe");
 			concepto = request.getParameter("concepto");
 			id_coche = request.getParameter("idcoche");
+			mensaje=null;
 			LOG.debug("Parametros recuperados satisfactoriamente");
 		} catch (Exception e) {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
