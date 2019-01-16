@@ -28,6 +28,7 @@ CREATE TABLE `agente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `placa` int(11) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `id_departamento` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `placa_UNIQUE` (`placa`),
@@ -42,7 +43,7 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei',123456,39),(2,'Johnny Walker',987654,36),(3,'Monk',324586,38),(4,'Takelberry',87456,37),(5,'Tontimmy',998776,37);
+INSERT INTO `agente` VALUES (1,'Majonei',123456,'dfgbtes',39),(2,'Johnny Walker',987654,'t45gt4w5t',36),(3,'Monk',324586,'ergsev',38),(4,'Takelberry',87456,'34t32',37),(5,'Tontimmy',998776,'7miti76',37);
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,6 +235,34 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_login` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_login`(IN p_placa INT, IN p_pass VARCHAR(20))
+BEGIN
+SELECT 
+	a.id,
+	a.nombre,
+	a.placa,
+    a.password
+FROM 
+	agente as a
+WHERE
+	a.placa=p_placa AND
+    a.password=p_pass;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `pa_multa_getByAgenteId` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -360,4 +389,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-16 13:12:31
+-- Dump completed on 2019-01-16 13:50:36
