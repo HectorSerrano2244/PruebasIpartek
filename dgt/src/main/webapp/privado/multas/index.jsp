@@ -19,6 +19,7 @@
 				<c:otherwise>
 					<th>Fecha Baja</th>
 					<th>Fecha Alta</th>
+					<th></th>
 				</c:otherwise>
 			</c:choose>
 		</tr>
@@ -31,8 +32,9 @@
 						<td>${m.coche.matricula}</td>
 						<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm"
 							value="${m.fechaBaja}" /></td>
-						<td><span
-							onclick="location='privado/multas?op=ver&idmulta=${m.id}&opm=${opm}'"><fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${m.fechaAlta}" /></span></td>
+						<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${m.fechaAlta}" /></td>
+							<td><span class="btn btn-primary float-left"
+							onclick="location='privado/multas?op=ver&idmulta=${m.id}&opm=${opm}'">Ver</span></td>
 					</tr>
 				</c:forEach>
 			</c:when>
