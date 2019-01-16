@@ -1,9 +1,15 @@
 <%@include file="../../includes/header.jsp"%>
 <%@include file="../../includes/navbar.jsp"%>
 <main role="main" class="container p-4">
-<div class="row border ">
-	<a href="login"	class=" btn btn-outline-primary mt-3 mb-3 col-3">Volver </a>
-	<span class="align-middle text-center mb-3 mt-1 col-9">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</span>
+<div class="container mb-3">
+	<div class="row d-flex align-items-center">
+		<div class="col-4">
+			<a href="login"	class=" btn btn-outline-primary btn-block">Volver </a>
+		</div>
+		<div class="text-center align-middle col-8">
+			<span style="font-size:25px">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</span>
+		</div>
+	</div>
 </div>
 <table
 	class="table table-hover tablaOrdenable">
