@@ -1,20 +1,19 @@
 package com.ipartek.formacion.modelo.pojo;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Agente {
 	private Long id;
-	@NotEmpty
 	private String nombre;
-	@NotEmpty
-	@Size(min = 6, max = 6)
-	private int placa;
-	@NotEmpty
+	@NotEmpty(message = "No puede estar vacio")
+	@Pattern(regexp = "\\d{6}", message = "Introduzca 6 numeros")
+	private String placa;
+	@NotEmpty(message = "No puede estar vacio")
 	private String password;
 	
-	public Agente(Long id, String nombre, int placa, String password) {
+	public Agente(Long id, String nombre, String placa, String password) {
 		this();
 		setId(id);
 		setNombre(nombre);
@@ -26,7 +25,7 @@ public class Agente {
 		super();
 		this.id = -1l;
 		this.nombre = "";
-		this.placa = 0;
+		this.placa = "";
 		this.password = "";
 	}
 
@@ -34,27 +33,23 @@ public class Agente {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
+	
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-	public int getPlaca() {
+	public String getPlaca() {
 		return placa;
 	}
 
-	public void setPlaca(int placa) {
+	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
 	

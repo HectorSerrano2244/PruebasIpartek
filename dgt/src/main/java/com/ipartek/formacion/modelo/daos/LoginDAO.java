@@ -168,7 +168,7 @@ public class LoginDAO {
 		Agente a = new Agente();
 		a.setId(rs.getLong("id"));
 		a.setNombre(rs.getString("nombre"));
-		a.setPlaca(rs.getInt("placa"));
+		a.setPlaca(String.valueOf(rs.getInt("placa")));
 		a.setPassword(rs.getString("password"));
 		return a;
 	}

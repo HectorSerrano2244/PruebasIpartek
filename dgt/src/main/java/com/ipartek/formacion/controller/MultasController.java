@@ -268,6 +268,7 @@ public class MultasController extends HttpServlet {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La matrícula no existe");
 			request.setAttribute("matricula", matricula);
 			vista = VISTA_BUSCAR;
+			request.setAttribute("titulo", "Introduzca una matrícula | App Multas");
 			LOG.warn(mensaje.getTexto());
 		}
 	}

@@ -7,8 +7,8 @@
 		</h1>
 		<label for="placa" class="sr-only">Nº Placa
 				</label> 
-				<input type="number" id="placa"
-			name="placa" class="form-control" maxlength="6" placeholder="Nº Placa" 
+				<input type="text" id="placa"
+			name="placa" class="form-control number" maxlength="6" placeholder="Nº Placa" 
 			value="${placa}" required autofocus>
 			<label for="password" class="sr-only">
 			Contraseña:</label> 
