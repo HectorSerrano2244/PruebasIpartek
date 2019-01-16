@@ -24,9 +24,7 @@ public class MultaDAO {
 	private Mensaje mensaje = null;
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETBYID_BAJA = "{call pa_multa_getByIdBaja(?)}";
-	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getAll_User(?)}";
-	private static final String SQL_GETALL_BYUSER_BAJA = "{call pa_multa_getAllByUserBaja(?)}";
+	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?)}";
 //	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL WHERE id = ?;";
@@ -51,7 +49,7 @@ public class MultaDAO {
 		isGetById = true;
 
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn.prepareCall(("baja".equals(opm)) ? SQL_GETBYID_BAJA : SQL_GETBYID);) {
+				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
 			cs.setLong(1, id);
 
 			if ("baja".equals(opm)) {
@@ -79,14 +77,14 @@ public class MultaDAO {
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn
-						.prepareCall(("baja".equals(opm)) ? SQL_GETALL_BYUSER_BAJA : SQL_GETALL_BYUSER);) {
+						.prepareCall(SQL_GETALL_BYUSER);) {
 			if ("baja".equals(opm)) {
 				isBaja = true;
 			} else {
 				isBaja = false;
 			}
 			cs.setLong(1, id);
-
+			cs.setString(2, opm);
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					try {
