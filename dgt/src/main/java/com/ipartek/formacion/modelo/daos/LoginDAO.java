@@ -14,7 +14,7 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class LoginDAO {
 	private final static Logger LOG = Logger.getLogger(LoginDAO.class);
 	private static LoginDAO INSTANCE = null;
-	private static final String SQL_GETBYID = "{call pa_agente_getById(?)}";
+	private static final String SQL_LOGIN = "{call pa_login(?, ?)}";
 
 	// Constructor privado, solo acceso por getInstance()
 	private LoginDAO() {
@@ -35,23 +35,25 @@ public class LoginDAO {
 	 * @param pass  String pass
 	 * @return usuario con datos si existe, null si no existe
 	 */
-	public Agente login(String placa, String password) {
+	public Agente login(int placa, String password) {
 
-		Agente agente = null;
+		Agente a = null;
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
-			pst.setString(1, placa);
-			pst.setString(2, password);
-			try (ResultSet rs = pst.executeQuery()) {
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_LOGIN);) {
+			cs.setInt(1, placa);
+			cs.setString(2, password);
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
-					agente = new Agente();
-					agente.setId(rs.getLong("id"));
+					a = rowMapper(rs);
 				}
 			}
+			catch (Exception e) {
+				LOG.error(e);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
-		return agente;
+		return a;
 	}
 
 //	public ArrayList<Agente> getAll() {
@@ -81,21 +83,21 @@ public class LoginDAO {
 //		return agentes;
 //	}
 
-	public Agente getByUser(Agente a) {
-		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
-			cs.setLong(1, a.getId());
-
-			try (ResultSet rs = cs.executeQuery()) {
-				while (rs.next()) {
-					a = rowMapper(rs);
-				}
-			}
-		} catch (Exception e) {
-			LOG.error(e);
-		}
-		return a;
-	}
+//	public Agente getByUser(Agente a) {
+//		try (Connection conn = ConnectionManager.getConnection();
+//				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
+//			cs.setLong(1, a.getId());
+//
+//			try (ResultSet rs = cs.executeQuery()) {
+//				while (rs.next()) {
+//					a = rowMapper(rs);
+//				}
+//			}
+//		} catch (Exception e) {
+//			LOG.error(e);
+//		}
+//		return a;
+//	}
 
 //	public boolean insert(Usuario u) throws SQLException {
 //		boolean r = false;
@@ -126,25 +128,25 @@ public class LoginDAO {
 //		return r;
 //	}
 //	
-	public Agente getById(long id) {
-
-		Agente a = null;
-		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
-
-			cs.setLong(1, id);
-
-			try (ResultSet rs = cs.executeQuery()) {
-
-				while (rs.next()) {
-					a = rowMapper(rs);
-				}
-			}
-
-		} catch (Exception e) {
-			LOG.error("El agente que buscas no existe", e);
-		}
-		return a;
-	}
+//	public Agente getById(long id) {
+//
+//		Agente a = null;
+//		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
+//
+//			cs.setLong(1, id);
+//
+//			try (ResultSet rs = cs.executeQuery()) {
+//
+//				while (rs.next()) {
+//					a = rowMapper(rs);
+//				}
+//			}
+//
+//		} catch (Exception e) {
+//			LOG.error("El agente que buscas no existe", e);
+//		}
+//		return a;
+//	}
 
 //	public boolean delete(long id) {
 //		boolean r = false;
@@ -166,6 +168,8 @@ public class LoginDAO {
 		Agente a = new Agente();
 		a.setId(rs.getLong("id"));
 		a.setNombre(rs.getString("nombre"));
+		a.setPlaca(rs.getInt("placa"));
+		a.setPassword(rs.getString("password"));
 		return a;
 	}
 }
