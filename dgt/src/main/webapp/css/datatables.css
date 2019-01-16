@@ -517,10 +517,13 @@ table.dataTable, table.dataTable th, table.dataTable td {
 @media screen and (max-width: 640px) {
 	.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter
 		{
-		float: none;
-		text-align: center
+		width:50px;
+		float:left;
+		text-align: center;
 	}
 	.dataTables_wrapper .dataTables_filter {
-		margin-top: 0.5em
+
+		margin-left: 6.2em;
+
 	}
 }
