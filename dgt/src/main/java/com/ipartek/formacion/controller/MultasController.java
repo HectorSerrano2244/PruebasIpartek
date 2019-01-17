@@ -38,7 +38,7 @@ public class MultasController extends HttpServlet {
 	
 	// Constantes que contienen los archivos .jsp. 
 	// Aquí se encuentra tanto el contenido visual (html) y la información pertinente sacada de los controladores
-	private static final String VISTA_PRAL = "../principal.jsp";
+	private static final String VISTA_PRAL = "../privado/principal.jsp";
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
 	private static final String VISTA_BUSCAR = "multas/buscar.jsp";
