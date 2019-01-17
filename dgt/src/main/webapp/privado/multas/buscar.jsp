@@ -1,10 +1,10 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
 
-<main role="main" class="container p-4"> 
+<main role="main" class="container p-4 "> 
 	<form action="privado/multas" method="post">
 		<div>
-			<a href="login" class="btn btn-outline-primary mt-3 mb-3 col-3">
+			<a href="privado/principal.jsp" class="btn btn-outline-primary mt-3 mb-3 col-3">
 				Volver
 			</a>
 		</div>

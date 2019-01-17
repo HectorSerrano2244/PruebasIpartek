@@ -24,7 +24,7 @@
 	<link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 		rel="stylesheet">
 	</head>
-<body>
+<body class="fondo">
 <main role="main" class="container">
 <div>
 	<img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"

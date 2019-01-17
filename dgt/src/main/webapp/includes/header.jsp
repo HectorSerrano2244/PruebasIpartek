@@ -23,6 +23,6 @@
 		
 	<link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 		rel="stylesheet">
-		 <link href="https://getbootstrap.com/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
+		 
 	</head>
-<body>
+<body class="sinespacio">

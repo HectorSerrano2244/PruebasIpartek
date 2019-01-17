@@ -2,16 +2,15 @@
 <%@include file="../../includes/navbar.jsp"%>
 <main role="main" class="container p-4">
 <div class="container mb-3">
-	<div class="row d-flex align-items-center">
+	<div class="row d-flex align-items-center mb-3">
 		<div class="col-4">
-			<a href="login"	class=" btn btn-outline-primary btn-block">Volver </a>
+			<a href="privado/principal.jsp"	class=" btn btn-outline-primary btn-block">Volver </a>
 		</div>
 		<div class="text-center align-middle col-8">
 			<span style="font-size:25px">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</span>
 		</div>
 	</div>
-</div>
-<table
+	<table
 	class="table table-hover tablaOrdenable">
 	<thead class="thead-light">
 		<tr>
@@ -40,5 +39,7 @@
 		</c:forEach>
 	</tbody>
 </table> 	
+</div>
+
 </main>
 <%@include file="../../includes/footer.jsp"%>

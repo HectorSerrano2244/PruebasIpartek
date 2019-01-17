@@ -1,6 +1,9 @@
-body {
+body.fondo {
 	background: url("../media/fondo.jpg") no-repeat center center;
 	background-size: 115% 115%;
+}
+body.sinespacio{
+  padding-top: 4.5rem;
 }
 
 .container {
