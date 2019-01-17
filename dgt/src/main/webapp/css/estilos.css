@@ -15,3 +15,9 @@ input[type="search" i] {
     width: 115px;
     float:right;
 }
+.nocumple{
+	background-color: rgba(255,0,0,0.2);
+}
+.cumple{
+	background-color: rgba(0,255,0,0.2);
+}
