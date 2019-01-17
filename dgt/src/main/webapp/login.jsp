@@ -11,9 +11,9 @@
 	<title>${(titulo != null) ? titulo : 'Página'}</title>
 	<base href="${pageContext.request.contextPath}/">
 	<!-- Bootstrap core CSS -->
-	<meta name="theme-color" content="#007bff">
+	<meta name="theme-color" content="#8e8c8e">
 	
-	<meta name="msapplication-navbutton-color" content="#007bff">
+	<meta name="msapplication-navbutton-color" content="#8e8c8e">
 	
 	<link rel="stylesheet" href="css/datatables.css">
 	<link rel="stylesheet" href="css/datatables-responsive.css">
@@ -23,18 +23,17 @@
 		
 	<link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
 		rel="stylesheet">
-		 <link href="https://getbootstrap.com/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
 	</head>
 <body>
 <main role="main" class="container">
 <div>
-	<img class="img-responsive mx-auto d-block mb-5" width="175px"
+	<img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"
 		height="200px"
 		src="https://pngimage.net/wp-content/uploads/2018/05/escudo-policia-nacional-espa%C3%B1a-png-1.png"
 		alt="escudo policia">
 </div>
 <form novalidate class="form-signin" action="login" method="post">
-	<h1 class="h3 mb-3 font-weight-normal text-center">Iniciar Sesión
+	<h1 class="h3 mb-3 font-weight-normal text-center text-white">Iniciar Sesión
 	</h1>
 	<label for="placa" class="sr-only">Nº Placa </label> <input type="text"
 		id="placa" name="placa" class="form-control number mb-3" maxlength="6"
@@ -47,6 +46,7 @@
 	<%@include file="includes/mensajes.jsp"%>
 </form>
 </main>
+<footer>
   	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -57,5 +57,6 @@
   	<script src="js/datatables-responsive.js"></script>
   	<script src="js/decimales.js"></script>
   	<script src="js/contadorTextarea.js"></script>
+	</footer>
   </body>
 </html>

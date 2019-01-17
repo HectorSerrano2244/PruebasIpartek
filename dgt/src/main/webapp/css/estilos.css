@@ -1,4 +1,8 @@
 body {
-	background-image: url("../media/fondo.jpg");
-	background-size: cover;
+	background: url("../media/fondo.jpg") no-repeat center center;
+	background-size: 115% 115%;
+}
+
+.container {
+	height: 91vh;
 }

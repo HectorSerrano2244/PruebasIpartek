@@ -17,6 +17,7 @@
 	
 	<link rel="stylesheet" href="css/datatables.css">
 	<link rel="stylesheet" href="css/datatables-responsive.css">
+	<link rel="stylesheet" href="css/estilos.css">
 	
 	<link rel="shortcut icon" type="image/x-icon" href="https://pngimage.net/wp-content/uploads/2018/05/escudo-policia-nacional-espa%C3%B1a-png-1.png"/>
 		
