@@ -1,7 +1,6 @@
 package com.ipartek.formacion.filter;
 
 import java.io.IOException;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
 /**
- * Servlet Filter implementation class SeguridadFilter
+ * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(dispatcherTypes = {
 				DispatcherType.REQUEST, 
@@ -25,30 +24,29 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 				DispatcherType.INCLUDE, 
 				DispatcherType.ERROR
 		}
-					, urlPatterns = { "/privado/*" })
-public class SeguridadFilter implements Filter {
+					, urlPatterns = { "/login.jsp" })
+public class LoginFilter implements Filter {
 
 	public void destroy() {
-		// TODO Auto-generated method stub
+		
 	}
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 
 		HttpSession session = request.getSession();
 		Agente aLogueado = (Agente) session.getAttribute("agenteLogueado");
-		if (aLogueado != null) {
+		if (aLogueado == null) {
 			chain.doFilter(req, res);
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/privado/principal.jsp");
 		}
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

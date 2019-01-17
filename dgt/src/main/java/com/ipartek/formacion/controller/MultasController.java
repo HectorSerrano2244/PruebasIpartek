@@ -53,6 +53,7 @@ public class MultasController extends HttpServlet {
 
 	private String op = null;
 	String opm = "";
+	String opr = "";
 	
 	// Parametros
 	String importe = "";
@@ -115,6 +116,7 @@ public class MultasController extends HttpServlet {
 			opMultar(request);
 			break;
 		case "anular":
+		case "recuperar":
 			opAnular(request);
 			break;
 		default: 
@@ -174,6 +176,7 @@ public class MultasController extends HttpServlet {
 				op = "ver";
 			}
 			opm = request.getParameter("opm");
+			opr = request.getParameter("opr");
 			idMultaStr = request.getParameter("idmulta");
 			matricula = request.getParameter("matricula");
 			importe = request.getParameter("importe");
@@ -216,7 +219,7 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				m = daoMulta.getById(idMulta, opm);
+				m = daoMulta.getById(idMulta, opm, opr);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -307,7 +310,6 @@ public class MultasController extends HttpServlet {
 				LOG.debug("No hay violaciones. Se procede a crear una multa");
 				try {
 					if (daoMulta.insert(m)) {
-						// TODO informacion del coche multado
 						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+new Date()+", Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
 						LOG.info(mensaje.getTexto());
 						idMultaStr = null;
@@ -347,7 +349,7 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opAnular(HttpServletRequest request) {
 		try {
-			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm)));
+			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm, opr)));
 			op = "ver";
 			opm = "baja";
 			idMultaStr = null;

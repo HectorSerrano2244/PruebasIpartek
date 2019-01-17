@@ -13,5 +13,8 @@
 	<a href="privado/multas?opm=baja" class="mt-6 btn btn-outline-secondary btn-block btn-lg">
 		Ver tus multas anuladas
 	</a>
+	<a href="#" class="mt-6 btn btn-outline-dark btn-block btn-lg">
+		Ver tus objetivos
+	</a>
 </main>
 <%@include file="../includes/footer.jsp"%>

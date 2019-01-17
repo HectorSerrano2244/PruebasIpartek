@@ -29,7 +29,7 @@ public class MultaDAO {
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
-	private static final String SQL_UPDATE = "{call pa_multa_update(?)}";
+	private static final String SQL_UPDATE = "{call pa_multa_update(?, ?)}";
 //	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
@@ -45,7 +45,7 @@ public class MultaDAO {
 		return INSTANCE;
 	}
 
-	public Multa getById(long id, String opm) {
+	public Multa getById(long id, String opm, String opr) {
 
 		Multa m = null;
 
@@ -54,7 +54,8 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
 			cs.setLong(1, id);
-
+			cs.setString(2, opr);
+			
 			if ("baja".equals(opm)) {
 				isBaja = true;
 			} else {

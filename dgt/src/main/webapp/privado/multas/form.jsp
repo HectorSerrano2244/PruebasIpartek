@@ -42,13 +42,11 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
 				<label for="concepto">Concepto <c:if test="${op != 'ver'}"><span id="contadorLabel"></span></c:if></label> <textarea
 					name="concepto" id="concepto" ${(op == 'ver') ? '' :'autofocus'} rows="8" style="resize: none" required class="form-control"
 					${(op == 'ver') ? "readonly" : ""}>${(op == 'ver') ? multa.concepto : concepto}</textarea>
 		</div>
-		<!-- ================== Concepto ========================== -->
 		<div class="form-group">
 			<label for="importe">Importe</label> <input type="number" step="any" required
 				name="importe" value="${(op == 'ver') ? multa.importe : importe}" class="form-control number"
@@ -70,11 +68,16 @@
 		</c:if>
 		
 		<c:if test="${op != 'buscar'}">
-			<c:if test="${opm != 'baja'}">
+		<c:choose>
+			<c:when test="${opm != 'baja'}">
 			<!-- Button trigger modal -->
 		
 				<a href="#" class="btn btn-outline-danger btn-block mt-3 mb-3" data-toggle="modal" data-target="#exampleModal">Anular multa</a>
-				
+			</c:when>
+			<c:otherwise>
+				<a href="privado/multas?op=anular&idmulta=${multa.id}&opr=recuperar" class="btn btn-outline-success btn-block mt-3 mb-3">Recuperar multa</a>
+			</c:otherwise>
+		</c:choose>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -96,8 +99,7 @@
 							</div>
 				    	</div>
 					</div>
-				</div>	
-			</c:if>
+				</div>
 		</c:if>
 		<%@ include file="../../includes/mensajes.jsp"%>
 	</form>
