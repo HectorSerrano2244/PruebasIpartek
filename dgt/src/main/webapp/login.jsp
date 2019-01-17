@@ -35,8 +35,8 @@
 <form novalidate class="form-signin" action="login" method="post">
 	<h1 class="h3 mb-3 font-weight-normal text-center text-white">Iniciar Sesión
 	</h1>
-	<label for="placa" class="sr-only">Nº Placa </label> <input type="text"
-		id="placa" name="placa" class="form-control number mb-3" maxlength="6"
+	<label for="placa" class="sr-only">Nº Placa </label> <input type="number"
+		id="placa" name="placa" min="-999999" max="999999" class="form-control number mb-3"
 		placeholder="Nº Placa" value="${placa}" required autofocus> 
 	<label for="password" class="sr-only"> Contraseña:</label> <input
 		type="password" id="password" class="form-control mb-3"

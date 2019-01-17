@@ -8,7 +8,7 @@ public class Agente {
 	private Long id;
 	private String nombre;
 	@NotEmpty(message = "No puede estar vacio")
-	@Pattern(regexp = "\\d{6}", message = "Introduzca 6 numeros")
+	@Pattern(regexp = "[0-9]{6}", message = "Introduzca 6 numeros")
 	private String placa;
 	@NotEmpty(message = "No puede estar vacio")
 	private String password;
