@@ -38,7 +38,7 @@ public class MultasController extends HttpServlet {
 	
 	// Constantes que contienen los archivos .jsp. 
 	// Aquí se encuentra tanto el contenido visual (html) y la información pertinente sacada de los controladores
-	private static final String VISTA_PRAL = "../privado/principal.jsp";
+	private static final String VISTA_PRAL = "principal.jsp";
 	private static final String VISTA_INDEX = "multas/index.jsp";
 	private static final String VISTA_FORM = "multas/form.jsp";
 	private static final String VISTA_BUSCAR = "multas/buscar.jsp";
@@ -219,7 +219,7 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				m = daoMulta.getById(idMulta, opm, opr);
+				m = daoMulta.getById(idMulta, opm);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -349,7 +349,7 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opAnular(HttpServletRequest request) {
 		try {
-			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm, opr)));
+			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm),opr));
 			op = "ver";
 			opm = "baja";
 			idMultaStr = null;

@@ -45,7 +45,7 @@ public class MultaDAO {
 		return INSTANCE;
 	}
 
-	public Multa getById(long id, String opm, String opr) {
+	public Multa getById(long id, String opm) {
 
 		Multa m = null;
 
@@ -54,7 +54,6 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
 			cs.setLong(1, id);
-			cs.setString(2, opr);
 			
 			if ("baja".equals(opm)) {
 				isBaja = true;
@@ -129,14 +128,14 @@ public class MultaDAO {
 
 	}
 
-	public boolean update(Multa m) throws SQLException {
+	public boolean update(Multa m, String opr) throws SQLException {
 
 		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_UPDATE);) {
 
 			cs.setLong(1, m.getId());
-
+			cs.setString(2, opr);
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
