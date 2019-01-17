@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 	private Validator validator;
 	
 	private LoginDAO daoLogin;
-	Agente a = new Agente();
+	Agente a = null;
 	String placa = "";
 	String password = "";
 	String vista = "";
@@ -60,6 +60,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getParameters(request);
 		try {
+			a=new Agente();
 			a.setPlaca(placa);
 			a.setPassword(password);
 			Set<ConstraintViolation<Agente>> violations = validator.validate(a);
