@@ -24,7 +24,7 @@ import com.ipartek.formacion.modelo.pojo.Mensaje;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	
-	private static final String VISTA_PRAL = "principal.jsp";
+	private static final String VISTA_PRAL = "privado/principal.jsp";
 	private static final String VISTA_LOGIN = "login.jsp";
 	
 	private static final long serialVersionUID = 1L;
