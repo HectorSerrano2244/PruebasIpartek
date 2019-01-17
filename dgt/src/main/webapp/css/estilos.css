@@ -9,3 +9,8 @@ body.sinespacio{
 .container {
 	height: 91vh;
 }
+input[type="search" i] {
+    padding: 1px;
+    width: 115px;
+    float:right;
+}
