@@ -17,6 +17,7 @@
 	
 	<link rel="stylesheet" href="css/datatables.css">
 	<link rel="stylesheet" href="css/datatables-responsive.css">
+	<link rel="stylesheet" href="css/estilos.css">
 	
 	<link rel="shortcut icon" type="image/x-icon" href="https://pngimage.net/wp-content/uploads/2018/05/escudo-policia-nacional-espa%C3%B1a-png-1.png"/>
 		
@@ -24,7 +25,7 @@
 		rel="stylesheet">
 		 <link href="https://getbootstrap.com/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
 	</head>
-<body style="background-image:'../resources/fondo.jpg'">
+<body>
 <main role="main" class="container">
 <div>
 	<img class="img-responsive mx-auto d-block mb-5" width="175px"
