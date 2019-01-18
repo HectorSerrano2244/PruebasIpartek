@@ -25,7 +25,8 @@ public class StatsController extends HttpServlet {
 	double objetivoAnualCombo = objetivoAnualActual;
 	double totalActual = 0;
 	double totalActualCombo = 0;
-	Object totalMes = "";
+	int anyoCombo = 0;
+	
 	private EstadisticasDAO daoEstadisticas;
 
 	@Override
@@ -41,7 +42,6 @@ public class StatsController extends HttpServlet {
 		Agente a = (Agente) session.getAttribute("agenteLogueado");
 
 		int anyoActual = fAnyoActual();
-		int anyoCombo;
 		try {
 			anyoCombo = Integer.parseInt(request.getParameter("anyoCombo"));
 		} catch (NumberFormatException e) {
@@ -52,7 +52,7 @@ public class StatsController extends HttpServlet {
 
 		totalActual = totalAnual(false);
 		totalActualCombo = totalAnual(true);
-		totalMes = request.getAttribute("totalMes");
+		Object totalMes = request.getAttribute("totalMes");
 
 		request.setAttribute("totalMesActual", new Double(totalMes.toString()));
 

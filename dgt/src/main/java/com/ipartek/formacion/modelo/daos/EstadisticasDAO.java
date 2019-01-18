@@ -43,8 +43,9 @@ public class EstadisticasDAO {
             pst.setInt(2, anyo);
             try (ResultSet rs = pst.executeQuery()) {
                 rs.next();
+                totalMes = 0;
                 for(int i = 1; i <= 12; i++) { // i = posiciones de las filas. 1 = Enero, 2 = Febrero, etc.
-                    try {
+                	try {
                         if (i == rs.getInt(1)) {  
                             // TODO redondear Floats a 2 decimales
                             estadisticas.add(new Estadisticas(prop.getProperty(String.valueOf(i)), rs.getFloat(2)));
@@ -60,6 +61,9 @@ public class EstadisticasDAO {
                     }
                     catch (Exception e) {
                         estadisticas.add(new Estadisticas(prop.getProperty(String.valueOf(i))));
+                        if (i == 12 && totalMes == 0) {
+                        	request.setAttribute("totalMes", 0);
+                        }
                     }
                 }
             }
