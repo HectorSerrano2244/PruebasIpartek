@@ -116,7 +116,6 @@ public class MultasController extends HttpServlet {
 			opMultar(request);
 			break;
 		case "anular":
-		case "recuperar":
 			opAnular(request);
 			break;
 		default: 
