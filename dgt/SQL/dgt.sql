@@ -158,7 +158,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,4,NULL,'2019-01-14 08:56:31'),(2,500,'exceso velocidad a 240km/h','2018-01-07 10:38:43',4,4,NULL,NULL),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2,NULL,NULL),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2,NULL,NULL),(5,800,'por velcoidad','2019-01-07 13:16:21',4,4,NULL,NULL),(6,300,'otra multa','2019-01-07 13:48:49',4,1,NULL,NULL),(7,45,'tuputamadre','2019-01-07 14:48:49',2,4,NULL,NULL),(8,43333,'dfgrsthrtsh','2019-01-07 12:34:49',2,4,NULL,NULL),(9,11,'vvvvv','2019-01-07 13:21:42',2,4,NULL,'2019-01-14 09:08:11'),(10,23,'sssss','2019-02-07 11:45:49',2,4,NULL,NULL),(11,55555,'dcxxxx','2019-01-10 14:23:44',2,4,NULL,NULL),(12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-15 12:45:32',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46',NULL),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48','2019-01-17 12:09:21');
+INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,4,NULL,'2019-01-14 08:56:31'),(2,500,'exceso velocidad a 240km/h','2018-01-07 10:38:43',4,4,NULL,NULL),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2,NULL,NULL),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2,NULL,NULL),(5,800,'por velcoidad','2019-01-07 13:16:21',4,4,NULL,NULL),(6,300,'otra multa','2019-01-07 13:48:49',4,1,NULL,NULL),(7,45,'tuputamadre','2019-01-07 14:48:49',2,4,NULL,NULL),(8,43333,'dfgrsthrtsh','2019-01-07 12:34:49',2,4,NULL,NULL),(9,11,'vvvvv','2019-01-07 13:21:42',2,4,NULL,'2019-01-14 09:08:11'),(10,23,'sssss','2019-02-07 11:45:49',2,4,NULL,NULL),(11,55555,'dcxxxx','2019-01-10 14:23:44',2,4,NULL,NULL),(12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-15 12:45:32',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46',NULL),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +345,23 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getById`(IN p_id_multa LONG)
 BEGIN
-SELECT m.id, m.fecha_alta,m.fecha_baja, m.importe, m.concepto, c.matricula, modelo, km FROM multa m, coche c WHERE m.id_coche = c.id AND m.id = p_id_multa;
+SELECT
+	m.id, 
+    id_agente,
+    id_coche,
+    fecha_alta,
+    fecha_baja, 
+    importe, 
+    concepto,
+    c.matricula,
+    c.modelo,
+    c.km
+FROM 
+	multa as m,
+    coche as c
+WHERE 
+	m.id_coche=c.id AND
+    m.id = p_id_multa;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -384,9 +400,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_update`(IN p_id LONG, IN p_oper VARCHAR(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_update`(IN p_id LONG, IN p_oper VARCHAR(15))
 BEGIN
-IF p_operacion = 'recuperar' then
+IF p_oper = 'recuperar' then
 	UPDATE 
 		multa 
     SET 
@@ -435,4 +451,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-17 13:28:48
+-- Dump completed on 2019-01-18 11:00:23
