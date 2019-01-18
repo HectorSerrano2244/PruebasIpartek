@@ -186,7 +186,7 @@ public class MultasController extends HttpServlet {
 		} catch (Exception e) {
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Parámetros introducidos incorrectos");
 			vista = VISTA_PRAL;
-			LOG.error(mensaje.getTexto());
+			LOG.error(mensaje.getTexto()+e.getMessage());
 		}
 	}
 	/**
@@ -348,11 +348,16 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opAnular(HttpServletRequest request) {
 		try {
-			request.setAttribute("multa", daoMulta.update(daoMulta.getById(Long.parseLong(idMultaStr), opm),opr));
-			op = "ver";
 			opm = "baja";
-			idMultaStr = null;
-			opVer(request);
+			m = daoMulta.getById(Long.parseLong(idMultaStr),opm);
+			if (m!=null) {
+				if(daoMulta.update(m,opr)) {
+					op = "ver";
+					opm = "nobaja";
+					idMultaStr = null;
+					opVer(request);
+				}
+			}
 		} catch (SQLException e) {
 			mensaje = new Mensaje(Mensaje.TIPO_WARNING, "No se puede anular la multa");
 			LOG.error(mensaje.getTexto(), e);

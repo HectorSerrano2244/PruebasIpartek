@@ -2,7 +2,6 @@ package com.ipartek.formacion.modelo.daos;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -29,8 +28,7 @@ public class MultaDAO {
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
-	private static final String SQL_UPDATE = "{call pa_multa_update(?, ?)}";
-//	private static final String SQL_UPDATE_RECUPERAR = "UPDATE multa SET fecha_baja = NULL WHERE id = ?;";
+	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -152,14 +150,19 @@ public class MultaDAO {
 		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
 		if (isBaja) {
 			Timestamp timestampbaja = rs.getTimestamp("fecha_baja");
-			m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
+			if(timestampbaja==null) {
+				m.setFechaBaja(null);
+			}else {
+				m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
+			}
+			
 		}
 		m.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
 		if (isGetById) {
 			m.setImporte(rs.getDouble("importe"));
 			m.setConcepto(rs.getString("concepto"));
-			c.setId(rs.getLong("id"));
+			c.setId(rs.getLong("id_coche"));
 			c.setModelo(rs.getString("modelo"));
 			c.setKm(rs.getInt("km"));
 		}
