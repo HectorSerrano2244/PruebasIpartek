@@ -27,60 +27,64 @@ public class StatsController extends HttpServlet {
 	double totalActualCombo = 0;
 	Object totalMes = "";
 	private EstadisticasDAO daoEstadisticas;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		daoEstadisticas = EstadisticasDAO.getInstance();
-		
+
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Agente a = (Agente) session.getAttribute("agenteLogueado");
-		
+
 		int anyoActual = fAnyoActual();
-		int anyoCombo = Integer.parseInt(request.getParameter("anyoCombo"));
-			estadisticasActuales = daoEstadisticas.getEstadisticas(request, a.getId(), anyoActual); // Año actual para agente en sesión
-			estadisticasCombo = estadisticasActuales;
-		if (anyoActual != anyoCombo) {
-			estadisticasCombo = daoEstadisticas.getEstadisticas(request, a.getId(), anyoCombo);
+		int anyoCombo;
+		try {
+			anyoCombo = Integer.parseInt(request.getParameter("anyoCombo"));
+		} catch (NumberFormatException e) {
+			anyoCombo = anyoActual;
 		}
-		
+
+		estadisticasCombo = daoEstadisticas.getEstadisticas(request, a.getId(), anyoCombo);
+
 		totalActual = totalAnual(false);
 		totalActualCombo = totalAnual(true);
 		totalMes = request.getAttribute("totalMes");
-		
+
 		request.setAttribute("totalMesActual", new Double(totalMes.toString()));
-		
+
 		request.setAttribute("anyoActual", anyoActual);
-		
+
 		request.setAttribute("totalAnualActual", totalActual);
-		
+
 		request.setAttribute("objetivoAnualActual", objetivoAnualActual);
-		
-		request.setAttribute("objetivoAnualActual", estadisticasActuales);
-		
-		request.setAttribute("objetivoCombo", estadisticasCombo);
-		
+
+//		request.setAttribute("objetivoAnualActual", estadisticasActuales);
+
+		request.setAttribute("objetivo", estadisticasCombo);
+
 		request.getRequestDispatcher("multas/estadisticas.jsp").forward(request, response);
 	}
 
 	private int fAnyoActual() {
 		Calendar fecha = Calendar.getInstance();
-        int anyo = fecha.get(Calendar.YEAR);
+		int anyo = fecha.get(Calendar.YEAR);
 		return anyo;
 	}
 
 	private double totalAnual(boolean isCombo) {
 		totalActual = 0;
-		for(Estadisticas e : (isCombo) ? estadisticasCombo : estadisticasActuales) {
+		for (Estadisticas e : estadisticasCombo ) {
 			totalActual += e.getImporte();
-        }
+		}
 		return totalActual;
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 }

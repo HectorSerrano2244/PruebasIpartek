@@ -15,11 +15,11 @@
 	<table id="actual" class="table">
 		<tr>
 			<td>Mes</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMes}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual / 12}" /></td>
+			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMesActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual / 12}" /></td>
 		</tr>
 		<tr>
 			<td>Año</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual}" /></td>
+			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual}" /></td>
 		</tr>
 	</table>
 	
