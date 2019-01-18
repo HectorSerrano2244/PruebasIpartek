@@ -11,15 +11,15 @@
 		</div>
 	</div>
 	<!-- Actual -->
-	<span>Año ${anyoActual}</span>
+	<span>Objetivos actuales</span>
 	<table id="actual" class="table">
 		<tr>
 			<td>Mes</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMes}" /> de ${objetivoAnual / 12}</td>
+			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMes}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual / 12}" /></td>
 		</tr>
 		<tr>
 			<td>Año</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnual}" /> de ${objetivoAnual}</td>
+			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual}" /></td>
 		</tr>
 	</table>
 	
@@ -46,7 +46,7 @@
 			<c:forEach items="${objetivo}" var="o">
 				<tr class="${(o.importe < (objetivoAnual / 12)) ? 'nocumple' : 'cumple'}">
 					<td>${o.mes}</td>
-					<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${o.importe}" /> de ${objetivoAnual / 12}</td>
+					<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${o.importe}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual / 12}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
