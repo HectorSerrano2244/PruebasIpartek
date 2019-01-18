@@ -8,5 +8,6 @@
   	<script src="js/datatables-responsive.js"></script>
   	<script src="js/decimales.js"></script>
   	<script src="js/contadorTextarea.js"></script>
+  	<script src="js/cambiarAnyo.js"></script>
   </body>
 </html>

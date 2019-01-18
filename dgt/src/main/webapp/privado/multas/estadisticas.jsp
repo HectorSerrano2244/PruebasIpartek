@@ -28,9 +28,9 @@
 	<!-- Histórico -->
 	<p><span>Histórico</span>
 		<span class="float-right">
-			<select>
+			<select id="anyo" onchange="cambiarAnyo()">
 				<c:forEach var = "i" begin = "2018" end ="${anyoActual}"  >
-			  		<option value="${i }">${i}</option>
+			  		<option value="${i}">${i}</option>
 			    </c:forEach>
 			</select>
 		</span></p>
