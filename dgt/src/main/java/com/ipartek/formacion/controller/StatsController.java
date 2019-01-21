@@ -35,8 +35,7 @@ public class StatsController extends HttpServlet {
 	private EstadisticasDAO estadisticasDAO;
 	private int enteroaniocombo;
 
-	private static final ArrayList<String> MESES = new ArrayList<String>(Arrays.asList("Enero", "Febrero", "Marzo",
-			"Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
+	
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -73,39 +72,14 @@ public class StatsController extends HttpServlet {
 		}
 	}
 
-	private ArrayList<EstadisticaExtendida> construirArrayCompleto() {
-		ArrayList<EstadisticaExtendida> listacompleta = new ArrayList<EstadisticaExtendida>();
-		ArrayList<Estadistica> listainicial;
-		listainicial = (ArrayList<Estadistica>) estadisticasDAO.getMesesAnio(agente.getId(),
-				Integer.parseInt(aniocombo));
-		for (int i = 0; i < 12; i++) {
-			Estadistica linea = new Estadistica(); // Objeto con el número del mes (linea)
-			EstadisticaExtendida lineacompleta = new EstadisticaExtendida(); // Objecto con el nombre del mes (lineacompleta)
-			try {
-				linea = listainicial.get(i);
-				lineacompleta.setMes(linea.getMes()); 
-				lineacompleta.setImporte(Float.parseFloat(String.valueOf(linea.getImporte())));
-				lineacompleta.setNombremes(MESES.get(i));
-
-			} catch (Exception e) {
-				lineacompleta.setMes(i);
-				lineacompleta.setImporte(0F);
-				lineacompleta.setNombremes(MESES.get(i));
-			}
-			listacompleta.add(lineacompleta);
-		}
-		return listacompleta;
-	}
-
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, SQLException, ServletException {
 		int mesactual = fechasistema.get(Calendar.MONTH) + 1;
 		int anioactual = fechasistema.get(Calendar.YEAR);
 		String mesactualStr = "0";
 		if (mesactual < 10) {
-			 mesactualStr += String.valueOf(mesactual);
-		}
-		else {
+			mesactualStr += String.valueOf(mesactual);
+		} else {
 			mesactualStr = String.valueOf(mesactual);
 		}
 		getParameters(request);
@@ -119,8 +93,8 @@ public class StatsController extends HttpServlet {
 		request.setAttribute("totalAnualCombo",
 				estadisticasDAO.getTotales("totalAnual", agente.getId(), 0, Integer.parseInt(aniocombo)));
 		request.setAttribute("objetivoAnioCombo", estadisticasDAO.getObjetivoAnual(Integer.parseInt(aniocombo)));
-		request.setAttribute("objetivo", construirArrayCompleto());
-		request.setAttribute("titulo", "Estadísticas "+anioactual+"-"+mesactualStr+"| App Multas");
+		request.setAttribute("objetivo", estadisticasDAO.getMesesAnio(agente.getId(), Integer.parseInt(aniocombo)));
+		request.setAttribute("titulo", "Estadísticas " + anioactual + "-" + mesactualStr + "| App Multas");
 		request.getRequestDispatcher(VISTA_OBJETIVOS).forward(request, response);
 
 	}

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,8 @@ public class EstadisticasDAO {
 	private static final String SQL_OBJETIVO_ANUAL = "SELECT objetivo FROM objetivo where Anio=?;";
 	private static final String SQL_DEVUELVE_TOTALES = "{call pa_multa_devuelveTotales(?,?,?,?,?)}";
 	private static final String SQL_TOTAL_MESES_ANIO = "SELECT ROUND(SUM(importe), 2) as recaudacion, MONTH(fecha_alta) AS mes FROM	multa WHERE	id_agente = ? AND YEAR(fecha_alta) = ? 	AND fecha_baja IS NULL GROUP BY mes ORDER BY mes;";
+	private static final ArrayList<String> MESES = new ArrayList<String>(Arrays.asList("Enero", "Febrero", "Marzo",
+			"Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
 	private ArrayList<Estadistica> estadisticas;
 	private Estadistica estadistica;
 
@@ -73,18 +76,35 @@ public class EstadisticasDAO {
 
 	public ArrayList<Estadistica> getMesesAnio(Long idagente, int anyo) {
 		estadisticas = new ArrayList<Estadistica>();
+		int i = 0;
+		int mes = 0;
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_TOTAL_MESES_ANIO)) {
 			pst.setLong(1, idagente);
 			pst.setInt(2, anyo);
 			try (ResultSet rs = pst.executeQuery()) {
-				while (rs.next()) {
+				rs.next();
+				for (i = 0; i <= 11; i++) {
 					estadistica = new Estadistica();
-					estadistica.setMes(rs.getInt("mes"));
-					estadistica.setImporte(rs.getFloat("recaudacion"));
+					estadistica.setMes(i + 1);
+					estadistica.setNombremes(MESES.get(i));
+					try {
+						mes = rs.getInt("mes");
+					} catch (Exception e) {
+						estadistica.setMes(i + 1);
+						estadistica.setImporte(0F);
+						estadistica.setNombremes(MESES.get(i));
+					}
+					if (mes != i + 1) {
+						estadistica.setImporte(0F);
+					} else {
+						estadistica.setImporte(rs.getFloat("recaudacion"));
+						rs.next();
+					}
 					estadisticas.add(estadistica);
 				}
 			} catch (Exception e) {
+
 				LOG.error(e);
 			}
 		} catch (Exception e) {

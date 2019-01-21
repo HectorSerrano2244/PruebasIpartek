@@ -5,13 +5,15 @@ import java.math.BigDecimal;
 public class Estadistica {
 	private int mes;
 	private Float importe = 0F;
+	private String nombremes;
 
 	BigDecimal bd;
 
-	public Estadistica(int mes, Float importe) {
+	public Estadistica(int mes, Float importe,String nombremes) {
 		this();
 		setMes(mes);
 		setImporte(importe);
+		setNombremes(nombremes);
 	}
 	
 	public Estadistica() {
@@ -25,25 +27,28 @@ public class Estadistica {
 		return mes;
 	}
 
-	public void setMes(int i) {
-		this.mes = i;
+	public void setMes(int mes) {
+		this.mes = mes;
 	}
 
 	public Float getImporte() {
 		return importe;
 	}
 
-	public void setImporte(Float d) {
-		/*
-		 * bd = new BigDecimal(Float.toString(importe)); bd = bd.setScale(2,
-		 * BigDecimal.ROUND_HALF_UP); importe = bd.floatValue(); this.importe =
-		 * bd.floatValue();
-		 */
-		this.importe = d;
+	public String getNombremes() {
+		return nombremes;
+	}
+
+	public void setNombremes(String nombremes) {
+		this.nombremes = nombremes;
+	}
+	
+	public void setImporte(Float importe) {
+		this.importe = importe;
 	}
 
 	@Override
 	public String toString() {
-		return "Estadisticas [mes=" + mes + ", importe=" + importe + "]";
+		return "Estadisticas [mes=" + mes + ", importe=" + importe + ", Nombre Mes=" + nombremes +"]";
 	}
 }

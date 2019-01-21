@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dgt
+-- Host: localhost    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -137,7 +137,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-20 21:40:25',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46','2019-01-20 21:21:40'),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL),(30,1445,'pruebaaaaaaa','2019-01-20 21:21:10',2,4,'2019-01-20 21:21:10',NULL),(31,0,'khfkesjh','2019-01-21 10:02:01',3,4,NULL,NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -449,4 +449,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-21 10:16:07
+-- Dump completed on 2019-01-21 19:02:25
