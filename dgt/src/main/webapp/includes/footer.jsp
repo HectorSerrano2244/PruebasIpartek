@@ -6,8 +6,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   	<script src="js/datatables.js"></script>
   	<script src="js/datatables-responsive.js"></script>
-  	<script src="js/decimales.js"></script>
-  	<script src="js/contadorTextarea.js"></script>
-  	<script src="js/cambiarAnyo.js"></script>
+  	<script src="js/funciones.js"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dgt
+-- Host: localhost    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -29,11 +29,8 @@ CREATE TABLE `agente` (
   `nombre` varchar(45) NOT NULL,
   `placa` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `id_departamento` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `placa_UNIQUE` (`placa`),
-  KEY `fk_agente_departamento_idx` (`id_departamento`),
-  CONSTRAINT `fk_agente_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`)
+  UNIQUE KEY `placa_UNIQUE` (`placa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,7 +40,7 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456',39),(2,'Johnny Walker',987654,'t45gt4w5t',36),(3,'Monk',987321,'123456789',38),(4,'Takelberry',987987,'987987',37),(5,'Tontimmy',998776,'7miti76',37);
+INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456'),(2,'Johnny Walker',987654,'t45gt4w5t'),(3,'Monk',987321,'123456789'),(4,'Takelberry',987987,'987987'),(5,'Tontimmy',998776,'7miti76');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,30 +69,6 @@ LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
 INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','flagoneta',47500);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `departamento`
---
-
-DROP TABLE IF EXISTS `departamento`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `departamento`
---
-
-LOCK TABLES `departamento` WRITE;
-/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT INTO `departamento` VALUES (31,'ventas'),(33,'ingenieria'),(34,'produccion'),(35,'mercadeo'),(36,'Alcholemia'),(37,'oficinistas'),(38,'fealdad'),(39,'velocidad');
-/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,14 +115,14 @@ CREATE TABLE `multa` (
   `fecha_alta` datetime DEFAULT CURRENT_TIMESTAMP,
   `id_coche` int(11) NOT NULL,
   `id_agente` int(11) NOT NULL,
-  `fecha_mod` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fecha_mod` datetime DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_multa_coches_idx` (`id_coche`) /*!80000 INVISIBLE */,
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,54 +131,34 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:37:13',2,4,NULL,'2019-01-14 08:56:31'),(2,500,'exceso velocidad a 240km/h','2018-01-07 10:38:43',4,4,NULL,NULL),(3,700,'por empinar codo 8.0','2019-01-07 10:41:09',1,2,NULL,NULL),(4,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2,NULL,NULL),(5,800,'por velcoidad','2019-01-07 13:16:21',4,4,NULL,NULL),(6,300,'otra multa','2019-01-07 13:48:49',4,1,NULL,NULL),(7,45,'tuputamadre','2019-01-07 14:48:49',2,4,NULL,NULL),(8,43333,'dfgrsthrtsh','2019-01-07 12:34:49',2,4,NULL,NULL),(9,11,'vvvvv','2019-01-07 13:21:42',2,4,NULL,'2019-01-14 09:08:11'),(10,23,'sssss','2019-02-07 11:45:49',2,4,NULL,NULL),(11,55555,'dcxxxx','2019-01-10 14:23:44',2,4,NULL,NULL),(12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-15 12:45:32',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46',NULL),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-20 21:40:25',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46','2019-01-20 21:21:40'),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL),(30,1445,'pruebaaaaaaa','2019-01-20 21:21:10',2,4,'2019-01-20 21:21:10',NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `puesto`
+-- Table structure for table `objetivo`
 --
 
-DROP TABLE IF EXISTS `puesto`;
+DROP TABLE IF EXISTS `objetivo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `puesto` (
+CREATE TABLE `objetivo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  `id_departamento` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `Anio` int(4) NOT NULL,
+  `objetivo` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='	';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `puesto`
+-- Dumping data for table `objetivo`
 --
 
-LOCK TABLES `puesto` WRITE;
-/*!40000 ALTER TABLE `puesto` DISABLE KEYS */;
-INSERT INTO `puesto` VALUES (1,'secretari@',38),(2,'programd@r',38),(3,'becari@',38);
-/*!40000 ALTER TABLE `puesto` ENABLE KEYS */;
+LOCK TABLES `objetivo` WRITE;
+/*!40000 ALTER TABLE `objetivo` DISABLE KEYS */;
+INSERT INTO `objetivo` VALUES (1,2018,12000),(2,2019,14400);
+/*!40000 ALTER TABLE `objetivo` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Temporary view structure for view `v_objetivo`
---
-
-DROP TABLE IF EXISTS `v_objetivo`;
-/*!50001 DROP VIEW IF EXISTS `v_objetivo`*/;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8mb4;
-/*!50001 CREATE VIEW `v_objetivo` AS SELECT 
- 1 AS `id`,
- 1 AS `importe`,
- 1 AS `concepto`,
- 1 AS `fecha_alta`,
- 1 AS `id_coche`,
- 1 AS `id_agente`,
- 1 AS `fecha_mod`,
- 1 AS `fecha_baja`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Dumping routines for database 'dgt'
@@ -276,6 +229,45 @@ FROM
 WHERE
 	a.placa=p_placa AND
     a.password=p_pass;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_multa_devuelveTotales` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_devuelveTotales`(IN p_opcion varchar(30),IN p_idagente LONG,IN p_anio INTEGER,IN p_mes INTEGER,OUT o_total FLOAT)
+BEGIN
+IF p_opcion='totalMensualAnio' then
+	SELECT
+		round(sum(importe)) INTO o_total
+	FROM
+		multa
+    WHERE
+		id_agente=p_idagente AND
+        month(fecha_alta)=p_mes AND
+        year(fecha_alta)=p_anio AND
+        fecha_baja is null;
+elseif p_opcion='totalAnual' then
+	SELECT
+		round(sum(importe)) INTO o_total
+	FROM
+		multa
+    WHERE
+		id_agente=p_idagente AND
+        year(fecha_alta)=p_anio AND
+        fecha_baja is null;
+end if;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -406,7 +398,8 @@ IF p_oper = 'recuperar' then
 	UPDATE 
 		multa 
     SET 
-		fecha_baja = NULL 
+		fecha_baja = NULL,
+        fecha_mod = CURRENT_TIMESTAMP 
 	WHERE 
 		id = p_id;
 else
@@ -423,24 +416,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Final view structure for view `v_objetivo`
---
-
-/*!50001 DROP VIEW IF EXISTS `v_objetivo`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `v_objetivo` AS select `multa`.`id` AS `id`,`multa`.`importe` AS `importe`,`multa`.`concepto` AS `concepto`,`multa`.`fecha_alta` AS `fecha_alta`,`multa`.`id_coche` AS `id_coche`,`multa`.`id_agente` AS `id_agente`,`multa`.`fecha_mod` AS `fecha_mod`,`multa`.`fecha_baja` AS `fecha_baja` from `multa` group by `multa`.`id_agente` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -451,4 +426,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-18 11:00:23
+-- Dump completed on 2019-01-20 21:43:01

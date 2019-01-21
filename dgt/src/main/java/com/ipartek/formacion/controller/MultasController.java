@@ -353,7 +353,11 @@ public class MultasController extends HttpServlet {
 			if (m!=null) {
 				if(daoMulta.update(m,opr)) {
 					op = "ver";
-					opm = "nobaja";
+					if("norecuperar".equals(opr)) {
+						opm = "baja";
+					}else {
+						opm = "nobaja";
+					}					
 					idMultaStr = null;
 					opVer(request);
 				}

@@ -1,7 +1,12 @@
 <%@include file="../../includes/header.jsp"%>
 <%@include file="../../includes/navbar.jsp"%>
-<main role="main" class="container p-4">
-<div class="container mb-3">
+<div class="preloader"> 
+<div class="preloader_image">
+
+</div>
+</div>
+<main role="main" class="container p-2">
+<div class="container mb-3 mt-3">
 	<div class="row d-flex align-items-center mb-3">
 		<div class="col-4">
 			<a href="privado/principal.jsp"	class=" btn btn-outline-primary btn-block">Volver </a>
@@ -28,7 +33,7 @@
 	</thead>
 	<tbody>
 		<c:forEach items="${multas}" var="m">
-			<tr onclick="location='privado/multas?op=ver&idmulta=${m.id}&opm=${opm}'">
+			<tr class="transparente" onclick="location='privado/multas?op=ver&idmulta=${m.id}&opm=${opm}'">
 				<td>${m.coche.matricula}</td>
 				<c:if test="${opm=='baja' }">
 				<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm"

@@ -1,6 +1,11 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
-<main role="main" class="container p-4">
+<div class="preloader"> 
+<div class="preloader_image">
+
+</div>
+</div>
+<main role="main" class="container p-2">
 	<c:choose>
 		<c:when test="${op != 'buscar'}">
 			<a href="privado/multas?op=ver&opm=${opm}" class="btn btn-outline-primary mt-3 mb-3 col-3">

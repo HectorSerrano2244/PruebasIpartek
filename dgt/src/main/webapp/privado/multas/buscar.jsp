@@ -1,7 +1,11 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
+<div class="preloader"> 
+<div class="preloader_image">
 
-<main role="main" class="container p-4 "> 
+</div>
+</div>
+<main role="main" class="container p-2"> 
 	<form action="privado/multas" method="post">
 		<div>
 			<a href="privado/principal.jsp" class="btn btn-outline-primary mt-3 mb-3 col-3">

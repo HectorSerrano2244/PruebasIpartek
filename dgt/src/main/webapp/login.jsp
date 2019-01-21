@@ -26,6 +26,7 @@
 	</head>
 <body class="fondo">
 <main role="main" class="container">
+
 <div>
 	<img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"
 		height="200px"
@@ -55,8 +56,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   	<script src="js/datatables.js"></script>
   	<script src="js/datatables-responsive.js"></script>
-  	<script src="js/decimales.js"></script>
-  	<script src="js/contadorTextarea.js"></script>
+  	<script src="js/funciones.js"></script>
 	</footer>
   </body>
 </html>

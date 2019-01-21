@@ -1,8 +1,13 @@
 <%@include file="../../includes/header.jsp"%>
 <%@include file="../../includes/navbar.jsp"%>
-<main role="main" class="container p-4">
+<div class="preloader"> 
+<div class="preloader_image">
+
+</div>
+</div>
+<main role="main" class="container p-2">
 <div class="container mb-3">
-	<div class="row d-flex align-items-center mb-3">
+	<div class="row d-flex align-items-center mb-3 mt-3">
 		<div class="col-4">
 			<a href="privado/principal.jsp"	class=" btn btn-outline-primary btn-block">Volver</a>
 		</div>
@@ -15,11 +20,11 @@
 	<table id="actual" class="table">
 		<tr>
 			<td>Mes</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMesActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual / 12}" /></td>
+			<td class="${(totalMesActual < (objetivoAnualActual / 12)) ? 'nocumpletxt' : 'cumpletxt'}"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalMesActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual / 12}" /></td>
 		</tr>
 		<tr>
 			<td>Año</td>
-			<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual}" /></td>
+			<td class="${(totalAnualActual < objetivoAnualActual) ? 'nocumpletxt' : 'cumpletxt'}"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualActual}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnualActual}" /></td>
 		</tr>
 	</table>
 	
@@ -30,11 +35,11 @@
 		<span class="float-right">
 			<select id="anyo" onchange="cambiarAnyo()">
 				<c:forEach var = "i" begin = "2018" end ="${anyoActual}"  >
-			  		<option value="${i}">${i}</option>
+			  		<option ${anyocombo==i?'selected':'' } value="${i}">${i}</option>
 			    </c:forEach>
 			</select>
 		</span></p>
-		<p>Objetivo : 98797987/12000</p>
+		<p>Objetivo : <span class="${(totalAnualCombo < objetivoAnioCombo) ? 'nocumpletxt' : 'cumpletxt'}"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualCombo}" /> / <fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${objetivoAnioCombo }" /></span></p>
 	<table id="historico" class="table">
 		<thead class="thead-light">
 			<tr>
@@ -44,9 +49,9 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${objetivo}" var="o">
-				<tr class="${(o.importe < (objetivoAnual / 12)) ? 'nocumple' : 'cumple'}">
-					<td>${o.mes}</td>
-					<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${o.importe}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnual / 12}" /></td>
+				<tr class="${(o.importe < (objetivoAnioCombo / 12)) ? 'nocumple' : 'cumple'}">
+					<td>${o.nombremes}</td>
+					<td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${o.importe}" /> de <fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0" value="${objetivoAnioCombo / 12}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

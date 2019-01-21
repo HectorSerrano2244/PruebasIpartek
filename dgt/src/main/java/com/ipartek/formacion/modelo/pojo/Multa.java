@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Multa {
 	private Long id;
@@ -11,6 +12,7 @@ public class Multa {
 	@Digits(fraction = 2, integer = 5)
 	private Double importe;
 	@NotNull
+	@Size(min=10, max=255)
 	private String concepto;
 	private Date fechaAlta;
 	private Date fechaModificacion;
