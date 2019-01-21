@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: dgt
+-- Host: 127.0.0.1    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.13
 
@@ -43,6 +43,24 @@ LOCK TABLES `agente` WRITE;
 INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456'),(2,'Johnny Walker',987654,'t45gt4w5t'),(3,'Monk',987321,'123456789'),(4,'Takelberry',987987,'987987'),(5,'Tontimmy',998776,'7miti76');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_agente_comprobacion` BEFORE INSERT ON `agente` FOR EACH ROW BEGIN
+	set new.nombre=trim(new.nombre);
+    set new.password=trim(new.password);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `coche`
@@ -70,36 +88,24 @@ LOCK TABLES `coche` WRITE;
 INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','flagoneta',47500);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `empleado`
---
-
-DROP TABLE IF EXISTS `empleado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `empleado` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  `id_departamento` int(11) DEFAULT NULL,
-  `fecha_contrato` date DEFAULT NULL,
-  `salario` float DEFAULT '900',
-  `comision` float DEFAULT '0',
-  `id_jefe` int(11) DEFAULT NULL,
-  `id_puesto` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `empleado`
---
-
-LOCK TABLES `empleado` WRITE;
-/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Andrade',31,NULL,900,0,NULL,NULL),(2,'Jordán',33,NULL,900,0,NULL,NULL),(3,'Steinberg',33,NULL,900,0,NULL,NULL),(4,'Róbinson',34,NULL,900,0,NULL,NULL),(5,'Zolano',34,NULL,900,0,NULL,NULL),(6,'Gaspar',36,NULL,900,0,NULL,NULL),(7,'borja',38,'2003-08-02',5000,1500,16,2),(8,'hector',38,'2014-11-25',3000,2000,16,2),(9,'andoni',38,'2016-08-27',2500,1000,16,2),(10,'xabier',38,'2019-01-09',900,0,NULL,3),(11,'david',38,'2018-08-13',900,0,NULL,3),(12,'Imanol',38,'2018-07-07',1350,350,13,1),(13,'Oscar',38,'2017-07-07',5000,4000,NULL,1),(14,'Amaia',38,'2016-10-25',2500,700,16,2),(15,'Daniel',38,'2015-07-07',1900,300,16,2),(16,'Ander',38,'2019-01-07',28000,7,16,2);
-/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_coche_comprobaciones` BEFORE INSERT ON `coche` FOR EACH ROW BEGIN
+	set new.matricula=trim(new.matricula);
+    set new.modelo=trim(new.modelo);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `multa`
@@ -122,7 +128,7 @@ CREATE TABLE `multa` (
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,9 +137,26 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-20 21:40:25',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46','2019-01-20 21:21:40'),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL),(30,1445,'pruebaaaaaaa','2019-01-20 21:21:10',2,4,'2019-01-20 21:21:10',NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2019-01-14 10:25:30',1,4,'2019-01-14 10:25:30','2019-01-15 11:28:28'),(13,0,'por muy feo','2019-01-14 11:06:39',1,4,'2019-01-14 11:06:39','2019-01-15 13:03:44'),(14,500,'por muy feo','2019-01-14 13:02:47',1,4,'2019-01-14 13:02:47','2019-01-16 08:45:41'),(15,500.7,'vas mas borracho que el tato','2019-01-15 12:25:10',2,4,'2019-01-15 12:25:10',NULL),(16,500.7,'borrachuzo de mierda','2019-01-15 12:31:15',2,4,'2019-01-15 12:31:15',NULL),(17,500.7,'borrachuzo de mierda','2019-01-15 12:33:21',2,4,'2019-01-15 12:33:21',NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,'2019-01-15 12:35:22',NULL),(19,500.7,'borrachuzo de mierda','2019-01-15 12:37:48',2,4,'2019-01-15 12:37:48',NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,'2019-01-15 12:38:49',NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,'2019-01-15 12:39:12',NULL),(22,500.7,'borrachuzo de mierda','2019-01-15 12:42:02',2,4,'2019-01-15 12:42:02',NULL),(23,500.7,'borrachuzo de mierda','2019-01-15 12:45:28',2,4,'2019-01-15 12:45:28',NULL),(24,500.7,'borrachuzo de mierda','2019-01-15 12:45:32',2,4,'2019-01-20 21:40:25',NULL),(25,500.7,'borrachuzo de mierda','2019-01-15 12:46:07',2,4,'2019-01-15 12:46:07',NULL),(26,500.7,'borrachuzo de mierda','2019-01-15 12:48:21',2,4,'2019-01-15 12:48:21',NULL),(27,500.7,'borrachuzo de mierda','2019-01-15 12:49:41',2,4,'2019-01-15 12:49:41','2019-01-15 13:09:38'),(28,456.6,'fdgrd','2019-01-16 09:21:46',2,4,'2019-01-16 09:21:46','2019-01-20 21:21:40'),(29,540.59,'aefwefwefwfewefwe','2019-01-17 12:08:48',1,1,'2019-01-17 12:08:48',NULL),(30,1445,'pruebaaaaaaa','2019-01-20 21:21:10',2,4,'2019-01-20 21:21:10',NULL),(31,0,'khfkesjh','2019-01-21 10:02:01',3,4,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_multa_correcciones` BEFORE INSERT ON `multa` FOR EACH ROW BEGIN
+	set new.concepto=trim(new.concepto);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `objetivo`
@@ -426,4 +449,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-20 21:43:01
+-- Dump completed on 2019-01-21 10:16:07
