@@ -9,7 +9,7 @@
 <div class="container mb-3 mt-3">
 	<div class="row d-flex align-items-center mb-3">
 		<div class="col-4">
-			<a href="privado/principal.jsp"	class=" btn btn-outline-primary btn-block">Volver </a>
+			<a href="privado/principal.jsp" class=" btn btn-outline-primary btn-block">Volver </a>
 		</div>
 		<div class="text-center align-middle col-8">
 			<span style="font-size:25px">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</span>

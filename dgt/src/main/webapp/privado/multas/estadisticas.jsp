@@ -38,8 +38,16 @@
 			  		<option ${anyocombo==i?'selected':'' } value="${i}">${i}</option>
 			    </c:forEach>
 			</select>
-		</span></p>
-		<p>Objetivo : <span class="${(totalAnualCombo < objetivoAnioCombo) ? 'nocumpletxt' : 'cumpletxt'}"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualCombo}" /> / <fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${objetivoAnioCombo }" /></span></p>
+		</span>
+	</p>
+	Objetivo: 
+	<span class="${(totalAnualCombo < objetivoAnioCombo) ? 'nocumpletxt' : 'cumpletxt'}">
+		<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalAnualCombo}"/> / <fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${objetivoAnioCombo }" />
+	</span>
+	<div class="mt-3 mb-3">
+		
+	</div>
+	
 	<table id="historico" class="table">
 		<thead class="thead-light">
 			<tr>

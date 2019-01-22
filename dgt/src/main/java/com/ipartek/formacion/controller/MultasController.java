@@ -121,7 +121,6 @@ public class MultasController extends HttpServlet {
 		default: 
 			mensaje = new Mensaje(Mensaje.TIPO_DANGER, "Operación incorrecta");
 			vista = VISTA_PRAL;
-			request.setAttribute("titulo", "Menú | App Multas");
 			LOG.debug(mensaje.getTexto());
 			break;
 		}
