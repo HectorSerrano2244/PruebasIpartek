@@ -91,9 +91,7 @@ public class EstadisticasDAO {
 					try {
 						mes = rs.getInt("mes");
 					} catch (Exception e) {
-						estadistica.setMes(i + 1);
 						estadistica.setImporte(0F);
-						estadistica.setNombremes(MESES.get(i));
 					}
 					if (mes != i + 1) {
 						estadistica.setImporte(0F);
