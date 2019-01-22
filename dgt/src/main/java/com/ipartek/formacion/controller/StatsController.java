@@ -3,7 +3,6 @@ package com.ipartek.formacion.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.servlet.ServletConfig;
@@ -19,7 +18,6 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.daos.EstadisticasDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Estadistica;
-import com.ipartek.formacion.modelo.pojo.EstadisticaExtendida;
 
 @WebServlet("/privado/estadisticas")
 public class StatsController extends HttpServlet {
