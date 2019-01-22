@@ -5,7 +5,10 @@ Gestor de multas DGT, permite a un agente aplicar multas, anularlas y listarlas
 
 * Datos de conexion en el archivo database.properties en la carpeta resources del proyecto. ( cambiar para ajustar a tu base de datos)
 * Acciones para LOG en el archivo log4j.propertie en la carpeta resources del proyecto. (registra eventos y errores que puedan surgir)
-* En la carpeta SQL del proyecto se encuentra el archivo dgt.sql con el script que crea la base de datos con los datos iniciales.(copiar y pegar el codigo en  Sistema de Gestión de Base de Datos de su preferencia, incluye creacion de la BDD, tablas y datos para comprobar funcionamiento)
+* En la carpeta SQL del proyecto se encuentra el archivo dgt.sql con el script que crea la base de datos con los datos iniciales.(copiar y pegar el codigo en  Sistema de Gestiï¿½n de Base de Datos de su preferencia, incluye creacion de la BDD, tablas y datos para comprobar funcionamiento)
+* Datos de acceso de prueba:
+	Placa 987987
+	contraseÃ±a 987987
 * La base de datos tiene la siguente estructura:
 
 <img src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/eer.png">
