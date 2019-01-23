@@ -14,6 +14,12 @@ Gestor de multas DGT, permite a un agente aplicar multas, anularlas y listarlas 
 
 <img src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/eer.png">
 
+## Proyectos
+
+* modelo: Aplicación Java (jar) para gestionar el modelo de datos
+* multas_agente: Proyecto Java Web (war) para gestion de multas de un Agente
+* backend: Proyecto Java web para gestionar toda la información como Administradores (CRUD: agentes, coches, etc.)
+* WS_SOAP: Web Service (Proveedor - SOAP) para poder consultar información de un vehículo
 
 ## Previsualización
 
