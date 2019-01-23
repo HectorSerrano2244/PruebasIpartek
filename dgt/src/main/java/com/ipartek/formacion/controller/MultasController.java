@@ -343,7 +343,9 @@ public class MultasController extends HttpServlet {
 	}
 	/**
 	 * Similar al método 'opVer', solo que lleva la variable 'opm'
-	 * para ver las multas anuladas. Para más información, mirar el método 'opVer'
+	 * para ver las multas anuladas. En caso de que la variable 'opr' 
+	 * lleve un valor distinto a 'norecuperar', recupera la multa anulada
+	 * Para más información, mirar el método 'opVer'.
 	 */
 	private void opAnular(HttpServletRequest request) {
 		try {
