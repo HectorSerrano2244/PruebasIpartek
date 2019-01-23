@@ -15,6 +15,7 @@
 			<span style="font-size:25px">${(opm == 'baja') ? 'MULTAS ANULADAS':'MULTAS' }</span>
 		</div>
 	</div>
+	<%@include file="../../includes/mensajes.jsp"%>
 	<table
 	class="table table-hover tablaOrdenable">
 	<thead class="thead-light">

@@ -18,6 +18,7 @@
 			</a>
 		</c:otherwise>
 	</c:choose>
+	<%@ include file="../../includes/mensajes.jsp"%>
 	<form action="privado/multas" method="post">
 		<input type="hidden" name="idmulta" value="${(op == 'ver') ? multa.id : 0}">
 		<input type="hidden" name="idcoche" value="${coche.id}">
@@ -106,7 +107,6 @@
 					</div>
 				</div>
 		</c:if>
-		<%@ include file="../../includes/mensajes.jsp"%>
 	</form>
 </main>
-<%@ include file="../../includes/footer.jsp"%>
+<%@ include file="../../includes/footerForm.jsp"%>

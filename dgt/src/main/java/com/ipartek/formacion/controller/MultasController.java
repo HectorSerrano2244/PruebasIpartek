@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
@@ -48,6 +49,7 @@ public class MultasController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
+	private Calendar fechaActual;
 	private MultaDAO daoMulta;
 	private CocheDAO daoCoche;
 
@@ -79,6 +81,7 @@ public class MultasController extends HttpServlet {
 		super.init(config);
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
+		fechaActual = Calendar.getInstance();
 		daoMulta = MultaDAO.getInstance();
 		daoCoche = CocheDAO.getInstance();
 	}
@@ -308,7 +311,14 @@ public class MultasController extends HttpServlet {
 				LOG.debug("No hay violaciones. Se procede a crear una multa");
 				try {
 					if (daoMulta.insert(m)) {
-						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+new Date()+", Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
+						String minuto = "";
+						if (fechaActual.get(Calendar.MINUTE) < 10) {
+							minuto = "0";
+							minuto += String.valueOf(fechaActual.get(Calendar.MINUTE));
+						} else {
+							minuto = String.valueOf(fechaActual.get(Calendar.MINUTE));
+						}
+						mensaje = new Mensaje(Mensaje.TIPO_INFO, "Coche multado. Fecha: "+fechaActual.get(Calendar.YEAR)+"/"+fechaActual.get(Calendar.MONTH)+1+"/"+fechaActual.get(Calendar.DAY_OF_MONTH)+" "+fechaActual.get(Calendar.HOUR_OF_DAY)+":"+minuto+" Matricula: "+m.getCoche().getMatricula()+" Importe: "+m.getImporte()+" Agente: "+a.getNombre());
 						LOG.info(mensaje.getTexto());
 						idMultaStr = null;
 						opVer(request);
