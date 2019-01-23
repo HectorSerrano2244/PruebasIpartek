@@ -5,12 +5,12 @@ import com.ipartek.formacion.modelo.pojo.Coche;
 
 public class WSDatosVehiculo {
 	private void ini() {
-		CocheDAO cochedao=CocheDAO.getInstance();
+		CocheDAO cochedao = CocheDAO.getInstance();
 
 	}
 	public Coche obtenerDatos(String matricula) {
 	
-		Coche c =new Coche();
+		Coche c = 
 		
 		return c;
 	}
