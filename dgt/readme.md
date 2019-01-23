@@ -9,6 +9,7 @@ Gestor de multas DGT, permite a un agente aplicar multas, anularlas y listarlas
 * Datos de acceso de prueba:
 	Placa 987987
 	contraseña 987987
+	matricula multable: 9605EFH
 * La base de datos tiene la siguente estructura:
 
 <img src="https://github.com/AjRoBSeYeR/PruebasIpartek/blob/master/dgt/src/main/resources/eer.png">
