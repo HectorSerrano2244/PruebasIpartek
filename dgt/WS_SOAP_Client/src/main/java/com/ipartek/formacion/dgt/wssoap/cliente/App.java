@@ -9,7 +9,7 @@ public class App {
 	public static void main(String[] args) throws RemoteException {
 		WSDatosVehiculoProxy cliente= new WSDatosVehiculoProxy();
 		cliente.obtenerDatos("3548MKZ");
-
+		System.out.println(cliente);
 	}
 
 }

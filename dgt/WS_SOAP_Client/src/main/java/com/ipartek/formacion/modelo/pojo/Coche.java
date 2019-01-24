@@ -224,4 +224,11 @@ public class Coche  implements java.io.Serializable {
             _javaType, _xmlType, typeDesc);
     }
 
+	@Override
+	public String toString() {
+		return "Coche [id=" + id + ", km=" + km + ", matricula=" + matricula + ", modelo=" + modelo + "]";
+	}
+    
+    
+
 }
