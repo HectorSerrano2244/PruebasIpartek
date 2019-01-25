@@ -18,6 +18,7 @@ public class CocheDAO {
 	private static CocheDAO INSTANCE = null;
 
 	private static final String SQL_GETMATRICULA = "{call pa_coche_getByMatricula(?)}";
+	private static final String SQL_GETBYID = "SELECT id, matricula, modelo, km FROM coche WHERE id = ?";
 
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
@@ -63,6 +64,29 @@ public class CocheDAO {
 		}
 		return c;
 	}
+	
+	public Coche getById(Long id) {
+		Coche c = null;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement cs = conn.prepareStatement(SQL_GETBYID);) {
+
+			cs.setLong(1, id);
+
+			try (ResultSet rs = cs.executeQuery()) {
+				try {
+					while (rs.next()) {
+						c = rowMapper(rs);
+					}
+				} catch (Exception e) {
+					LOG.warn(e);
+				}
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return c;
+	}
 
 	public ArrayList<Coche> getAll() {
 
@@ -90,4 +114,64 @@ public class CocheDAO {
 		}
 		return coches;
 	}
+	
+	public boolean insert(Coche c) throws SQLException {
+		boolean r = false;
+		String sql = "INSERT INTO coche (matricula, modelo, km) VALUES (?, ?, ?);";
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setString(1, c.getMatricula());
+			pst.setString(2, c.getModelo());
+			pst.setInt(3, c.getKm());
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				r = true;
+			}
+		}
+		return r;
+	}
+	
+	public boolean delete(Long id) throws SQLException {
+		boolean r = false;
+		String sql = "DELETE FROM coche WHERE id = ?";
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1, id);
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				r = true;
+			}
+		}
+		return r;
+	}
+	
+	public boolean updatePatch(String modelo, long id) throws SQLException {
+		boolean r = false;
+		String sql = "UPDATE coche SET modelo = ? WHERE id = ?";
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setString(1, modelo);
+			pst.setLong(2, id);
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				r = true;
+			}
+		}
+		return r;
+	}
+	
+//	public boolean darDeBaja(Long id) throws SQLException {
+//		boolean r = false;
+//		String sql = "UPDATE coche SET modelo = ?";
+//		try (Connection conn = ConnectionManager.getConnection();
+//				PreparedStatement pst = conn.prepareStatement(sql);) {
+//			pst.setLong(1, id);
+//			int affectedRows = pst.executeUpdate();
+//			if (affectedRows == 1) {
+//				r = true;
+//			}
+//		}
+//		return r;
+//	}
 }
