@@ -1,11 +1,13 @@
 package com.ipartek.formacion.dgt.api;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.pojo.Coche;
 
+@CrossOrigin
 @RestController
 public class VehiculoController {
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
@@ -60,9 +63,11 @@ public class VehiculoController {
 	@RequestMapping(value = "/api/vehiculo/{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<Coche> updatePatch(@PathVariable long id, @RequestBody Coche c) throws SQLException {
 		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+		String modelo = c.getModelo();
 		c = daoCoche.getById(id);
 		if (c != null) {
-			if (daoCoche.updatePatch(c.getModelo(), id)) {
+			if (daoCoche.updatePatch(modelo, id)) {
+				c.setModelo(modelo);
 				respuesta = new ResponseEntity<Coche>(c, HttpStatus.OK);
 			}
 			else {
