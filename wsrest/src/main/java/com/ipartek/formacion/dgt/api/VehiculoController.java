@@ -1,8 +1,13 @@
 package com.ipartek.formacion.dgt.api;
 
 import java.sql.SQLException;
-
 import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -19,32 +24,47 @@ import com.ipartek.formacion.modelo.pojo.Coche;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/api/vehiculo/")
 public class VehiculoController {
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
 	ResponseEntity<Coche> respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+	private ValidatorFactory factory;
+	private Validator validator;
 	private static CocheDAO daoCoche;
 	
 	public VehiculoController() {
 		super();
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 		daoCoche = CocheDAO.getInstance();
 	}
 	
-	@RequestMapping(value = "/api/vehiculo", method = RequestMethod.GET)
-	public ArrayList<Coche> listar() {
+	@RequestMapping(method = RequestMethod.GET)
+	public ArrayList<Coche> listar() throws SQLException {
 		return daoCoche.getAll();
 	}
 	
-	@RequestMapping(value = "/api/vehiculo/{id}", method = RequestMethod.GET)
-	public Coche detalle(@PathVariable long id) {
-		Coche c = new Coche();
-		if (id > 0) {
-		c = new Coche(2L, "9605EFH", "Fiat Multipla", 800);
-		c.setId(id);
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public ResponseEntity<Coche> detalle(@PathVariable String id) {
+		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+		try {
+			long identificador = Long.parseLong(id);
+			Coche coche = daoCoche.getById(identificador);
+			if (coche != null) {
+				respuesta = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+			}
 		}
-		return c;
+		catch(NumberFormatException e) {
+			respuesta = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+		}
+		catch(Exception e) {
+			LOG.error(e);
+			respuesta = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return respuesta;
 	}
 	
-	@RequestMapping(value = "/api/vehiculo/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Coche> eliminar(@PathVariable long id) {
 		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		if (id > 0) {
@@ -52,15 +72,18 @@ public class VehiculoController {
 				if (daoCoche.delete(id)) {
 					respuesta = new ResponseEntity<Coche>(HttpStatus.OK);
 				}
-			} catch (SQLException e) {
-				respuesta = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
-				LOG.error(e);
+			}
+			catch (SQLException e) {
+				respuesta = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
+			}
+			catch (Exception e) {
+				respuesta = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 		return respuesta;
 	}
 	
-	@RequestMapping(value = "/api/vehiculo/{id}", method = RequestMethod.PATCH)
+	@RequestMapping(value = "{id}", method = RequestMethod.PATCH)
 	public ResponseEntity<Coche> updatePatch(@PathVariable long id, @RequestBody Coche c) throws SQLException {
 		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		String modelo = c.getModelo();
@@ -77,19 +100,41 @@ public class VehiculoController {
 		return respuesta;
 	}
 	
-	@RequestMapping(value = "/api/vehiculo", method = RequestMethod.POST)
-	public ResponseEntity<Coche> crear(@RequestBody Coche c) throws SQLException {
-		respuesta = new ResponseEntity<Coche>(c, HttpStatus.NOT_FOUND);
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Coche> update(@PathVariable long id, @RequestBody Coche coche) throws SQLException {
+		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+		if (coche != null) {
+			if (daoCoche.update(coche)) {
+				respuesta = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+			}
+			else {
+				respuesta = new ResponseEntity<Coche>(coche, HttpStatus.BAD_REQUEST);
+			}
+		}
+		return respuesta;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Coche> crear(@RequestBody Coche coche) throws SQLException {
+		respuesta = new ResponseEntity<Coche>(coche, HttpStatus.NOT_FOUND);
 		try {
-			if (daoCoche.insert(c)) {
-				respuesta = new ResponseEntity<Coche>(c, HttpStatus.CREATED);
+			Set<ConstraintViolation<Coche>> violations = validator.validate(coche);
+			if(violations.size() > 0) {
+				throw new Exception();
+			}
+			String matricula = coche.getMatricula();
+			String modelo = coche.getModelo();
+			int km = coche.getKm();
+			coche = daoCoche.insert(matricula, modelo, km);
+			if (coche != null) {
+				respuesta = new ResponseEntity<Coche>(coche, HttpStatus.CREATED);
 			}
 			else {
 				throw new Exception();
 			}
 		}
 		catch(Exception e) {
-			respuesta = new ResponseEntity<Coche>(c, HttpStatus.BAD_REQUEST);
+			respuesta = new ResponseEntity<Coche>(coche, HttpStatus.BAD_REQUEST);
 		}
 		return respuesta;
 	}
