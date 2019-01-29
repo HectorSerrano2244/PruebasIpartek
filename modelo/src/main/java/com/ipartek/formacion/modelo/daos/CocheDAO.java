@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -196,14 +197,15 @@ public class CocheDAO {
 		return r;
 	}
 	
-	public boolean update(Coche coche) throws SQLException {
+	public boolean update(Coche coche, long id, Date fechaBaja) throws SQLException {
 		boolean r = false;
-		String sql = "UPDATE coche SET modelo = ? matricula = ? km = ? WHERE id = ?";
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setString(1, coche.getModelo());
-			pst.setString(2, coche.getMatricula());
-			pst.setInt(3, coche.getKm());
-			if (pst.executeUpdate() == 1) {
+		String sql = "UPDATE coche SET modelo = ?, matricula = ?, km = ? WHERE id = ?";
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cst = conn.prepareCall(sql);) {
+			cst.setString(1, coche.getModelo());
+			cst.setString(2, coche.getMatricula());
+			cst.setInt(3, coche.getKm());
+			cst.setLong(4, id);
+			if (cst.executeUpdate() == 1) {
 				r = true;
 			}
 		}

@@ -1,8 +1,8 @@
 
 //variables globales
 var ulVehiculos;
-var formEditar = document.querySelector('#formEditar');
-var formCrear = document.querySelector('#formCrear');
+var formEditar;
+var formCrear;
 var vehiculos = [];
 var vehiculoSeleccionado;
 
@@ -17,7 +17,9 @@ window.addEventListener('load', function(){
     // console.warn('esto es un waring');
     // console.error('esto es un ERROR');
     
-    ulVehiculos = document.getElementById('ulVehiculo');
+    ulVehiculos = document.querySelector('#ulVehiculo');
+    formEditar = document.querySelector('#formEditar');
+    formCrear = document.querySelector('#formCrear');
 
     refrescarLista();
 
@@ -48,8 +50,9 @@ function refrescarLista(){
                         <span class="matricula">${vehiculo.matricula}</span> 
                         <span class="modelo">${vehiculo.modelo}</span>
                         <span class="km">${vehiculo.km} KM</span>
-                        <a href="#" onclick="editar(${index}))">Editar</a>
+                        <a href="#" onclick="editar(${index})">Editar</a>
                         <a href="#" onclick="eliminar(${vehiculo.id})">Eliminar</a>
+                        <a href="#" onclick="darDeBaja(${vehiculo})">Dar de baja</a>
                     </li>`;
         });
         ulVehiculos.innerHTML = lis;
@@ -67,7 +70,7 @@ function editar(index){
         <input class="form-control" type="text" id="matricula" placeholder="BI000KM">
         <input class="form-control mt-3" type="text" id="modelo">
         <input class="form-control mt-3" type="number" id="km">
-        <button class="btn btn-outline-primary btn-block mt-4" onclick="crear('PUT')">Editar</button>
+        <button class="btn btn-outline-primary btn-block mt-4" onclick="crear('PUT', ${index})">Editar</button>
         <button class="btn btn-outline-secondary btn-block mt-4" onclick="refrescarLista()">Volver a Crear</button>
     </div>`;
     formCrear.innerHTML = "";
@@ -77,9 +80,17 @@ function editar(index){
     document.querySelector('#km').value = vehiculo.km;
 }
 
-function modificar() {
-    let vehiculo = vehiculos[index];
-    console.log('click detalle %o', vehiculo);
+function darDeBaja(vehiculo) {
+    console.log('click dar de baja %o', vehiculo);
+
+    let fechaBaja = new Date();
+
+    let jsonCoche = {
+        "matricula" : vehiculo.matricula,
+        "modelo": vehiculo.modelo,
+        "km": vehiculo.km,
+        "fechaBaja": fechaBaja
+    };
 
     let xhr = new XMLHttpRequest();    
     xhr.onreadystatechange = function(){ 
@@ -87,11 +98,11 @@ function modificar() {
 
         }
     };
-    xhr.open('PUT', ENDPOINT + idVehiculo );    
+    xhr.open('PUT', ENDPOINT + vehiculo.id);    
     xhr.send();
 }
 
-function eliminar( idVehiculo ){
+function eliminar(idVehiculo){
 
    
     console.log('click Eliminar %o', idVehiculo );
@@ -124,7 +135,9 @@ function eliminar( idVehiculo ){
 } // eliminar
 
 
-function crear(accion){
+function crear(accion, index){
+    let vehiculo = vehiculos[index];
+
     console.log('click crear' );
 
     let matricula = document.querySelector('#matricula').value;
@@ -142,13 +155,12 @@ function crear(accion){
         if (xhr.readyState == 4 ){   
             console.debug(' STATUS ' + xhr.status );
             switch(xhr.status) {
+            case 200:
+                showAlert('Coche modificado con éxito');
+                refrescarLista();
+            break;
             case 201:
-                if (accion == 'POST') {
-                    showAlert('Coche creado con éxito');
-                }
-                else {
-                    showAlert('Coche modificado con éxito');
-                }
+                showAlert('Coche creado con éxito');
                 refrescarLista();
             break;
             case 400:
@@ -165,7 +177,14 @@ function crear(accion){
             }
         }   
    };
-   xhr.open('POST', ENDPOINT );
+   let id;
+   if (vehiculo == undefined) {
+        id = "";
+   }
+   else {
+        id = vehiculo.id;
+   }
+   xhr.open(accion, ENDPOINT+id);
    xhr.setRequestHeader("Content-type", "application/json");
    xhr.send( JSON.stringify(jsonCoche) );
 

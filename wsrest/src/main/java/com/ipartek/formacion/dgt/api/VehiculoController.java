@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.pojo.Coche;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @CrossOrigin
 @RestController
+@Api(tags = {"VEHICULO"}, produces = "application/json", description = "Gestión de vehículos")
 @RequestMapping("/api/vehiculo/")
 public class VehiculoController {
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
@@ -104,7 +110,7 @@ public class VehiculoController {
 	public ResponseEntity<Coche> update(@PathVariable long id, @RequestBody Coche coche) throws SQLException {
 		respuesta = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		if (coche != null) {
-			if (daoCoche.update(coche)) {
+			if (daoCoche.update(coche, id, coche.getFechaBaja())) {
 				respuesta = new ResponseEntity<Coche>(coche, HttpStatus.OK);
 			}
 			else {
@@ -114,6 +120,12 @@ public class VehiculoController {
 		return respuesta;
 	}
 	
+	@ApiResponses({
+					@ApiResponse(code = 201, message="Vehiculo Creado"), 
+					@ApiResponse(code = 409, message="Existe Matricula"),
+					@ApiResponse(code = 400, message="Datos Vehiculos No Validos")
+				}
+			)
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Coche> crear(@RequestBody Coche coche) throws SQLException {
 		respuesta = new ResponseEntity<Coche>(coche, HttpStatus.NOT_FOUND);
