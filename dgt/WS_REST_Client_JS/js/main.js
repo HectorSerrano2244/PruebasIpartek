@@ -94,8 +94,15 @@ function darDeBaja(vehiculo) {
 
     let xhr = new XMLHttpRequest();    
     xhr.onreadystatechange = function(){ 
-        if (xhr.readyState == 4 && xhr.status == 200 ) {               
+        if (xhr.readyState == 4) {               
+            switch(xhr.status) {
+                case 200:
 
+                break;
+                default:
+                    showAlert('Error inesperado', 'warning');
+                break;
+            }
         }
     };
     xhr.open('PUT', ENDPOINT + vehiculo.id);    
@@ -103,8 +110,6 @@ function darDeBaja(vehiculo) {
 }
 
 function eliminar(idVehiculo){
-
-   
     console.log('click Eliminar %o', idVehiculo );
 
     if ( confirm('¿Estas Seguro?') ){
