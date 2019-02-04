@@ -12,6 +12,16 @@ public class Vehiculo {
 	@Pattern(regexp = "\\d{2}")
 	private String matricula;
 	
+	public Vehiculo() {
+		super();
+		this.id = -1L;
+		this.combustible = null;
+		this.modelo = null;
+		this.persona = null;
+		this.numBastidor = "";
+		this.matricula = "";
+	}
+	
 	public Vehiculo(Long id, Combustible combustible, Modelo modelo, Persona persona, String numBastidor,
 			String matricula) {
 		super();
