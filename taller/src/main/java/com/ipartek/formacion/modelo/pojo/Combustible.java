@@ -1,16 +1,16 @@
-package com.ipartek.formacion.pojo;
+package com.ipartek.formacion.modelo.pojo;
 
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Modelo {
+public class Combustible {
 	private Long id;
 	@NotNull
 	@NotBlank
 	private String nombre;
 	
-	public Modelo(Long id, String nombre) {
+	public Combustible(Long id, String nombre) {
 		super();
 		setId(id);
 		setNombre(nombre);

@@ -1,4 +1,4 @@
-package com.ipartek.formacion.pojo;
+package com.ipartek.formacion.modelo.pojo;
 
 import javax.validation.constraints.Pattern;
 
@@ -6,19 +6,19 @@ public class Vehiculo {
 	private Long id;
 	private Combustible combustible;
 	private Modelo modelo;
-	private Cliente cliente;
+	private Persona persona;
 	@Pattern(regexp = "\\w{17}")
 	private String numBastidor;
 	@Pattern(regexp = "\\d{2}")
 	private String matricula;
 	
-	public Vehiculo(Long id, Combustible combustible, Modelo modelo, Cliente cliente, String numBastidor,
+	public Vehiculo(Long id, Combustible combustible, Modelo modelo, Persona persona, String numBastidor,
 			String matricula) {
 		super();
 		setId(id);
 		setCombustible(combustible);
 		setModelo(modelo);
-		setCliente(cliente);
+		setPersona(persona);
 		setNumBastidor(numBastidor);
 		setMatricula(matricula);
 	}
@@ -47,12 +47,12 @@ public class Vehiculo {
 		this.modelo = modelo;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	public String getNumBastidor() {
@@ -73,7 +73,7 @@ public class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "Vehiculo [id=" + id + ", combustible=" + combustible + ", modelo=" + modelo + ", cliente=" + cliente
+		return "Vehiculo [id=" + id + ", combustible=" + combustible + ", modelo=" + modelo + ", persona=" + persona
 				+ ", numBastidor=" + numBastidor + ", matricula=" + matricula + "]";
 	}
 	
