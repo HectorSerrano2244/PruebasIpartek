@@ -1,5 +1,6 @@
 package com.ipartek.formacion.taller.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Combustible;
@@ -39,7 +40,7 @@ public interface CombustibleService {
 	
 	/**
 	 * Modifica el <b>nombre</b> de un combustible identificado por su <b>id</b>
-	 * @param combustible Combustible a modificar
+	 * @param combustible Combustible que queremos modificar
 	 * @return <b>true</b> si lo modifica, <b>false</b> si no lo encuentra
 	 * @throws CombustibleException @see CombustibleException.EXCEPTION_EXIST
 	 */

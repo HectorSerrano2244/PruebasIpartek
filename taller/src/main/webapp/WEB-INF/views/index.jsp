@@ -24,7 +24,8 @@
 		<div class="jumbotron">
 		  <h1 class="display-4">Web Service API Rest TALLER</h1>
 		  <p class="lead">Servicio Rest con Spring 4.3.0.RELEASE</p>
-		  <p><b>Endpoint</b> http://localhost:8080/taller/api<p>		  
+		  <a href="http://localhost:8080/taller/api"><b>Endpoint</b></a>
+		  <a href="http://localhost:8080/taller/swagger-ui.html"><b>Swagger</b></a> 
 		</div>
 	</main>	
 		

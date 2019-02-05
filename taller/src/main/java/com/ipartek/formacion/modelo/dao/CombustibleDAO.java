@@ -15,9 +15,9 @@ import com.ipartek.formacion.modelo.pojo.Combustible;
 public class CombustibleDAO {
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
-	private static final String SQL_INSERT = "INSERT INTO combustible (nombre) VALUES (?)";
-	private static final String SQL_UPDATE = "UPDATE FROM combustible SET Nombre = ? WHERE id = ?";
-	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?";
+	private static final String SQL_INSERT = "INSERT INTO combustible (nombre) VALUES (?);";
+	private static final String SQL_UPDATE = "UPDATE combustible SET Nombre = ? WHERE id = ?;";
+	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?;";
 
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
@@ -33,11 +33,12 @@ public class CombustibleDAO {
 		return lista;
 	}
 	
-	public Combustible getById(long id) {
+	public Combustible detalle(long id) {
 		Combustible c = new Combustible();
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GET_BY_ID);
-				ResultSet rs = pst.executeQuery();) {
+				PreparedStatement pst = conn.prepareStatement(SQL_GET_BY_ID);) {
+			pst.setLong(1, id);
+			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				c = mapeo(rs);
 			}
@@ -45,6 +46,45 @@ public class CombustibleDAO {
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	public boolean crear(Combustible c) {
+		boolean r = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
+			pst.setString(1, c.getNombre());
+			if (pst.executeUpdate() == 1) {
+				r = true;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	public boolean modificar(Combustible c) throws SQLException {
+		boolean r = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+			pst.setString(1, c.getNombre());
+			pst.setLong(2, c.getId());
+			if (pst.executeUpdate() == 1) {
+				r = true;
+			}
+		}
+		return r;
+	}
+	
+	public boolean eliminar(long id) throws SQLException {
+		boolean r = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
+			pst.setLong(1, id);
+			if (pst.executeUpdate() == 1) {
+				r = true;
+			}
+		}
+		return r;
 	}
 
 	private Combustible mapeo(ResultSet rs) throws SQLException {

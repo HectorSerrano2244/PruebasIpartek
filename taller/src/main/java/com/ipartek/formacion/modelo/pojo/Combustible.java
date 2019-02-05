@@ -30,7 +30,7 @@ public class Combustible {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getModelo() {
+	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
@@ -38,6 +38,6 @@ public class Combustible {
 	}
 	@Override
 	public String toString() {
-		return "Modelo [id=" + id + ", nombre=" + nombre + "]";
+		return "Combustible [id=" + id + ", nombre=" + nombre + "]";
 	}
 }
