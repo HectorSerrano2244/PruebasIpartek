@@ -10,10 +10,16 @@ public class Modelo {
 	@NotBlank
 	private String nombre;
 	
-	public Modelo(Long id, String nombre) {
+	public Modelo() {
 		super();
 		this.id = -1L;
 		this.nombre = "";
+	}
+	
+	public Modelo(Long id, String nombre) {
+		this();
+		this.setId(id);
+		this.setNombre(nombre);
 	}
 	
 	public Long getId() {

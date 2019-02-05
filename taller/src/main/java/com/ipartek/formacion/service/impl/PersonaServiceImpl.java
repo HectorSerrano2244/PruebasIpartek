@@ -24,10 +24,10 @@ public class PersonaServiceImpl implements PersonaService {
 	}
 
 	@Override
-	public ArrayList<Vehiculo> vehiculos(long idPersona) {
+	public ArrayList<Vehiculo> vehiculos(long id) {
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-		vehiculos.addAll(daoPersona.getAllVehiculosByUser().values());
-		return null;
+		vehiculos.addAll(daoPersona.getAllVehiculosByUser(id).values());
+		return vehiculos;
 	}
 
 }

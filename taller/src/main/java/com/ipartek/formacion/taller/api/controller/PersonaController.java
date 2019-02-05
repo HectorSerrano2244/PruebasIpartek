@@ -27,15 +27,6 @@ public class PersonaController {
 	
 	@RequestMapping(value = "/api/persona/{id}/vehiculo", method = RequestMethod.GET)
 	public ArrayList<Vehiculo> vehiculos(@PathVariable long id) throws SQLException {
-		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-		
-		Vehiculo v = new Vehiculo();
-		
-		v.setId(id);
-		v.setMatricula("BI000SD");
-		vehiculos.add(v);
-		
-		return vehiculos;
-		//return personaService.vehiculos(id);
+		return personaService.vehiculos(id);
 	}
 }
