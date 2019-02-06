@@ -9,65 +9,66 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ipartek.formacion.modelo.pojo.Persona;
+import com.ipartek.formacion.modelo.pojo.Rol;
 import com.ipartek.formacion.taller.api.pojo.Mensaje;
-import com.ipartek.formacion.taller.service.PersonaService;
-import com.ipartek.formacion.taller.service.exception.PersonaException;
+import com.ipartek.formacion.taller.service.RolService;
+import com.ipartek.formacion.taller.service.exception.RolException;
 
-@CrossOrigin
 @RestController
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class PersonaController {
+public class RolController {
+
 	@Autowired
-	PersonaService personaService;
+	RolService rolService;
 	@Autowired
 	Validator validator;
-	
-	@RequestMapping(value = "/api/persona/", method = RequestMethod.GET)
-	ResponseEntity<ArrayList<Persona>> listar() {
-		ResponseEntity<ArrayList<Persona>> respuesta;
-		respuesta = new ResponseEntity<ArrayList<Persona>>(HttpStatus.NOT_FOUND);
+
+	String errores = null;
+
+	@RequestMapping(value = "/api/rol/", method = RequestMethod.GET)
+	ResponseEntity<ArrayList<Rol>> listar() {
+		ResponseEntity<ArrayList<Rol>> respuesta;
+		respuesta = new ResponseEntity<ArrayList<Rol>>(HttpStatus.NOT_FOUND);
 		try {
-			ArrayList<Persona> personas = (ArrayList<Persona>) personaService.listar();
-			if (!personas.isEmpty()) {
-				respuesta = new ResponseEntity<ArrayList<Persona>>(personas, HttpStatus.OK);
+			ArrayList<Rol> lista = (ArrayList<Rol>) rolService.listar();
+			if (!lista.isEmpty()) {
+				respuesta = new ResponseEntity<ArrayList<Rol>>(lista, HttpStatus.OK);
 			}
 		} catch (Exception e) {
-			respuesta = new ResponseEntity<ArrayList<Persona>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta = new ResponseEntity<ArrayList<Rol>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return respuesta;
 	}
-	
-	@RequestMapping(value = "/api/persona/{id}", method = RequestMethod.GET)
-	ResponseEntity<Persona> detalle(@PathVariable long id) {
-		ResponseEntity<Persona> respuesta;
-		respuesta = new ResponseEntity<Persona>(HttpStatus.NOT_FOUND);
+
+	@RequestMapping(value = "/api/rol/{id}", method = RequestMethod.GET)
+	ResponseEntity<Rol> detalle(@PathVariable long id) {
+		ResponseEntity<Rol> respuesta;
+		respuesta = new ResponseEntity<Rol>(HttpStatus.NOT_FOUND);
 		try {
-			Persona c = personaService.detalle(id);
-			if (c != null) {
-				respuesta = new ResponseEntity<Persona>(c, HttpStatus.OK);
+			Rol rol = rolService.detalle(id);
+			if (rol != null) {
+				respuesta = new ResponseEntity<Rol>(rol, HttpStatus.OK);
 			}
 		} catch (Exception e) {
-			respuesta = new ResponseEntity<Persona>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta = new ResponseEntity<Rol>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return respuesta;
 	}
-	
-	@RequestMapping(value = "/api/persona/", method = RequestMethod.POST)
-	ResponseEntity<Mensaje> crear(@RequestBody Persona persona) {
+
+	@RequestMapping(value = "/api/rol/", method = RequestMethod.POST)
+	ResponseEntity<Mensaje> crear(@RequestBody Rol rol) {
 		ResponseEntity<Mensaje> respuesta;
-		respuesta = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+		respuesta = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
 		try {
-			Set<ConstraintViolation<Persona>> violations = validator.validate(persona);
+			Set<ConstraintViolation<Rol>> violations = validator.validate(rol);
 			if (violations.isEmpty()) {
-				if (personaService.crear(persona)) {
+				if (rolService.crear(rol)) {
 					respuesta = new ResponseEntity<Mensaje>(HttpStatus.CREATED);
 				} else {
 					respuesta = new ResponseEntity<Mensaje>(HttpStatus.CONFLICT);
@@ -76,20 +77,20 @@ public class PersonaController {
 				respuesta = new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			respuesta = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return respuesta;
 	}
-	
-	@RequestMapping(value = "/api/persona/{id}", method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "/api/rol/{id}", method = RequestMethod.DELETE)
 	ResponseEntity<Mensaje> eliminar(@PathVariable long id) {
 		ResponseEntity<Mensaje> respuesta;
 		respuesta = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
 		try {
-			if (personaService.eliminar(id)) {
+			if (rolService.eliminar(id)) {
 				respuesta = new ResponseEntity<Mensaje>(HttpStatus.OK);
 			}
-		} catch (PersonaException e) {
+		} catch (RolException e) {
 			e.printStackTrace();
 			respuesta = new ResponseEntity<Mensaje>(new Mensaje(e.getMessage()), HttpStatus.CONFLICT);
 		} catch (Exception e) {
@@ -98,24 +99,24 @@ public class PersonaController {
 		}
 		return respuesta;
 	}
-	
-	@RequestMapping(value = "/api/persona/", method = RequestMethod.PUT)
-	ResponseEntity modificar(@RequestBody Persona persona) {
+
+	@RequestMapping(value = "/api/rol/", method = RequestMethod.PUT)
+	ResponseEntity modificar(@RequestBody Rol rol) {
 		ResponseEntity<Mensaje> respuesta;
 		respuesta = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
 		try {
-			if (personaService.modificar(persona)) {
-				respuesta = new ResponseEntity(persona, HttpStatus.OK);
+			if (rolService.modificar(rol)) {
+				respuesta = new ResponseEntity(rol, HttpStatus.OK);
 			} else {
 				respuesta = new ResponseEntity("Validación incorrecta", HttpStatus.BAD_REQUEST);
 			}
-		} catch (PersonaException e) {
+		} catch (RolException e) {
 
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			Set<ConstraintViolation<Persona>> violations = e.getViolations();
+			Set<ConstraintViolation<Rol>> violations = e.getViolations();
 
 			if (violations != null) {
-				mensaje.addViolationsP(violations);
+				mensaje.addViolationsR(violations);
 				respuesta = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
 			} else {
 				respuesta = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
@@ -127,9 +128,4 @@ public class PersonaController {
 		}
 		return respuesta;
 	}
-	
-//	@RequestMapping(value = "/api/persona/{id}/vehiculo", method = RequestMethod.GET)
-//	public ArrayList<Vehiculo> vehiculos(@PathVariable long id) throws SQLException {
-//		return personaService.vehiculos(id);
-//	}
 }

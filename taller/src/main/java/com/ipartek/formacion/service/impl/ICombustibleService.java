@@ -15,7 +15,7 @@ import com.ipartek.formacion.taller.service.CombustibleService;
 import com.ipartek.formacion.taller.service.exception.CombustibleException;
 
 @Service
-public class CombustibleServiceImpl implements CombustibleService {
+public class ICombustibleService implements CombustibleService {
 
 	@Autowired
 	CombustibleDAO daoCombustible;
@@ -47,7 +47,19 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
-		return daoCombustible.crear(combustible);
+		boolean r = false;
+		try {
+			
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if (violations.isEmpty()) {			
+				r = daoCombustible.crear(combustible);				
+			}else {
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations );
+			}	
+		} catch (Exception e) {			
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT );
+		}			
+		return r;
 	}
 
 	@Override
@@ -59,7 +71,7 @@ public class CombustibleServiceImpl implements CombustibleService {
 				r = daoCombustible.modificar(combustible);
 			}
 			else {
-				
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
 			}
 		} catch (Exception e) {
 			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);

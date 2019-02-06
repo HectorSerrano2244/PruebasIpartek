@@ -30,7 +30,7 @@ public class Rol {
 		this.id = id;
 	}
 
-	public String getModelo() {
+	public String getNombre() {
 		return nombre;
 	}
 
