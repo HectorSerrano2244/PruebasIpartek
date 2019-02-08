@@ -11,34 +11,36 @@
 		</div>
 	</div>
 	<!-- Actual -->
-	<span>Actual</span>
+	<span>Año ${anyoActual}</span>
 	<table id="actual" class="table">
 		<tr>
 			<td>Mes</td>
-			<td>0 / 0</td>
+			<td>${totalMes} de ${objetivoAnual / 12}</td>
 		</tr>
 		<tr>
 			<td>Año</td>
-			<td>0 / 0</td>
+			<td>${totalAnual} de ${objetivoAnual}</td>
 		</tr>
 	</table>
 	
 	<hr>
 	
 	<!-- Histórico -->
-	<span>Historico</span>
+	<span>Histórico</span>
 	<table id="historico" class="table">
 		<thead class="thead-light">
 			<tr>
 				<th>Mes</th>
-				<th>Rec / Obj</th>
+				<th>Rec de Obj</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
+			<c:forEach items="${objetivo}" var="o">
+				<tr class="${(o.importe < (objetivoAnual / 12)) ? 'nocumple' : 'cumple'}">
+					<td>${o.mes}</td>
+					<td>${o.importe} de ${objetivoAnual / 12}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table> 	
 </div>
