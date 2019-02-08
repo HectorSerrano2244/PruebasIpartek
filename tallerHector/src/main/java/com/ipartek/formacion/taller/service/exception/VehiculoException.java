@@ -25,6 +25,10 @@ public class VehiculoException extends Exception {
 		this.setViolations(violations);
 	}
 	
+	public VehiculoException(Set<ConstraintViolation<Vehiculo>> violations) {
+		this.setViolations(violations);
+	}
+	
 	public Set<ConstraintViolation<Vehiculo>> getViolations() {
 		return violations;
 	}

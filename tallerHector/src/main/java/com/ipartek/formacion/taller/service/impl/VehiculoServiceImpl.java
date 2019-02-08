@@ -70,11 +70,11 @@ public class VehiculoServiceImpl implements VehiculoService {
 					}
 				}
 				catch (Exception e) {
-					throw new VehiculoException(e.getMessage()  );
+					throw new VehiculoException(e.getMessage());
 				}
 			}
 			else {
-				throw new VehiculoException(VehiculoException.EXCEPTION_INTEGRITY);
+				throw new VehiculoException(violations);
 			}
 		return isCreado;
 	}

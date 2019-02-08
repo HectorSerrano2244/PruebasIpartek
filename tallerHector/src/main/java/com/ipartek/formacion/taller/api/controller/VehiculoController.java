@@ -2,6 +2,7 @@ package com.ipartek.formacion.taller.api.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,18 +87,17 @@ public class VehiculoController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity crear(@RequestBody Vehiculo vehiculo ) {
+	public ResponseEntity crear(@RequestBody Vehiculo vehiculo) {
 
 		ResponseEntity response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		try {
-
 			if (vehiculoService.crear(vehiculo)) {
 				response = new ResponseEntity(vehiculo, HttpStatus.CREATED);
 			} else {
 				response = new ResponseEntity(HttpStatus.CONFLICT);
 			}
-		} catch (VehiculoException e) {	
-			response = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT );
+		} catch (VehiculoException e) {
+			response = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
