@@ -1,0 +1,8 @@
+<div>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero expedita magni saepe doloribus ducimus minus omnis, consequatur eos alias itaque ipsa dignissimos fugiat numquam nihil animi, vitae voluptatibus molestiae dolore.</p>
+  <span>Clicks: {{contador}}</span>
+  <span>Tiempo: {{tiempo}}</span>
+  <button class="btn btn-outline-success" (click)="sumar()">Suma</button>
+  <button class="btn btn-outline-info" (click)="iniciar()" disabled="{{ (tiempo == 10) ? '' : 'disabled' }}">{{ (tiempo == 10) ? 'Iniciar' : 'Jugando' }}</button>
+  <button class="btn btn-outline-secondary" *ngIf="tiempo==0" (click)="restart()">Nueva Partida</button>
+</div>
