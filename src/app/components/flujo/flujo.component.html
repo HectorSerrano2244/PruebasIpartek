@@ -1,0 +1,24 @@
+<img src="assets\img\flujo informacion angular.png" alt="flujo informacion entre modelo y vista">
+<h1>Expresion &#123; &#123; &#125; &#125;</h1>
+<p>{{expresion}}</p>
+
+<h2>Propiedades</h2>
+<h3 [class]="claseModelo">HIDDEN</h3>
+<p [hidden]="!ocultar">
+  Este se muestra
+</p>
+<p [hidden]="ocultar">
+  Este se oculta
+</p>
+
+<div>
+<input type="radio" name="color" value="text-primary" (click)="changeClass('text-primary')">Primary
+<input type="radio" name="color" value="text-warning" (click)="changeClass('text-warning')">Warning
+<input type="radio" name="color" value="text-danger" (click)="changeClass('text-danger')">Danger
+</div>
+
+<h2>Doble binding o Banana In A Box</h2>
+
+<p>import &#123; FormsModule &#125; from '@angular/forms' en app.module.ts</p>
+<p>Tu Nombre es: <b>{{nombre}}</b></p>
+<input appNombre="{{nombre}}" [class]="claseValidar" type="text" [(ngModel)]="nombre" placeholder="minimo 10 chars" class="form-control" (click)="borrar()" name="nombre">

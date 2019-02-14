@@ -8,6 +8,8 @@ import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludoComponent } from './components/saludo/saludo.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { FlujoComponent } from './components/flujo/flujo.component';
+import { PipesComponent } from './components/pipes/pipes.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: '404', component: Error404Component },
   {path: 'directivas', component: PaginaDirectivaComponent },
   {path: 'saludo/:nombre/:apellido1/:apellido2', component: SaludoComponent },
+  {path: 'flujo', component: FlujoComponent },
+  {path: 'pipes', component: PipesComponent },
   {path: '**', pathMatch: 'full', redirectTo: '404'}
 ];
 
