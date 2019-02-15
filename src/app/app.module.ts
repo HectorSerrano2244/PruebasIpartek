@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-// Nuestros componentes
+// Componentes
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JuegoComponent } from './components/juego/juego.component';
@@ -11,13 +11,19 @@ import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludoComponent } from './components/saludo/saludo.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { FlujoComponent } from './components/flujo/flujo.component';
+import { PipesComponent } from './components/pipes/pipes.component';
+import { ArraysComponent } from './components/arrays/arrays.component';
+
+// Directivas
+import { NombreDirective } from './directives/nombre.directive';
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
-import { FlujoComponent } from './components/flujo/flujo.component';
-import { NombreDirective } from './directives/nombre.directive';
-import { PipesComponent } from './components/pipes/pipes.component';
+
+// Pipes
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimPipe } from './pipes/trim.pipe';
+import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,9 @@ import { TrimPipe } from './pipes/trim.pipe';
     NombreDirective,
     PipesComponent,
     MonedaPipe,
-    TrimPipe
+    TrimPipe,
+    ArraysComponent,
+    FiltroOfertaPipe
   ],
   imports: [
     BrowserModule,

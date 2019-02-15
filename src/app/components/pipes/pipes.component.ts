@@ -10,11 +10,12 @@ export class PipesComponent implements OnInit {
   nombre: string;
   nombreTrim: string;
   numero: number;
+  frutas: string[];
 
   constructor() { 
     console.trace('PipesComponent constructor');
     this.nombre = "mI NOmbRE";
-    this.nombreTrim = "  Hector     ";
+    this.nombreTrim = "         Hola             Que                  Tal  ";
     this.numero = 2.5673432;
   }
 

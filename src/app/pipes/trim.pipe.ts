@@ -6,10 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TrimPipe implements PipeTransform {
 
   transform(value: any) {
-    if (!value) {
-      return '';
-    }
-    return value.trim();
+    return value.replace(/ +(?= )/g,'').trim();
   }
-
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Nuestros componentes
+// Componentes
 import { HomeComponent } from './components/home/home.component';
 import { JuegoComponent } from './components/juego/juego.component';
 import { AboutComponent } from './components/about/about.component';
@@ -10,6 +10,7 @@ import { SaludoComponent } from './components/saludo/saludo.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PipesComponent } from './components/pipes/pipes.component';
+import { ArraysComponent } from './components/arrays/arrays.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'saludo/:nombre/:apellido1/:apellido2', component: SaludoComponent },
   {path: 'flujo', component: FlujoComponent },
   {path: 'pipes', component: PipesComponent },
+  {path: 'arrays', component: ArraysComponent },
   {path: '**', pathMatch: 'full', redirectTo: '404'}
 ];
 
