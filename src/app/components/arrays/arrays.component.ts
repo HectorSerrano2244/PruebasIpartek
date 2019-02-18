@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ArraysComponent implements OnInit {
 
 isOferta: boolean;
+searchText: string;
 frutas: any[];
 f_nombres: any[];
 f_precios: any[];
@@ -24,6 +25,7 @@ textcolor: string;
 
   constructor() { 
     this.isOferta = false;
+    this.searchText = "";
     console.trace('ArraysComponent constructor');
     this.frutas = [
       {
