@@ -1,15 +1,15 @@
 <div class="card" style="width: 18rem;">
-    <img src="{{fruta.imagen}}" class="card-img-top" alt="{{fruta.nombre}}">
-    <div class="card-body">
-      <h5 class="card-title text-center">{{fruta.nombre | uppercase}}</h5>      
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{fruta.precio | moneda}}</li>      
-    </ul>    
-    <ul class="list-group list-group-flush">
-        <li *ngFor="let color of fruta.colores" class="list-group-item" [style.color]="color.codigo">{{color.nombre}}</li>      
-      </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Añadir al Carrito</a>     
-    </div>
+  <img src="{{fruta.imagen}}" class="card-img-top" alt="{{fruta.nombre}}">
+  <div class="card-body">
+    <h5 class="card-title text-center">{{fruta.nombre | uppercase}}</h5>      
   </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{fruta.precio | moneda}}</li>      
+  </ul>    
+  <ul class="list-group list-group-flush">
+      <li *ngFor="let color of fruta.colores" class="list-group-item" [style.color]="color.codigo">{{color.nombre}}</li>      
+    </ul>
+  <div class="card-body">
+    <button (click)="clickBoton($event, fruta)" class="btn btn-outline-primary">Añadir al Carrito</button>     
+  </div>
+</div>

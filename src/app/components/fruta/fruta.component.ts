@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-fruta',
@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FrutaComponent implements OnInit {
 
- 
+  @Output() llamarPadre = new EventEmitter();
+  
   @Input('fruta') fruta: any;
   @Input('frutaComparar') frutaComparar: any;
 
@@ -19,4 +20,8 @@ export class FrutaComponent implements OnInit {
   ngOnInit() {
   }
 
+  clickBoton(event, fruta) {
+    console.trace('clickBoton');
+    this.llamarPadre.emit(fruta);
+  }
 }

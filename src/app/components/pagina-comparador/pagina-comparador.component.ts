@@ -11,8 +11,14 @@ export class PaginaComparadorComponent implements OnInit {
   frutaSelec1: any;
   frutaSelec2: any;
   diferencia: number;
+  carrito: any[];
+  importe: number;
+  multiplicador: number;
 
   constructor() {
+    this.importe = 0;
+    this.multiplicador = 0;
+    this.carrito = [];
     this.frutas = [
       {
         "nombre": "fresa",
@@ -21,7 +27,7 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 5,
         "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
         "colores": [
-          { "nombre": "rojo" , "codigo": "#F00"}
+          { "nombre": "rojo", "codigo": "#F00" }
         ]
       },
       {
@@ -31,8 +37,8 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 7,
         "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
         "colores": [
-          {"nombre": "rojo", "codigo":"#F00"},
-          {"nombre": "naranja", "codigo":"#FFA500"},
+          { "nombre": "rojo", "codigo": "#F00" },
+          { "nombre": "naranja", "codigo": "#FFA500" },
         ]
       },
       {
@@ -42,7 +48,7 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 0,
         "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
         "colores": [
-          {"nombre": "verde", "codigo":"#0F0"}
+          { "nombre": "verde", "codigo": "#0F0" }
         ]
       },
       {
@@ -52,9 +58,9 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 3.5,
         "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/manzana-royal.jpg",
         "colores": [
-          {"nombre": "verde", "codigo":"#0F0"},
-          {"nombre": "rojo", "codigo":"#F00"},
-          {"nombre": "amarillo", "codigo":"#FF0"}
+          { "nombre": "verde", "codigo": "#0F0" },
+          { "nombre": "rojo", "codigo": "#F00" },
+          { "nombre": "amarillo", "codigo": "#FF0" }
         ]
       },
       {
@@ -64,10 +70,10 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 3,
         "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTuiEhT2_yFMqcz3TlSGzmwVqrOXJnO1gdlEd5ErYl4ynfte4J",
         "colores": [
-          {"nombre": "negro", "codigo":"#000"},
-          {"nombre": "verde", "codigo":"#0F0"}
+          { "nombre": "negro", "codigo": "#000" },
+          { "nombre": "verde", "codigo": "#0F0" }
         ]
-      }      
+      }
     ];
 
     this.frutaSelec1 = this.frutas[0];
@@ -78,12 +84,36 @@ export class PaginaComparadorComponent implements OnInit {
     }
 
 
-   }
-
-  ngOnInit() {
+  }
+  escucho(event) {
+    this.importe = this.importe + event.precio;
+    this.carrito = this.carrito.filter(c => { 
+      if (event.nombre != c.nombre) {
+        return true;
+      }
+      else {
+        if(this.multiplicador === 0){
+          this.multiplicador = 2;
+        }
+        else {
+          this.multiplicador++;
+        }
+        return false;
+      }
+    }).map(c => c);
+    this.carrito.push(event);
   }
 
-  cambiarFruta(i:number){
+  borrar(i) {
+    this.importe = this.importe - this.carrito[i].precio;
+    this.carrito.splice(i, 1);
+  }
+
+  ngOnInit() {
+    console.trace('PaginaComparadorComponent ngOnInit');
+  }
+
+  cambiarFruta(i: number) {
     console.log('click cambiarFruta %o', i);
     this.frutaSelec2 = this.frutaSelec1;
     this.frutaSelec1 = this.frutas[i];
@@ -93,6 +123,4 @@ export class PaginaComparadorComponent implements OnInit {
       this.diferencia = this.diferencia + (this.diferencia * -2);
     }
   }
-
-
 }

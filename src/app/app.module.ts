@@ -18,6 +18,7 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
 import { CocheComponent } from './components/pagina-concesionario/coche/coche.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 // Directivas
 import { NombreDirective } from './directives/nombre.directive';
@@ -52,7 +53,8 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     PaginaComparadorComponent,
     FrutaComponent,
     PaginaConcesionarioComponent,
-    CocheComponent
+    CocheComponent,
+    TraductorComponent
   ],
   imports: [
     BrowserModule,
